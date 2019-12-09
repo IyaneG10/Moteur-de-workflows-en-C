@@ -12,7 +12,7 @@
 #define TAILLE_MSG              1024
 
 typedef struct { 
-    long numProcess;
+    int numProcess;
     char contenuMessage[ TAILLE_MSG ]; 
 } messsage_IPC; 
 
@@ -103,7 +103,7 @@ char getCmdAdmin(int argc, char **argv)
 		}
 	}
 
-	return *arguments;
+	return arguments;
 }
 
 
@@ -119,14 +119,13 @@ char getCmdAdmin(int argc, char **argv)
 int main(int argc, char **argv) { 
 
 	char arg [10];
-	//arg=;
 	strcpy(arg,getCmdAdmin(argc, argv));
 	int requetes, reponses;
 	messsage_IPC msg;
 	int res; 
 
 	/* se connecter aux IPC de requête et de réponse */
-	requetes = msgget(CLE_REQUETE, 0700 | IPC_CREAT); 
+	requetes = msgget(CLE_REQUETE, 0); 
 	if (requetes == -1) { perror("msgget"); return (EXIT_FAILURE); } 
 
 	reponses = msgget(CLE_REPONSE, 0700 | IPC_CREAT); 
@@ -140,16 +139,17 @@ int main(int argc, char **argv) {
 	printf("Saisir la commande à envoyer : ");
 	fgets(msg.contenuMessage, TAILLE_MSG, stdin);
 
-	/* envoyer la requête signée par son numéro de processus */
+	/* envoyer la requêtes signée avec le numéro de processus */
 	msg.numProcess = getpid();
 	res = msgsnd(requetes, & msg, strlen(msg.contenuMessage) + 1, 0); 
 	if (res == -1) { perror("msgsnd"); return (EXIT_FAILURE); } 
 
-	/* récupérer sa réponse signée par son numéro de processus */
+	/* Ne récupérer que les réponses dédiées à notre processus */
 	res = msgrcv(reponses, & msg, TAILLE_MSG, getpid(), 0); 
 	if (res == -1) { perror("msgrcv"); return (EXIT_FAILURE); } 
 
 	printf("Le serveur a envoyé : %s\n", msg.contenuMessage); 
-	return (EXIT_SUCCESS); 
+
+	return 0; 
 }
 

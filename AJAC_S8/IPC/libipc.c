@@ -30,14 +30,14 @@ void* gestion_file_message(void* arg)
 	requetes = msgget(CLE_REQUETE, 0700 | IPC_CREAT); 
 	if (requetes == -1) { perror("msgget");} 
 
-	reponses = msgget(CLE_REPONSE, 0700 | IPC_CREAT); 
+	reponses = msgget(CLE_REPONSE, 0); 
 	if (reponses == -1) { perror("msgget"); } 
 
 	while (1) {
 		printf("En attente des requetes admin\n");
 		if (msgrcv(requetes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 
 		// afficher la requete IPC 
-		printf("La requete admin du processus n° %ld est : %s \n", msg.numProcess,msg.contenuMessage); 
+		printf("La requete admin du processus n° %i est : %s \n", msg.numProcess,msg.contenuMessage); 
 		// réponse du serveur (renvoyer même message)
 		if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	}

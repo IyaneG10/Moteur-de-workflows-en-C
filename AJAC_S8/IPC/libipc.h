@@ -7,7 +7,7 @@
 #define TAILLE_MSG              1024
 
 typedef struct { 
-	long numProcess;
+	int numProcess;
 	char contenuMessage[ TAILLE_MSG ]; 
 } messsage_IPC; 
 
