@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:process xmlns:tns="http://www.example.org/process" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/process process.xsd ">
+  <tns:description>Processus stage</tns:description>
+  <tns:variableList>
+  	<tns:variable name="description_stage" type="string" />
+  	<tns:variable name="validation" type="bool" initialValue="false" />
+  </tns:variableList>
+  <tns:activityList>
+    <tns:activity id="A1" name="Demande">
+    	<tns:description>Remplir la demande de stage</tns:description>
+    	<tns:performer>tmv</tns:performer>
+    	<tns:output name="description_stage" />
+    </tns:activity>
+    <tns:activity id="A2" name="Etude_demande">
+    	<tns:description>Etude de la demande de stage</tns:description>
+    	<tns:performer>rex</tns:performer>
+    	<tns:input >description_stage</tns:input>
+    	<tns:output >validation</tns:output>
+    </tns:activity>
+    <tns:activity id="A3" name="Refus">
+    	<tns:description>Demande de stage refusé</tns:description>
+    	<tns:performer>tmv</tns:performer>
+    </tns:activity>
+    <tns:activity id="A4" name="Redaction">
+    	<tns:description>Redaction de la convention de stage</tns:description>
+    	<tns:performer>nd</tns:performer>
+    </tns:activity>
+    <tns:activity id="A5" name="Signature">
+    	<tns:description>Signature de la convention par l'étudiant</tns:description>
+    	<tns:performer>tmv</tns:performer>
+    </tns:activity>
+    <tns:activity name="Signature" id="A6">
+    	<tns:description>Signature de la convention par l'entreprise</tns:description>
+    	<tns:performer>HAL</tns:performer>
+    </tns:activity>
+    <tns:activity id="A7" name="Signature">
+    	<tns:description>Signature de la convention par l'école</tns:description>
+    	<tns:performer>nd</tns:performer>
+    </tns:activity>
+  </tns:activityList>
+  <tns:transitionList>
+  	<tns:transition id="T1" from="A1" to="A2"></tns:transition>
+  	<tns:transition id="T2" from="A2" to="A3">
+  		<tns:condition expr="validation==false"/>
+  	</tns:transition>
+  	<tns:transition id="T3" from="A2" to="A4">
+  		<tns:condition expr="validation==true"/>
+  	</tns:transition>
+  	<tns:transition id="T4" from="A4" to="A5"></tns:transition>
+  	<tns:transition id="T5" from="A5" to="A6"></tns:transition>
+  	<tns:transition id="T6" from="A6" to="A7"></tns:transition>
+  </tns:transitionList>
+</tns:process>
