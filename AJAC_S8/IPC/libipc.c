@@ -22,25 +22,29 @@
 
 void* gestion_file_message(void* arg)
 {
-	int requetes, reponses;
+	int commandes, reponses;
 	messsage_IPC msg;
-	
 
-	/* Se connecter aux IPC de requête et de réponse */
-	requetes = msgget(CLE_REQUETE, 0700 | IPC_CREAT); 
-	if (requetes == -1) { perror("msgget");} 
 
+	// créer une file de message pour les commandes admin (les droit R/W pour tous)
+	commandes = msgget(CLE_COMMANDE, 0666 | IPC_CREAT); 
+	if (commandes == -1) { perror("msgget commande");} 
+	// récupérer l'id de la file de réponse (crée par l'admin)
 	reponses = msgget(CLE_REPONSE, 0); 
-	if (reponses == -1) { perror("msgget"); } 
+	if (reponses == -1) { perror("msgget reponse"); } 
 
 	while (1) {
 		printf("En attente des requetes admin\n");
-		if (msgrcv(requetes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 
-		// afficher la requete IPC 
+		if (msgrcv(commandes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 
+
 		printf("La requete admin du processus n° %i est : %s \n", msg.numProcess,msg.contenuMessage); 
+
 		// réponse du serveur (renvoyer même message)
 		if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+		//msgctl(commandes, IPC_RMID, NULL);
+
 	}
+
 
 	return NULL;
 

@@ -2,13 +2,13 @@
 #define __LIBIPC_H__
 
 
-#define CLE_REQUETE         0x00000001
+#define CLE_COMMANDE        0x00000001
 #define CLE_REPONSE        0x00000002 
 #define TAILLE_MSG              1024
 
 typedef struct { 
 	int numProcess;
-	char contenuMessage[ TAILLE_MSG ]; 
+	char contenuMessage[TAILLE_MSG]; 
 } messsage_IPC; 
 
 void* gestion_file_message(void* arg);

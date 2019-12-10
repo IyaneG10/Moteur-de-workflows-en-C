@@ -7,24 +7,32 @@
 #include <sys/ipc.h> 
 #include <sys/msg.h> 
 
-#define CLE_REQUETE         0x00000001
+
+#define CLE_COMMANDE        0x00000001
 #define CLE_REPONSE        0x00000002 
 #define TAILLE_MSG              1024
-
 typedef struct { 
-    int numProcess;
-    char contenuMessage[ TAILLE_MSG ]; 
+	int numProcess;
+	char contenuMessage[TAILLE_MSG]; 
 } messsage_IPC; 
 
 
+struct Arg
+{
+	char arg_U [TAILLE_MSG];
+	char arg_C[TAILLE_MSG];
+	char arg_L [TAILLE_MSG];
+	char arg_A[TAILLE_MSG];
+};
 
 
 
-char getCmdAdmin(int argc, char **argv)
+
+struct Arg getCmdAdmin(int argc, char **argv)
 {
 	int res;
-	char arguments [10];
-
+	//char arguments [TAILLE_MSG];
+	struct Arg arguments = {"","","",""}; // valeurs par défaut
 
 	while (1)
 	{
@@ -32,12 +40,12 @@ char getCmdAdmin(int argc, char **argv)
 		{
 			{"users",  no_argument, 0, 'u'},
 			{"connected",  no_argument, 0, 'c'},
-			{"add-user",  required_argument, 0, 'a'},
 			{"listen",  no_argument, 0, 'l'},
+			{"add-user",  required_argument, 0, 'a'},
 			{0, 0, 0, 0}
 		};
 		int option_index = 0;
-		res = getopt_long (argc, argv, "ucal",long_options, &option_index);
+		res = getopt_long (argc, argv, "ucla:",long_options, &option_index);
 
 		if (res == -1)
 			break;
@@ -46,50 +54,51 @@ char getCmdAdmin(int argc, char **argv)
 			case 0:
 				if (long_options[option_index].flag != 0)
 					break;
-				#ifdef DEBUG
+#ifdef DEBUG
 				printf ("GETOPTLONG:option %s", long_options[option_index].name);
-				#endif
+#endif
 				if (optarg)
 				{
-					#ifdef DEBUG
+#ifdef DEBUG
 					printf ("GETOPTLONG:with arg %s", optarg);
-					#endif
+#endif
 				}
-				#ifdef DEBUG
+#ifdef DEBUG
 				printf ("\n");
-				#endif
+#endif
 				break;
 			case 'u':
 				{
-					strcpy(arguments, "u");
-					printf ("spécifié en argument est: %s\n", arguments);
-					#ifdef DEBUG
-					printf ("GETOPTLONG:Le port spécifié en argument est: %s\n", optarg);
-					#endif
+					strcpy(arguments.arg_U, "u");
+					printf ("spécifiée en argument est: %s\n", arguments.arg_U);
+#ifdef DEBUG
+					printf ("GETOPTLONG:L'option spécifiée est: %s\n", arguments.arg_U);
+#endif
 					break;
 				}
 			case 'c':
 				{
-					strcpy(arguments, "c");
-					#ifdef DEBUG
-					printf ("GETOPTLONG:Le fichier utilisateur spécifié en argument est: %s\n", optarg);
-					#endif
+					strcpy(arguments.arg_C, "c");
+#ifdef DEBUG
+					printf ("GETOPTLONG:L'option spécifiée est: %s\n", arguments.arg_C);
+#endif
 					break;
 				}
 			case 'a':
 				{
-					strcpy(arguments, optarg);
-					#ifdef DEBUG
-					printf ("GETOPTLONG:Le fichier utilisateur spécifié en argument est: %s\n", optarg);
-					#endif
+					printf("Tout est OK jusqu'ici\n");
+					strcpy(arguments.arg_A, optarg);
+#ifdef DEBUG
+					printf ("GETOPTLONG:L'option spécifiée a pour agrhument : %s\n", optarg);
+#endif
 					break;
 				}
 			case 'l':
 				{
-					strcpy(arguments, "l");
-					#ifdef DEBUG
-					printf ("GETOPTLONG:Le fichier utilisateur spécifié en argument est: %s\n", optarg);
-					#endif
+					strcpy(arguments.arg_L, "l");
+#ifdef DEBUG
+					printf ("GETOPTLONG:L'option spécifiée est: %s\n", arguments.arg_L);
+#endif
 					break;
 				}
 			case '?':
@@ -118,37 +127,53 @@ char getCmdAdmin(int argc, char **argv)
 
 int main(int argc, char **argv) { 
 
-	char arg [10];
-	strcpy(arg,getCmdAdmin(argc, argv));
-	int requetes, reponses;
+
+	struct Arg arg = {"","","",""}; // valeurs par défaut
+	arg = getCmdAdmin(argc, argv);
+	int commandes, reponses;
 	messsage_IPC msg;
 	int res; 
+	int pid=getpid();
+	printf("Le PID est: %d\n",pid);
 
-	/* se connecter aux IPC de requête et de réponse */
-	requetes = msgget(CLE_REQUETE, 0); 
-	if (requetes == -1) { perror("msgget"); return (EXIT_FAILURE); } 
+	// récupérer l'id de la file de commande (créee par le serveur) 
+	commandes = msgget(CLE_COMMANDE, 0); 
+	if (commandes == -1) { perror("msgget requete"); return (EXIT_FAILURE); } 
+	// créer une file de reponse (les droit R/W pour tous)
+	reponses = msgget(CLE_REPONSE, 0666 | IPC_CREAT); 
+	if (reponses == -1) { perror("msgget reponse"); return (EXIT_FAILURE); }
 
-	reponses = msgget(CLE_REPONSE, 0700 | IPC_CREAT); 
-	if (reponses == -1) { perror("msgget"); return (EXIT_FAILURE); }
+	if(strcmp(arg.arg_U, "u") == 0)
+	{
+		strcpy(msg.contenuMessage, "getUsers");
+	}
+	else if(strcmp(arg.arg_C, "c") == 0)
+	{
+		strcpy(msg.contenuMessage, "getConnectedUsers");
+	}
+	else if(strcmp(arg.arg_L, "l") == 0)
+	{
+		strcpy(msg.contenuMessage, "listen");
+	}
+	else if (strcmp(arg.arg_A, "NULL") != 0)
+	{
+		strcpy(msg.contenuMessage, arg.arg_A);
+	}
 
-	
 
-	printf("L'argument est: %s\n",arg);
 
-	/* demander un messsage_IPC à l'utilisateur */
-	printf("Saisir la commande à envoyer : ");
-	fgets(msg.contenuMessage, TAILLE_MSG, stdin);
-
-	/* envoyer la requêtes signée avec le numéro de processus */
-	msg.numProcess = getpid();
-	res = msgsnd(requetes, & msg, strlen(msg.contenuMessage) + 1, 0); 
+	// envoyer la commande admin avec le numéroo du processus 
+	msg.numProcess = pid;
+	res = msgsnd(commandes, & msg, strlen(msg.contenuMessage) + 1, 0); 
 	if (res == -1) { perror("msgsnd"); return (EXIT_FAILURE); } 
 
-	/* Ne récupérer que les réponses dédiées à notre processus */
-	res = msgrcv(reponses, & msg, TAILLE_MSG, getpid(), 0); 
+	// Récupérer et afficher la réponse du serveur
+	res = msgrcv(reponses, & msg, TAILLE_MSG,0 /*pid*/, 0); 
 	if (res == -1) { perror("msgrcv"); return (EXIT_FAILURE); } 
-
 	printf("Le serveur a envoyé : %s\n", msg.contenuMessage); 
+
+	//msgctl(reponses, IPC_RMID, NULL);
+
 
 	return 0; 
 }
