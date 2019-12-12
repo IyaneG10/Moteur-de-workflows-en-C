@@ -41,6 +41,23 @@ void fct_aide(FILE *file_dialogue)
 }
 
 
+void fct_Todo(FILE *file_dialogue)
+{
+    char buffer[SIZE_BUFFER];
+    fputs("Bienvenue dans le mode To-Do, saisir exit pour en sortir\n",file_dialogue);
+    while(fgets(buffer,MAX_LIGNE,file_dialogue)!=NULL)
+    {
+        if(strncmp(buffer,"exit",4) == 0)
+        {
+            break;
+        }
+
+    }
+    fputs("Vous êtes sorti du mode To-Do\n",file_dialogue);
+
+}
+
+
 char * adresseClient(long socket)
 {
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
@@ -290,6 +307,10 @@ void* gestionClient(void *dialogue)
         if(strncmp(buffer,"aide",4) == 0)
 		{
 			fct_aide(file_dialogue);
+		}
+        if(strncmp(buffer,"ToDo",4) == 0)
+		{
+            fct_Todo(file_dialogue);
 		}
 	}
 
