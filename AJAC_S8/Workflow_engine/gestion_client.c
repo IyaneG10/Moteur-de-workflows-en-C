@@ -28,6 +28,13 @@
 #include "gestion_client.h"
 
 
+void fct_aide(FILE *file_dialogue)
+{
+
+    fputs("Vos possibilités sont:\n",file_dialogue);
+}
+
+
 char * adresseClient(long socket)
 {
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
@@ -246,6 +253,11 @@ void* gestionClient(void *dialogue)
 		nomMachine = adresseClient((long)dialogue); // récupération de l'adresse de la machine connectée
 		printf("L'utilisateur %s est connecté avec la machine: %s\n", Connexion.connectedUser, nomMachine);
 		fputs("Connexion reussie\n",file_dialogue);
+        
+        //Process *debutListProcess = NULL;
+        //instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
+        //instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
+        //afficherInfos (debutListProcess);
 
 		ajouterConnList( connectedUsers,Connexion);
 		afficherConnList(connectedUsers);
@@ -267,16 +279,80 @@ void* gestionClient(void *dialogue)
 		printf("Message de l'utilisateur %s: %s",Connexion.connectedUser, buffer);
 		if(strncmp(buffer,"exit",4) == 0)
 		{
-			fclose(file_dialogue);
-			free(nomMachine);
-			break;
+            break;
+		}
+        if(strncmp(buffer,"aide",4) == 0)
+		{
+			fct_aide(file_dialogue);
 		}
 	}
 
-
+	fputs("Vous vous êtes déconnecté\n",file_dialogue);
 	printf("L'utilisateur %s est déconnecté\n", Connexion.connectedUser);
 	supprConnList( connectedUsers,Connexion);
+    fclose(file_dialogue);
+    free(nomMachine);
 	fclose(fp_fichierUtilisateurs);
 	return 0;
 
 }
+
+
+
+void ajouterActivite (Process *debut, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) {
+    
+    Activity *activite = malloc (sizeof (*activite));
+    strcpy (activite->id, id);
+    strcpy (activite->name, name);
+    strcpy (activite->description, description);
+    strcpy (activite->performer, performer);
+    strcpy (activite->input, input);
+    strcpy (activite->output, output);
+    strcpy (activite->etat, etat);
+    activite->next = debut->debutListActivity;  //  On ajoute au début (plus simple)
+        debut->debutListActivity = activite;
+}
+
+
+void instancierProcessus (Process **debut, char *id, char *description, char *etat) {
+    
+    
+    Process *processus = malloc (sizeof (*processus));
+    processus->validation=false;
+    strcpy (processus->id, id);
+    strcpy (processus->description, description);
+    strcpy (processus->etat, etat);
+    processus->next = *debut;     //  On ajoute au début (plus simple)
+        *debut = processus;
+        // on utilisera le parsing du fichier xml plus tard
+        ajouterActivite (processus, "A7","Signature","Signature de la convention de stage par l'ecole","nd","NULL","NULL", "NOT STARTED" );
+        ajouterActivite (processus,"A6","Signature","Signature de la convention de stage par l'entreprise","HAL","NULL","NULL", "NOT STARTED");
+        ajouterActivite (processus, "A5","Signature","Signature de la convention de stage par l'etudiant","tmv","NULL","NULL", "NOT STARTED");
+        ajouterActivite (processus, "A4","Redaction","Redaction de la convention de stage","nd","NULL","NULL", "NOT STARTED" );
+        ajouterActivite (processus, "A3","Refus","Demande de stage refusee","tmv","NULL","NULL", "NOT STARTED");
+        ajouterActivite (processus, "A2","Etude_demande","Etude de la demande","rex","NULL","NULL", "NOT STARTED");
+        ajouterActivite (processus, "A1","Demande","Remplir la demande de stage","tmv","NULL","NULL","NOT STARTED");
+        
+        
+}
+
+
+
+
+void afficherInfos (Process *processCourant) {
+    
+    
+    while (processCourant != NULL) {
+        printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+        
+        
+        Activity *activiteCourante = processCourant->debutListActivity;
+        
+        while (activiteCourante != NULL) {
+            printf ("\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
+            activiteCourante = activiteCourante->next;
+        }
+                        processCourant = processCourant->next;
+    }
+}
+
