@@ -32,6 +32,12 @@ void fct_aide(FILE *file_dialogue)
 {
 
     fputs("Vos possibilités sont:\n",file_dialogue);
+    fputs("\tToDo : pour passer en mode gestion de la To-Do List\n",file_dialogue);
+    fputs("\tconnected users : pour de connaître tous les utilisateurs connectés\n",file_dialogue);
+    fputs("\tls processes [etat]: pour de lister  les processus\n",file_dialogue);
+    fputs("\tls process <id-process> : pour récupérer toutes les informations associées à un processus particulier\n",file_dialogue);
+    fputs("\tcreate process <file> : pour créer une nouvelle instance de processus\n",file_dialogue);
+    fputs("\texit : pour quitter l’application et se déconnecter\n",file_dialogue);
 }
 
 
