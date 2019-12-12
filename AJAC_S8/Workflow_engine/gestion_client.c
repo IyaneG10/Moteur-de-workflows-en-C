@@ -58,6 +58,20 @@ void fct_Todo(FILE *file_dialogue)
 }
 
 
+void fct_connectedUsers(FILE *file_dialogue)
+{
+    fputs("Les utilisateurs connectés sont: \n",file_dialogue);
+    for (int i=0; i < MAX_UTILISATEURS; i++)
+    {
+        if (strcmp(connectedUsers[i], "") != 0)
+        {
+            fprintf(file_dialogue,"- %d°) %s\n",(i+1),connectedUsers[i]);
+        }
+        
+    }
+
+}
+
 char * adresseClient(long socket)
 {
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
@@ -311,6 +325,10 @@ void* gestionClient(void *dialogue)
         if(strncmp(buffer,"ToDo",4) == 0)
 		{
             fct_Todo(file_dialogue);
+		}
+        if(strncmp(buffer,"connected users",15) == 0)
+		{
+            fct_connectedUsers(file_dialogue);
 		}
 	}
 

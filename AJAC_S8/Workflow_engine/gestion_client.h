@@ -49,6 +49,7 @@ struct ConnexionInfos
 
 void fct_aide(FILE *file_dialogue);
 void fct_Todo(FILE *file_dialogue);
+void fct_connectedUsers(FILE *file_dialogue);
 
 void supprConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion); 
 
