@@ -35,21 +35,19 @@ char connectedUsers[MAX_UTILISATEURS][LONG_ID];
 
 int main(int argc, char *argv[])
 {
-	#ifdef DEBUG
+#ifdef DEBUG
 	printf("*** LE DEBOGGAGE FONCTIONNE ***\n");
-	#endif
+#endif
 	struct OptionArg arg= check_arguments(argc,argv);
 	printf("Le port utilisé est: %s\n", arg.portNum);
 	strcpy(usersFile, arg.File);
 	printf("Le userfile utilisé est: %s\n", usersFile);
-    
-    
-    Process *debutListProcess = NULL;
-    
-    instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-    //instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
-    
-    //afficherInfos (debutListProcess);
+
+
+	//Process *debutListProcess = NULL;
+	//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
+	//instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
+	//afficherInfos (debutListProcess);
 
 	//Thread de gestion de la file de message pour les requetes admin
 	lanceClientLeger(NULL, gestion_file_message); 

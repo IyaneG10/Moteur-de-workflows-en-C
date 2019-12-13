@@ -31,44 +31,62 @@
 void fct_aide(FILE *file_dialogue)
 {
 
-    fputs("Vos possibilités sont:\n",file_dialogue);
-    fputs("\tToDo : pour passer en mode gestion de la To-Do List\n",file_dialogue);
-    fputs("\tconnected users : pour de connaître tous les utilisateurs connectés\n",file_dialogue);
-    fputs("\tls processes [etat]: pour de lister  les processus\n",file_dialogue);
-    fputs("\tls process <id-process> : pour récupérer toutes les informations associées à un processus particulier\n",file_dialogue);
-    fputs("\tcreate process <file> : pour créer une nouvelle instance de processus\n",file_dialogue);
-    fputs("\texit : pour quitter l’application et se déconnecter\n",file_dialogue);
+	fputs("Vos possibilités sont:\n",file_dialogue);
+	fputs("\tToDo : pour passer en mode gestion de la To-Do List\n",file_dialogue);
+	fputs("\tconnected users : pour de connaître tous les utilisateurs connectés\n",file_dialogue);
+	fputs("\tls processes [etat]: pour de lister  les processus\n",file_dialogue);
+	fputs("\tls process <id-process> : pour récupérer toutes les informations associées à un processus particulier\n",file_dialogue);
+	fputs("\tcreate process <file> : pour créer une nouvelle instance de processus\n",file_dialogue);
+	fputs("\texit : pour quitter l’application et se déconnecter\n",file_dialogue);
 }
 
 
 void fct_Todo(FILE *file_dialogue)
 {
-    char buffer[SIZE_BUFFER];
-    fputs("Bienvenue dans le mode To-Do, saisir exit pour en sortir\n",file_dialogue);
-    while(fgets(buffer,MAX_LIGNE,file_dialogue)!=NULL)
-    {
-        if(strncmp(buffer,"exit",4) == 0)
-        {
-            break;
-        }
+	char buffer[SIZE_BUFFER];
+	fputs("Bienvenue dans le mode To-Do, saisir exit pour en sortir\n",file_dialogue);
+	while(fgets(buffer,MAX_LIGNE,file_dialogue)!=NULL)
+	{
+		if(strncmp(buffer,"exit",4) == 0)
+		{
+			break;
+		}
 
-    }
-    fputs("Vous êtes sorti du mode To-Do\n",file_dialogue);
+	}
+	fputs("Vous êtes sorti du mode To-Do\n",file_dialogue);
 
 }
 
 
 void fct_connectedUsers(FILE *file_dialogue)
 {
-    fputs("Les utilisateurs connectés sont: \n",file_dialogue);
-    for (int i=0; i < MAX_UTILISATEURS; i++)
-    {
-        if (strcmp(connectedUsers[i], "") != 0)
-        {
-            fprintf(file_dialogue,"- %d°) %s\n",(i+1),connectedUsers[i]);
-        }
-        
-    }
+	fputs("Les utilisateurs connectés sont: \n",file_dialogue);
+	for (int i=0; i < MAX_UTILISATEURS; i++)
+	{
+		if (strcmp(connectedUsers[i], "") != 0)
+		{
+			fprintf(file_dialogue,"- %d°) %s\n",(i+1),connectedUsers[i]);
+		}
+
+	}
+
+}
+
+void fct_listProcesses(FILE *file_dialogue,Process *processCourant)
+{
+	//Process *processCourant = NULL;
+	while (processCourant != NULL) {
+		fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+
+
+		Activity *activiteCourante = processCourant->debutListActivity;
+
+		while (activiteCourante != NULL) {
+			fprintf (file_dialogue,"\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
+			activiteCourante = activiteCourante->next;
+		}
+		processCourant = processCourant->next;
+	}
 
 }
 
@@ -267,6 +285,7 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 
 void* gestionClient(void *dialogue)
 {
+    Process *debutListProcess = NULL;
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
@@ -290,11 +309,11 @@ void* gestionClient(void *dialogue)
 		nomMachine = adresseClient((long)dialogue); // récupération de l'adresse de la machine connectée
 		printf("L'utilisateur %s est connecté avec la machine: %s\n", Connexion.connectedUser, nomMachine);
 		fputs("Connexion reussie\n",file_dialogue);
-        
-        //Process *debutListProcess = NULL;
-        //instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-        //instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
-        //afficherInfos (debutListProcess);
+
+		//Process *debutListProcess = NULL;
+		//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
+		//instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
+		//afficherInfos (debutListProcess);
 
 		ajouterConnList( connectedUsers,Connexion);
 		afficherConnList(connectedUsers);
@@ -316,27 +335,41 @@ void* gestionClient(void *dialogue)
 		printf("Message de l'utilisateur %s: %s",Connexion.connectedUser, buffer);
 		if(strncmp(buffer,"exit",4) == 0)
 		{
-            break;
+			break;
 		}
-        if(strncmp(buffer,"aide",4) == 0)
+		if(strncmp(buffer,"aide",4) == 0)
 		{
 			fct_aide(file_dialogue);
 		}
-        if(strncmp(buffer,"ToDo",4) == 0)
+		if(strncmp(buffer,"ToDo",4) == 0)
 		{
-            fct_Todo(file_dialogue);
+			fct_Todo(file_dialogue);
 		}
-        if(strncmp(buffer,"connected users",15) == 0)
+		if(strncmp(buffer,"connected users",15) == 0)
 		{
-            fct_connectedUsers(file_dialogue);
+			fct_connectedUsers(file_dialogue);
 		}
+		if(strncmp(buffer,"ls processes",12) == 0)
+		{
+			//Process *debutListProcess = NULL;
+			//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
+			fct_listProcesses(file_dialogue,debutListProcess);
+		}
+        if(strncmp(buffer,"create process",13) == 0)
+		{
+            //Process *debutListProcess = NULL;
+			instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
+            //fct_listProcesses(file_dialogue,debutListProcess);
+		}
+
+
 	}
 
 	fputs("Vous vous êtes déconnecté\n",file_dialogue);
 	printf("L'utilisateur %s est déconnecté\n", Connexion.connectedUser);
 	supprConnList( connectedUsers,Connexion);
-    fclose(file_dialogue);
-    free(nomMachine);
+	fclose(file_dialogue);
+	free(nomMachine);
 	fclose(fp_fichierUtilisateurs);
 	return 0;
 
@@ -345,59 +378,59 @@ void* gestionClient(void *dialogue)
 
 
 void ajouterActivite (Process *debut, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) {
-    
-    Activity *activite = malloc (sizeof (*activite));
-    strcpy (activite->id, id);
-    strcpy (activite->name, name);
-    strcpy (activite->description, description);
-    strcpy (activite->performer, performer);
-    strcpy (activite->input, input);
-    strcpy (activite->output, output);
-    strcpy (activite->etat, etat);
-    activite->next = debut->debutListActivity;  //  On ajoute au début (plus simple)
-        debut->debutListActivity = activite;
+
+	Activity *activite = malloc (sizeof (*activite));
+	strcpy (activite->id, id);
+	strcpy (activite->name, name);
+	strcpy (activite->description, description);
+	strcpy (activite->performer, performer);
+	strcpy (activite->input, input);
+	strcpy (activite->output, output);
+	strcpy (activite->etat, etat);
+	activite->next = debut->debutListActivity;  //  On ajoute au début (plus simple)
+	debut->debutListActivity = activite;
 }
 
 
 void instancierProcessus (Process **debut, char *id, char *description, char *etat) {
-    
-    
-    Process *processus = malloc (sizeof (*processus));
-    processus->validation=false;
-    strcpy (processus->id, id);
-    strcpy (processus->description, description);
-    strcpy (processus->etat, etat);
-    processus->next = *debut;     //  On ajoute au début (plus simple)
-        *debut = processus;
-        // on utilisera le parsing du fichier xml plus tard
-        ajouterActivite (processus, "A7","Signature","Signature de la convention de stage par l'ecole","nd","NULL","NULL", "NOT STARTED" );
-        ajouterActivite (processus,"A6","Signature","Signature de la convention de stage par l'entreprise","HAL","NULL","NULL", "NOT STARTED");
-        ajouterActivite (processus, "A5","Signature","Signature de la convention de stage par l'etudiant","tmv","NULL","NULL", "NOT STARTED");
-        ajouterActivite (processus, "A4","Redaction","Redaction de la convention de stage","nd","NULL","NULL", "NOT STARTED" );
-        ajouterActivite (processus, "A3","Refus","Demande de stage refusee","tmv","NULL","NULL", "NOT STARTED");
-        ajouterActivite (processus, "A2","Etude_demande","Etude de la demande","rex","NULL","NULL", "NOT STARTED");
-        ajouterActivite (processus, "A1","Demande","Remplir la demande de stage","tmv","NULL","NULL","NOT STARTED");
-        
-        
+
+
+	Process *processus = malloc (sizeof (*processus));
+	processus->validation=false;
+	strcpy (processus->id, id);
+	strcpy (processus->description, description);
+	strcpy (processus->etat, etat);
+	processus->next = *debut;     //  On ajoute au début (plus simple)
+	*debut = processus;
+	// on utilisera le parsing du fichier xml plus tard
+	ajouterActivite (processus, "A7","Signature","Signature de la convention de stage par l'ecole","nd","NULL","NULL", "NOT STARTED" );
+	ajouterActivite (processus,"A6","Signature","Signature de la convention de stage par l'entreprise","HAL","NULL","NULL", "NOT STARTED");
+	ajouterActivite (processus, "A5","Signature","Signature de la convention de stage par l'etudiant","tmv","NULL","NULL", "NOT STARTED");
+	ajouterActivite (processus, "A4","Redaction","Redaction de la convention de stage","nd","NULL","NULL", "NOT STARTED" );
+	ajouterActivite (processus, "A3","Refus","Demande de stage refusee","tmv","NULL","NULL", "NOT STARTED");
+	ajouterActivite (processus, "A2","Etude_demande","Etude de la demande","rex","NULL","NULL", "NOT STARTED");
+	ajouterActivite (processus, "A1","Demande","Remplir la demande de stage","tmv","NULL","NULL","NOT STARTED");
+
+
 }
 
 
 
 
 void afficherInfos (Process *processCourant) {
-    
-    
-    while (processCourant != NULL) {
-        printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
-        
-        
-        Activity *activiteCourante = processCourant->debutListActivity;
-        
-        while (activiteCourante != NULL) {
-            printf ("\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
-            activiteCourante = activiteCourante->next;
-        }
-                        processCourant = processCourant->next;
-    }
+
+
+	while (processCourant != NULL) {
+		printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+
+
+		Activity *activiteCourante = processCourant->debutListActivity;
+
+		while (activiteCourante != NULL) {
+			printf ("\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
+			activiteCourante = activiteCourante->next;
+		}
+		processCourant = processCourant->next;
+	}
 }
 
