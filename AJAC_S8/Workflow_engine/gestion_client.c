@@ -27,6 +27,8 @@
 
 #include "gestion_client.h"
 
+extern     Process *debutListProcess;
+
 
 void fct_aide(FILE *file_dialogue)
 {
@@ -285,7 +287,7 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 
 void* gestionClient(void *dialogue)
 {
-    Process *debutListProcess = NULL;
+    //Process *debutListProcess = NULL;
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);

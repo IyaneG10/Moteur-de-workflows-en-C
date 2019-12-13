@@ -27,7 +27,7 @@
 #include "libthrd.h"
 #include "libipc.h"
 
-
+Process *debutListProcess;
 
 char usersFile[100]; // en variable globale car partagée par tous les processus (sans modification)
 char connectedUsers[MAX_UTILISATEURS][LONG_ID];
