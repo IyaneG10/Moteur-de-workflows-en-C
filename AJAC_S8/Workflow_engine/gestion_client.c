@@ -27,19 +27,19 @@
 
 #include "gestion_client.h"
 
-extern     Process *debutListProcess;
-
+extern Process *debutListProcess;
+//extern int test;
 
 void fct_aide(FILE *file_dialogue)
 {
 
-	fputs("Vos possibilités sont:\n",file_dialogue);
+	fputs("Vos possibilites sont:\n",file_dialogue);
 	fputs("\tToDo : pour passer en mode gestion de la To-Do List\n",file_dialogue);
-	fputs("\tconnected users : pour de connaître tous les utilisateurs connectés\n",file_dialogue);
+	fputs("\tconnected users : pour de connaître tous les utilisateurs connectes\n",file_dialogue);
 	fputs("\tls processes [etat]: pour de lister  les processus\n",file_dialogue);
-	fputs("\tls process <id-process> : pour récupérer toutes les informations associées à un processus particulier\n",file_dialogue);
-	fputs("\tcreate process <file> : pour créer une nouvelle instance de processus\n",file_dialogue);
-	fputs("\texit : pour quitter l’application et se déconnecter\n",file_dialogue);
+	fputs("\tls process <id-process> : pour recuperer toutes les informations associees à un processus particulier\n",file_dialogue);
+	fputs("\tcreate process <file> : pour creer une nouvelle instance de processus\n",file_dialogue);
+	fputs("\texit : pour quitter l’application et se deconnecter\n",file_dialogue);
 }
 
 
@@ -62,7 +62,7 @@ void fct_Todo(FILE *file_dialogue)
 
 void fct_connectedUsers(FILE *file_dialogue)
 {
-	fputs("Les utilisateurs connectés sont: \n",file_dialogue);
+	fputs("Les utilisateurs connectes sont: \n",file_dialogue);
 	for (int i=0; i < MAX_UTILISATEURS; i++)
 	{
 		if (strcmp(connectedUsers[i], "") != 0)
@@ -76,9 +76,13 @@ void fct_connectedUsers(FILE *file_dialogue)
 
 void fct_listProcesses(FILE *file_dialogue,Process *processCourant)
 {
+	
+	//printf("Le test est: %d\n", test);
+	//fprintf (file_dialogue,"Le test est: %d\n", test);
+
 	//Process *processCourant = NULL;
 	while (processCourant != NULL) {
-		fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+		fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
 
 
 		Activity *activiteCourante = processCourant->debutListActivity;
@@ -207,7 +211,7 @@ struct ConnexionInfos authentificationClient(FILE *file_dialogue,  char users[MA
 	strcat(identifiantsSaisis,":");
 	strcat(identifiantsSaisis, password); // couple login:password
 #ifdef DEBUG
-	printf("L'utilisateur a renseigné les infos suivantes [login:pwd] = %s\n", identifiantsSaisis);
+	printf("L'utilisateur a renseigne les infos suivantes [login:pwd] = %s\n", identifiantsSaisis);
 #endif
 
 	for(int i=0; i<MAX_UTILISATEURS; i++)
@@ -216,7 +220,7 @@ struct ConnexionInfos authentificationClient(FILE *file_dialogue,  char users[MA
 		strcat(identifiantsBDD,":");
 		strcat(identifiantsBDD, users[i][1]); // couple login:password
 #ifdef DEBUG
-		printf("Selon la base de données,  [login:pwd] = %s\n", identifiantsSaisis);
+		printf("Selon la base de donnees,  [login:pwd] = %s\n", identifiantsSaisis);
 #endif
 		if(strcmp(identifiantsBDD, identifiantsSaisis) == false) // correspondance entre login et password
 		{   Infos.validity=true;
@@ -273,7 +277,7 @@ void ajouterConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct Conne
 
 void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 {
-	printf("Les utilisateurs connectés sont: \n");
+	printf("Les utilisateurs connectes sont: \n");
 	for (int i=0; i < MAX_UTILISATEURS; i++)
 	{
 		if (strcmp(connectedUsers[i], "") != 0)
@@ -287,12 +291,14 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 
 void* gestionClient(void *dialogue)
 {
-    //Process *debutListProcess = NULL;
+    
+	
+	//Process *debutListProcess = NULL;
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
 	char buffer[SIZE_BUFFER];
-	char usersBDD[MAX_UTILISATEURS][3][LONG_ID]; // Base De Données matrice pour stocker: [0]=login, [1]=pwd, [2]=prenom, [3]=nom
+	char usersBDD[MAX_UTILISATEURS][3][LONG_ID]; // Base De Donnees matrice pour stocker: [0]=login, [1]=pwd, [2]=prenom, [3]=nom
 	FILE * fp_fichierUtilisateurs = fopen(usersFile, "r");
 	if (fp_fichierUtilisateurs == NULL)
 	{
@@ -300,7 +306,7 @@ void* gestionClient(void *dialogue)
 	}
 	if ( parserBDDUsers(fp_fichierUtilisateurs, usersBDD) <= 0)
 	{
-		fprintf(stderr, "Impossible de parser le fichier de base de données\n");
+		fprintf(stderr, "Impossible de parser le fichier de base de donnees\n");
 	}
 
 	struct ConnexionInfos Connexion = {false,""};
@@ -308,8 +314,8 @@ void* gestionClient(void *dialogue)
 
 	if(Connexion.validity)
 	{
-		nomMachine = adresseClient((long)dialogue); // récupération de l'adresse de la machine connectée
-		printf("L'utilisateur %s est connecté avec la machine: %s\n", Connexion.connectedUser, nomMachine);
+		nomMachine = adresseClient((long)dialogue); // recuperation de l'adresse de la machine connectee
+		printf("L'utilisateur %s est connecte avec la machine: %s\n", Connexion.connectedUser, nomMachine);
 		fputs("Connexion reussie\n",file_dialogue);
 
 		//Process *debutListProcess = NULL;
@@ -367,8 +373,8 @@ void* gestionClient(void *dialogue)
 
 	}
 
-	fputs("Vous vous êtes déconnecté\n",file_dialogue);
-	printf("L'utilisateur %s est déconnecté\n", Connexion.connectedUser);
+	fputs("Vous vous êtes deconnecte\n",file_dialogue);
+	printf("L'utilisateur %s est deconnecte\n", Connexion.connectedUser);
 	supprConnList( connectedUsers,Connexion);
 	fclose(file_dialogue);
 	free(nomMachine);
@@ -389,7 +395,7 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
 	strcpy (activite->input, input);
 	strcpy (activite->output, output);
 	strcpy (activite->etat, etat);
-	activite->next = debut->debutListActivity;  //  On ajoute au début (plus simple)
+	activite->next = debut->debutListActivity;  //  On ajoute au debut (plus simple)
 	debut->debutListActivity = activite;
 }
 
@@ -402,7 +408,7 @@ void instancierProcessus (Process **debut, char *id, char *description, char *et
 	strcpy (processus->id, id);
 	strcpy (processus->description, description);
 	strcpy (processus->etat, etat);
-	processus->next = *debut;     //  On ajoute au début (plus simple)
+	processus->next = *debut;     //  On ajoute au debut (plus simple)
 	*debut = processus;
 	// on utilisera le parsing du fichier xml plus tard
 	ajouterActivite (processus, "A7","Signature","Signature de la convention de stage par l'ecole","nd","NULL","NULL", "NOT STARTED" );
@@ -423,7 +429,7 @@ void afficherInfos (Process *processCourant) {
 
 
 	while (processCourant != NULL) {
-		printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+		printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
 
 
 		Activity *activiteCourante = processCourant->debutListActivity;

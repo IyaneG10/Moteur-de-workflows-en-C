@@ -18,7 +18,7 @@
     	<tns:output >validation</tns:output>
     </tns:activity>
     <tns:activity id="A3" name="Refus">
-    	<tns:description>Demande de stage refusé</tns:description>
+    	<tns:description>Demande de stage refuse</tns:description>
     	<tns:performer>tmv</tns:performer>
     </tns:activity>
     <tns:activity id="A4" name="Redaction">
@@ -26,15 +26,15 @@
     	<tns:performer>nd</tns:performer>
     </tns:activity>
     <tns:activity id="A5" name="Signature">
-    	<tns:description>Signature de la convention par l'étudiant</tns:description>
+    	<tns:description>Signature de la convention par l'etudiant</tns:description>
     	<tns:performer>tmv</tns:performer>
     </tns:activity>
-    <tns:activity name="Signature" id="A6">
+    <tns:activity id="A6" name="Signature" >
     	<tns:description>Signature de la convention par l'entreprise</tns:description>
     	<tns:performer>HAL</tns:performer>
     </tns:activity>
     <tns:activity id="A7" name="Signature">
-    	<tns:description>Signature de la convention par l'école</tns:description>
+    	<tns:description>Signature de la convention par l'ecole</tns:description>
     	<tns:performer>nd</tns:performer>
     </tns:activity>
   </tns:activityList>

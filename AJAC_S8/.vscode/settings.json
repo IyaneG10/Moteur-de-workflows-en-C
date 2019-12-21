@@ -6,6 +6,7 @@
         "libsck.h": "c",
         "gestion_client.h": "c",
         "netdb.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "fcntl.h": "c"
     }
 }

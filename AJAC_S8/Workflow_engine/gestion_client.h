@@ -13,8 +13,8 @@
 #define ETAT_RS RUNNING
 #define ETAT_CP COMPLETED
 
-extern char usersFile[100]; // déclaré dans main
-extern char connectedUsers[MAX_UTILISATEURS][LONG_ID]; // déclaré dans main
+extern char usersFile[100]; // declare dans main
+extern char connectedUsers[MAX_UTILISATEURS][LONG_ID]; // declare dans main
 
 
 typedef struct Activity {
@@ -43,8 +43,8 @@ typedef struct Process {
 
 struct ConnexionInfos
 {
-	bool validity; // true: connexion réussie
-	char connectedUser [LONG_ID]; // Nom et Prénom de l'utilisateur connecté
+	bool validity; // true: connexion reussie
+	char connectedUser [LONG_ID]; // Nom et Prenom de l'utilisateur connecte
 };
 
 void fct_aide(FILE *file_dialogue);

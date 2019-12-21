@@ -17,9 +17,12 @@
 #include <sys/msg.h> 
 
 #include "libipc.h"
+//#include "gestion_client.h"
 
 
 
+
+/*
 void* gestion_file_message(void* arg)
 {
 	int commandes, reponses;
@@ -49,3 +52,4 @@ void* gestion_file_message(void* arg)
 	return NULL;
 
 }
+*/
