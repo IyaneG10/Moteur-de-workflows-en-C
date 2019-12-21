@@ -39,7 +39,16 @@ typedef struct Process {
 	struct Process *next;
 } Process;
 
-
+enum {
+    AUTRE,
+    PROCESS,
+    DESC_PROCESS,
+    ACTIVITY,
+    DESC_ACTIVITY,
+    PERF_ACTIVITY,
+    IN_ACTIVITY,
+    OUT_ACTIVITY
+};
 
 struct ConnexionInfos
 {

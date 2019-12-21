@@ -39,7 +39,7 @@ clean:
 #gcc -Wall -o nom_du_fichier_objet  -c nom_du_fichier_source_C
   #gcc -o nom_du_programme   -lnom_de_la_librairie   nom_du_fichier_objet 
 main: main.o optionServer.o gestion_client.o
-	$(CC) -o main main.c optionServer.c gestion_client.c $(LOCAL_LIBS)  $(CFLAGS) $(LIBS) -lresolv 
+	$(CC) -o main main.c optionServer.c gestion_client.c $(LOCAL_LIBS)  $(CFLAGS) $(LIBS) -lresolv -I/usr/include/libxml2/ -lxml2
 	#$(CC) main.o optionServer.o -o main
 #gcc -L/usr/local/lib/tableaunoir  essai.c -o essai.exe -lTableauNoir 
 #gcc [options] [source files] [object files] [-Ldir] -llibname [-o outfile]
@@ -50,7 +50,7 @@ optionServer.o : optionServer.c
 	$(CC) -c -Wall optionServer.c
 
 gestion_client.o : gestion_client.c 
-	$(CC) -c -Wall gestion_client.c
+	$(CC) -c -Wall gestion_client.c  -I/usr/include/libxml2/ -lxml2
 
 
 

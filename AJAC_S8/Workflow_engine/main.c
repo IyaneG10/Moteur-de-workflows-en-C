@@ -97,10 +97,10 @@ int main(int argc, char *argv[])
 	printf("Le userfile utilisé est: %s\n", usersFile);
 
 	//test=18;
-	debutListProcess = NULL;
-	instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
+	//debutListProcess = NULL;
+	//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
 	//instancierProcessus (&debutListProcess, "100", "Demande de stage Malick", "RUNNING");
-	afficherInfos (debutListProcess);
+	//afficherInfos (debutListProcess);
 
 	//Thread de gestion de la file de message pour les requetes admin
 	lanceClientLeger(NULL, gestion_file_message); 

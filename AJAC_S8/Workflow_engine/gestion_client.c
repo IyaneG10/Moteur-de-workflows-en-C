@@ -23,12 +23,142 @@
 #include <netinet/tcp.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
+#include <libxml/parser.h>
+
 
 
 #include "gestion_client.h"
 
 extern Process *debutListProcess;
+Process *processus;
 //extern int test;
+
+char * description_stage;
+bool validation;
+
+static xmlSAXHandler handler;
+static int           elem_courant;
+
+char process_id [SIZE];
+char process_name[SIZE];
+
+
+
+const xmlChar *  activity_id;
+const xmlChar *  activity_name;
+const xmlChar *  activity_description;
+const xmlChar *  activity_performer;
+const xmlChar *  activity_input;
+const xmlChar *  activity_output; 
+const xmlChar *  activity_etat ;
+
+
+void caracteres (void *user_data, const xmlChar *text, int length)
+{
+
+	if( elem_courant == DESC_ACTIVITY)
+
+	{
+		activity_description = xmlStrndup(text, length);
+		printf ("\tDescription: %s\n", (char *)activity_description);
+	}
+	if( elem_courant == PERF_ACTIVITY)
+
+	{
+		activity_performer = xmlStrndup(text, length);
+		printf ("\tPerformer: %s\n", (char *)activity_performer);
+	}
+	if( elem_courant == IN_ACTIVITY)
+
+	{
+		activity_input = xmlStrndup(text, length);
+		printf ("\tInput: %s\n", (char *)activity_input);
+	}
+	if( elem_courant == OUT_ACTIVITY)
+
+	{
+		activity_output = xmlStrndup(text, length);
+		printf ("\tOutput: %s\n", (char *)activity_output);
+	}
+
+}
+
+void fin_element (void *user_data, const xmlChar *name)
+{
+
+	if((strcmp((const char*)name,"tns:activity")==0 )&& elem_courant == ACTIVITY)
+	{
+		printf ("Fin de l’activité \n");
+		printf ("- %s\n", (char *)activity_id);
+		printf ("- %s\n", (char *)activity_name);
+		printf ("- %s\n", (char *)activity_description);
+		printf ("- %s\n", (char *)activity_performer);
+		elem_courant=PROCESS;
+
+		ajouterActivite (processus, (char *)activity_id,(char *)activity_name,(char *)activity_description, (char *)activity_performer,"NULL","NULL","NOT STARTED");
+
+	}
+
+	else if(strcmp((const char*)name,"tns:description")==0)
+	{
+		elem_courant=ACTIVITY;
+	}
+
+	else if(strcmp((const char*)name,"tns:performer")==0)
+	{
+		elem_courant=ACTIVITY;
+	}
+	else if(strcmp((const char*)name,"tns:input")==0)
+	{
+		elem_courant=ACTIVITY;
+	}
+
+	else if(strcmp((const char*)name,"tns:output")==0)
+	{
+		elem_courant=ACTIVITY;
+	}
+}
+
+void debut_element (void *user_data, const xmlChar *name, const xmlChar **attrs)
+{
+
+
+	if(strcmp((const char*)name,"tns:activity")==0 )
+
+	{
+		elem_courant=ACTIVITY;
+
+		activity_id = xmlStrndup(attrs[1], sizeof(attrs[1])+1);
+		activity_name = xmlStrndup(attrs[3], sizeof(attrs[3])+1);
+		printf ("Debut  de l’activité %s\n", activity_id);
+		printf("\tid: %s\n",(char*) activity_id);
+		printf("\tname: %s\n",(char*) activity_name);
+
+	}
+	else if(strcmp((const char*)name,"tns:description")==0 && elem_courant == ACTIVITY)
+	{
+		elem_courant=DESC_ACTIVITY;
+	}
+	else if(strcmp((const char*)name,"tns:performer")==0 && elem_courant == ACTIVITY)
+	{
+		elem_courant=PERF_ACTIVITY;
+	}
+	else if(strcmp((const char*)name,"tns:input")==0 && elem_courant == ACTIVITY)
+	{
+		elem_courant=IN_ACTIVITY;
+	}
+	else if(strcmp((const char*)name,"tns:ouput")==0 && elem_courant == ACTIVITY)
+	{
+		elem_courant=OUT_ACTIVITY;
+	}
+
+
+
+
+
+}
+
+
 
 void fct_aide(FILE *file_dialogue)
 {
@@ -76,21 +206,20 @@ void fct_connectedUsers(FILE *file_dialogue)
 
 void fct_listProcesses(FILE *file_dialogue,Process *processCourant)
 {
-	
-	//printf("Le test est: %d\n", test);
+	printf("TOUT EST OK JUSQU'ICI\n");
+
 	//fprintf (file_dialogue,"Le test est: %d\n", test);
 
 	//Process *processCourant = NULL;
 	while (processCourant != NULL) {
 		fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
 
-
 		Activity *activiteCourante = processCourant->debutListActivity;
-
 		while (activiteCourante != NULL) {
 			fprintf (file_dialogue,"\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
 			activiteCourante = activiteCourante->next;
 		}
+
 		processCourant = processCourant->next;
 	}
 
@@ -291,8 +420,8 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 
 void* gestionClient(void *dialogue)
 {
-    
-	
+
+
 	//Process *debutListProcess = NULL;
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }
@@ -359,15 +488,13 @@ void* gestionClient(void *dialogue)
 		}
 		if(strncmp(buffer,"ls processes",12) == 0)
 		{
-			//Process *debutListProcess = NULL;
-			//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
 			fct_listProcesses(file_dialogue,debutListProcess);
 		}
-        if(strncmp(buffer,"create process",13) == 0)
+		if(strncmp(buffer,"create process",13) == 0)
 		{
-            //Process *debutListProcess = NULL;
+			//Process *debutListProcess = NULL;
 			instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-            //fct_listProcesses(file_dialogue,debutListProcess);
+			//fct_listProcesses(file_dialogue,debutListProcess);
 		}
 
 
@@ -402,23 +529,34 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
 
 void instancierProcessus (Process **debut, char *id, char *description, char *etat) {
 
+	int nbProcess=1;
+	//while (debutListProcess != NULL) {
+	//	nbProcess++;
+	//	debutListProcess = debutListProcess->next;
+	//}
 
-	Process *processus = malloc (sizeof (*processus));
+
+
+	processus = malloc (sizeof (*processus));
+	elem_courant=AUTRE;
+	handler.startElement = debut_element;
+	handler.endElement   = fin_element;
+	handler.characters   = caracteres;
+	if (xmlSAXUserParseFile (&handler, NULL, "../Models/process1.xml") < 0) { perror ("oups parser"); }
+
+
 	processus->validation=false;
-	strcpy (processus->id, id);
+	sprintf (processus->id,"%d",nbProcess);
+	//strcpy (processus->id, id);
 	strcpy (processus->description, description);
 	strcpy (processus->etat, etat);
 	processus->next = *debut;     //  On ajoute au debut (plus simple)
+			   // debutListProcess=processus;
 	*debut = processus;
-	// on utilisera le parsing du fichier xml plus tard
-	ajouterActivite (processus, "A7","Signature","Signature de la convention de stage par l'ecole","nd","NULL","NULL", "NOT STARTED" );
-	ajouterActivite (processus,"A6","Signature","Signature de la convention de stage par l'entreprise","HAL","NULL","NULL", "NOT STARTED");
-	ajouterActivite (processus, "A5","Signature","Signature de la convention de stage par l'etudiant","tmv","NULL","NULL", "NOT STARTED");
-	ajouterActivite (processus, "A4","Redaction","Redaction de la convention de stage","nd","NULL","NULL", "NOT STARTED" );
-	ajouterActivite (processus, "A3","Refus","Demande de stage refusee","tmv","NULL","NULL", "NOT STARTED");
-	ajouterActivite (processus, "A2","Etude_demande","Etude de la demande","rex","NULL","NULL", "NOT STARTED");
-	ajouterActivite (processus, "A1","Demande","Remplir la demande de stage","tmv","NULL","NULL","NOT STARTED");
 
+    //ajouterActivite (processus, "A1","Demande","Remplir la demande de stage","tmv","NULL","NULL","NOT STARTED");
+
+	printf("Le nombre de processus est: %d\n", nbProcess);
 
 }
 
