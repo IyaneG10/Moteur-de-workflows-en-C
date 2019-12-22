@@ -48,7 +48,7 @@ typedef struct {
 
 
 
-void* gestion_file_message(void* arg)
+void* gestion_file_message(void* arg) // à compléter plus tard
 {
 	int commandes, reponses;
 	messsage_IPC msg;
@@ -68,12 +68,6 @@ void* gestion_file_message(void* arg)
 
 		printf("La requete admin du processus n° %i est : %s \n", msg.numProcess,msg.contenuMessage); 
 
-		/*while (debutListProcess != NULL) {
-		printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activités suivantes:\n", debutListProcess->id, debutListProcess->description, debutListProcess->etat);
-		debutListProcess = debutListProcess->next;
-		}*/
-
-
 		// réponse du serveur (renvoyer même message)
 		if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 		//msgctl(commandes, IPC_RMID, NULL);
@@ -88,19 +82,12 @@ void* gestion_file_message(void* arg)
 
 int main(int argc, char *argv[])
 {
-#ifdef DEBUG
-	printf("*** LE DEBOGGAGE FONCTIONNE ***\n");
-#endif
 	struct OptionArg arg= check_arguments(argc,argv);
 	printf("Le port utilisé est: %s\n", arg.portNum);
 	strcpy(usersFile, arg.File);
 	printf("Le userfile utilisé est: %s\n", usersFile);
 
-	//test=18;
-	//debutListProcess = NULL;
-	//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-	//instancierProcessus (&debutListProcess, "100", "Demande de stage Malick", "RUNNING");
-	//afficherInfos (debutListProcess);
+	debutListProcess = NULL;
 
 	//Thread de gestion de la file de message pour les requetes admin
 	lanceClientLeger(NULL, gestion_file_message); 

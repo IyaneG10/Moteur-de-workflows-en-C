@@ -31,54 +31,66 @@
 
 extern Process *debutListProcess;
 Process *processus;
-//extern int test;
 
-char * description_stage;
-bool validation;
+
+char * description_stage; // à utiliser plus tard
+bool validation;// à utiliser plus tard
 
 static xmlSAXHandler handler;
-static int           elem_courant;
-
-char process_id [SIZE];
-char process_name[SIZE];
+static int           elem_courant; // pour savoir dans quel état on se trouve
 
 
+const xmlChar *  process_description;
 
 const xmlChar *  activity_id;
 const xmlChar *  activity_name;
 const xmlChar *  activity_description;
 const xmlChar *  activity_performer;
-const xmlChar *  activity_input;
-const xmlChar *  activity_output; 
-const xmlChar *  activity_etat ;
+const xmlChar *  activity_input; // NULL pour l'instant
+const xmlChar *  activity_output; // NULL pour l'instant 
+const xmlChar *  activity_etat ; // Etat initial= NOT_STARTED
 
 
 void caracteres (void *user_data, const xmlChar *text, int length)
 {
-
+	if( elem_courant == DESC_PROCESS)
+	{
+		process_description = xmlStrndup(text, length);
+        #ifdef DEBUG
+		printf ("\tDescription du process: %s\n", (char *)process_description);
+        #endif
+	}
+	
 	if( elem_courant == DESC_ACTIVITY)
-
 	{
 		activity_description = xmlStrndup(text, length);
+        #ifdef DEBUG
 		printf ("\tDescription: %s\n", (char *)activity_description);
+        #endif
 	}
+	
 	if( elem_courant == PERF_ACTIVITY)
-
 	{
 		activity_performer = xmlStrndup(text, length);
+        #ifdef DEBUG
 		printf ("\tPerformer: %s\n", (char *)activity_performer);
+        #endif
 	}
+	
 	if( elem_courant == IN_ACTIVITY)
-
 	{
 		activity_input = xmlStrndup(text, length);
-		printf ("\tInput: %s\n", (char *)activity_input);
+        #ifdef DEBUG
+        printf ("\tInput: %s\n", (char *)activity_input);
+        #endif
 	}
-	if( elem_courant == OUT_ACTIVITY)
 
+	if( elem_courant == OUT_ACTIVITY)
 	{
 		activity_output = xmlStrndup(text, length);
+        #ifdef DEBUG
 		printf ("\tOutput: %s\n", (char *)activity_output);
+        #endif
 	}
 
 }
@@ -88,18 +100,26 @@ void fin_element (void *user_data, const xmlChar *name)
 
 	if((strcmp((const char*)name,"tns:activity")==0 )&& elem_courant == ACTIVITY)
 	{
-		printf ("Fin de l’activité \n");
+        #ifdef DEBUG
+        printf ("Fin de l’activité \n");
 		printf ("- %s\n", (char *)activity_id);
 		printf ("- %s\n", (char *)activity_name);
 		printf ("- %s\n", (char *)activity_description);
 		printf ("- %s\n", (char *)activity_performer);
+        #endif
 		elem_courant=PROCESS;
 
 		ajouterActivite (processus, (char *)activity_id,(char *)activity_name,(char *)activity_description, (char *)activity_performer,"NULL","NULL","NOT STARTED");
 
+
 	}
 
-	else if(strcmp((const char*)name,"tns:description")==0)
+	else if((strcmp((const char*)name,"tns:description")==0) && elem_courant==DESC_PROCESS)
+	{
+		elem_courant=PROCESS;
+	}
+
+	else if((strcmp((const char*)name,"tns:description")==0) && elem_courant==DESC_ACTIVITY)
 	{
 		elem_courant=ACTIVITY;
 	}
@@ -130,10 +150,16 @@ void debut_element (void *user_data, const xmlChar *name, const xmlChar **attrs)
 
 		activity_id = xmlStrndup(attrs[1], sizeof(attrs[1])+1);
 		activity_name = xmlStrndup(attrs[3], sizeof(attrs[3])+1);
+        #ifdef DEBUG
 		printf ("Debut  de l’activité %s\n", activity_id);
 		printf("\tid: %s\n",(char*) activity_id);
 		printf("\tname: %s\n",(char*) activity_name);
+        #endif
 
+	}
+	else if(strcmp((const char*)name,"tns:description")==0 && elem_courant != ACTIVITY)
+	{
+		elem_courant=DESC_PROCESS;
 	}
 	else if(strcmp((const char*)name,"tns:description")==0 && elem_courant == ACTIVITY)
 	{
@@ -206,12 +232,13 @@ void fct_connectedUsers(FILE *file_dialogue)
 
 void fct_listProcesses(FILE *file_dialogue,Process *processCourant)
 {
-	printf("TOUT EST OK JUSQU'ICI\n");
+    #ifdef DEBUG
+    printf("Process courant: %p\n", processCourant);
+    #endif
+	int nbProcess=0;
 
-	//fprintf (file_dialogue,"Le test est: %d\n", test);
-
-	//Process *processCourant = NULL;
 	while (processCourant != NULL) {
+		nbProcess++;
 		fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
 
 		Activity *activiteCourante = processCourant->debutListActivity;
@@ -222,6 +249,7 @@ void fct_listProcesses(FILE *file_dialogue,Process *processCourant)
 
 		processCourant = processCourant->next;
 	}
+	fprintf (file_dialogue,"Il y'a au total %d processus:\n", nbProcess);
 
 }
 
@@ -421,8 +449,6 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 void* gestionClient(void *dialogue)
 {
 
-
-	//Process *debutListProcess = NULL;
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
@@ -446,12 +472,6 @@ void* gestionClient(void *dialogue)
 		nomMachine = adresseClient((long)dialogue); // recuperation de l'adresse de la machine connectee
 		printf("L'utilisateur %s est connecte avec la machine: %s\n", Connexion.connectedUser, nomMachine);
 		fputs("Connexion reussie\n",file_dialogue);
-
-		//Process *debutListProcess = NULL;
-		//instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-		//instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
-		//afficherInfos (debutListProcess);
-
 		ajouterConnList( connectedUsers,Connexion);
 		afficherConnList(connectedUsers);
 
@@ -492,11 +512,9 @@ void* gestionClient(void *dialogue)
 		}
 		if(strncmp(buffer,"create process",13) == 0)
 		{
-			//Process *debutListProcess = NULL;
 			instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-			//fct_listProcesses(file_dialogue,debutListProcess);
+			fputs("Instanciation de processus effectuee avec succes\n",file_dialogue);
 		}
-
 
 	}
 
@@ -524,20 +542,23 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
 	strcpy (activite->etat, etat);
 	activite->next = debut->debutListActivity;  //  On ajoute au debut (plus simple)
 	debut->debutListActivity = activite;
+
 }
 
 
 void instancierProcessus (Process **debut, char *id, char *description, char *etat) {
 
 	int nbProcess=1;
-	//while (debutListProcess != NULL) {
-	//	nbProcess++;
-	//	debutListProcess = debutListProcess->next;
-	//}
-
-
-
+    #ifdef DEBUG
+	printf("debut : %p\n",debut);
+	printf("debutListProcess: %p\n",debutListProcess);
+	printf("processus: %p\n",processus);
+    #endif
 	processus = malloc (sizeof (*processus));
+
+	nbProcess=  countProcesses (debutListProcess);
+	nbProcess++;
+
 	elem_courant=AUTRE;
 	handler.startElement = debut_element;
 	handler.endElement   = fin_element;
@@ -546,15 +567,11 @@ void instancierProcessus (Process **debut, char *id, char *description, char *et
 
 
 	processus->validation=false;
-	sprintf (processus->id,"%d",nbProcess);
-	//strcpy (processus->id, id);
-	strcpy (processus->description, description);
+	sprintf (processus->id,"%d",nbProcess); 
+	strcpy (processus->description, (char *)process_description);
 	strcpy (processus->etat, etat);
 	processus->next = *debut;     //  On ajoute au debut (plus simple)
-			   // debutListProcess=processus;
 	*debut = processus;
-
-    //ajouterActivite (processus, "A1","Demande","Remplir la demande de stage","tmv","NULL","NULL","NOT STARTED");
 
 	printf("Le nombre de processus est: %d\n", nbProcess);
 
@@ -565,8 +582,8 @@ void instancierProcessus (Process **debut, char *id, char *description, char *et
 
 void afficherInfos (Process *processCourant) {
 
-
 	while (processCourant != NULL) {
+
 		printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
 
 
@@ -578,5 +595,17 @@ void afficherInfos (Process *processCourant) {
 		}
 		processCourant = processCourant->next;
 	}
+}
+
+
+int countProcesses (Process *processCourant) {
+	int nbProcess=0;
+	while (processCourant != NULL) {
+
+		nbProcess++;
+		processCourant = processCourant->next;
+	}
+
+	return nbProcess;
 }
 

@@ -82,6 +82,7 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
 void instancierProcessus (Process **debut, char *id, char *description, char *etat);
 
 void afficherInfos (Process *processCourant) ;
+int countProcesses (Process *processCourant) ;
 
 
 
