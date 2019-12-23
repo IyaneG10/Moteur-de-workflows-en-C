@@ -56,14 +56,21 @@ struct ConnexionInfos
 	char connectedUser [LONG_ID]; // Nom et Prenom de l'utilisateur connecte
 };
 
+
+
+
+char * findStrOpt(char str[100]);
+char * findStrArg(const char *text);
+
 void fct_aide(FILE *file_dialogue);
-void fct_Todo(FILE *file_dialogue);
-void fct_connectedUsers(FILE *file_dialogue);
-void fct_listProcesses(FILE *file_dialogue,Process *processCourant);
+void fct_Todo(FILE *file_dialogue,char user[LONG_ID]);
+void fct_listProcesses(FILE *file_dialogue,Process *processCourant,char *option);
+void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg);
+//void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* arg,char user[LONG_ID]);
 
 void supprConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion); 
 
-void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID]);
+void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],FILE *file_dialogue);
 
 void ajouterConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion);
 
@@ -79,9 +86,8 @@ struct ConnexionInfos authentificationClient(FILE *file_dialogue, char usersBDD[
 
 void ajouterActivite (Process *debut, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) ;
 
-void instancierProcessus (Process **debut, char *id, char *description, char *etat);
+void instancierProcessus (Process **debut,char* file);
 
-void afficherInfos (Process *processCourant) ;
 int countProcesses (Process *processCourant) ;
 
 

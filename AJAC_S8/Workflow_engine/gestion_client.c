@@ -51,46 +51,89 @@ const xmlChar *  activity_output; // NULL pour l'instant
 const xmlChar *  activity_etat ; // Etat initial= NOT_STARTED
 
 
+
+
+
+char * findStrOpt(char str[100])
+{
+
+	// La définitions de séparateurs connus.
+	//const char * separators = "-";
+
+	// On cherche à récupérer, un à un, tous les mots (token) de la phrase
+	// et on commence par le premier.
+	char * strToken=strtok (str, "-" );
+
+	strToken = strtok ( NULL, "-" );
+
+	return strToken;
+}
+
+char * findStrArg(const char *text)
+{   
+	const char *p1 = "<";
+	const char *p2 = ">";
+	char *res = NULL;
+	char *start=NULL;
+	char *end=NULL;
+
+
+	if ( (start = strstr( text, p1 )) )
+	{
+		start += strlen( p1 );
+		if ( (end = strstr( start, p2 )) )
+		{
+			res = ( char * )malloc( end - start + 1 );
+			memcpy( res, start, end - start );
+			res[end - start] = '\0';
+		}
+	}
+
+
+	return res;
+}
+
+
 void caracteres (void *user_data, const xmlChar *text, int length)
 {
 	if( elem_courant == DESC_PROCESS)
 	{
 		process_description = xmlStrndup(text, length);
-        #ifdef DEBUG
+#ifdef DEBUG
 		printf ("\tDescription du process: %s\n", (char *)process_description);
-        #endif
+#endif
 	}
-	
+
 	if( elem_courant == DESC_ACTIVITY)
 	{
 		activity_description = xmlStrndup(text, length);
-        #ifdef DEBUG
+#ifdef DEBUG
 		printf ("\tDescription: %s\n", (char *)activity_description);
-        #endif
+#endif
 	}
-	
+
 	if( elem_courant == PERF_ACTIVITY)
 	{
 		activity_performer = xmlStrndup(text, length);
-        #ifdef DEBUG
+#ifdef DEBUG
 		printf ("\tPerformer: %s\n", (char *)activity_performer);
-        #endif
+#endif
 	}
-	
+
 	if( elem_courant == IN_ACTIVITY)
 	{
 		activity_input = xmlStrndup(text, length);
-        #ifdef DEBUG
-        printf ("\tInput: %s\n", (char *)activity_input);
-        #endif
+#ifdef DEBUG
+		printf ("\tInput: %s\n", (char *)activity_input);
+#endif
 	}
 
 	if( elem_courant == OUT_ACTIVITY)
 	{
 		activity_output = xmlStrndup(text, length);
-        #ifdef DEBUG
+#ifdef DEBUG
 		printf ("\tOutput: %s\n", (char *)activity_output);
-        #endif
+#endif
 	}
 
 }
@@ -100,13 +143,13 @@ void fin_element (void *user_data, const xmlChar *name)
 
 	if((strcmp((const char*)name,"tns:activity")==0 )&& elem_courant == ACTIVITY)
 	{
-        #ifdef DEBUG
-        printf ("Fin de l’activité \n");
+#ifdef DEBUG
+		printf ("Fin de l’activité \n");
 		printf ("- %s\n", (char *)activity_id);
 		printf ("- %s\n", (char *)activity_name);
 		printf ("- %s\n", (char *)activity_description);
 		printf ("- %s\n", (char *)activity_performer);
-        #endif
+#endif
 		elem_courant=PROCESS;
 
 		ajouterActivite (processus, (char *)activity_id,(char *)activity_name,(char *)activity_description, (char *)activity_performer,"NULL","NULL","NOT STARTED");
@@ -150,11 +193,11 @@ void debut_element (void *user_data, const xmlChar *name, const xmlChar **attrs)
 
 		activity_id = xmlStrndup(attrs[1], sizeof(attrs[1])+1);
 		activity_name = xmlStrndup(attrs[3], sizeof(attrs[3])+1);
-        #ifdef DEBUG
+#ifdef DEBUG
 		printf ("Debut  de l’activité %s\n", activity_id);
 		printf("\tid: %s\n",(char*) activity_id);
 		printf("\tname: %s\n",(char*) activity_name);
-        #endif
+#endif
 
 	}
 	else if(strcmp((const char*)name,"tns:description")==0 && elem_courant != ACTIVITY)
@@ -199,7 +242,7 @@ void fct_aide(FILE *file_dialogue)
 }
 
 
-void fct_Todo(FILE *file_dialogue)
+void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 {
 	char buffer[SIZE_BUFFER];
 	fputs("Bienvenue dans le mode To-Do, saisir exit pour en sortir\n",file_dialogue);
@@ -216,42 +259,67 @@ void fct_Todo(FILE *file_dialogue)
 }
 
 
-void fct_connectedUsers(FILE *file_dialogue)
+
+void fct_listProcesses(FILE *file_dialogue,Process *processCourant, char *option)
 {
-	fputs("Les utilisateurs connectes sont: \n",file_dialogue);
-	for (int i=0; i < MAX_UTILISATEURS; i++)
-	{
-		if (strcmp(connectedUsers[i], "") != 0)
-		{
-			fprintf(file_dialogue,"- %d°) %s\n",(i+1),connectedUsers[i]);
-		}
-
-	}
-
-}
-
-void fct_listProcesses(FILE *file_dialogue,Process *processCourant)
-{
-    #ifdef DEBUG
-    printf("Process courant: %p\n", processCourant);
-    #endif
+#ifdef DEBUG
+	printf("Process courant: %p\n", processCourant);
+#endif
 	int nbProcess=0;
 
 	while (processCourant != NULL) {
 		nbProcess++;
-		fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+		if (option == NULL)
+		{
+			fprintf (file_dialogue,"Process \t[Id:]  %s\t[Etat:] %s\n", processCourant->id, processCourant->etat);   
+		}
+		else if(strcmp(processCourant->etat,option) == 0)
+		{
+			fprintf (file_dialogue,"Process \t[Id:]  %s\t[Etat:] %s\n", processCourant->id, processCourant->etat); 
+		}
+		else 
+		{
+			fprintf (file_dialogue,"Il n'y a aucun processus avec l'etat:  %s\n", option); 
+		}
+		fprintf (file_dialogue,"Il y'a au total %d processus:\n", nbProcess);
 
-		Activity *activiteCourante = processCourant->debutListActivity;
-		while (activiteCourante != NULL) {
-			fprintf (file_dialogue,"\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
-			activiteCourante = activiteCourante->next;
+
+		processCourant = processCourant->next;
+	}
+}
+
+
+void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg)
+{
+#ifdef DEBUG
+	printf("Process courant: %p\n", processCourant);
+#endif
+	int nbProcess=0;
+
+	while (processCourant != NULL) {
+		nbProcess++;
+		if(strcmp(processCourant->id,arg) == 0)
+		{
+			fprintf (file_dialogue,"Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
+
+			Activity *activiteCourante = processCourant->debutListActivity;
+			while (activiteCourante != NULL) {
+				fprintf (file_dialogue,"\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
+				activiteCourante = activiteCourante->next;
+			}
+		}
+		else 
+		{
+			fprintf (file_dialogue,"Il n'y a aucun processus avec l'id:  %s\n", arg); 
 		}
 
 		processCourant = processCourant->next;
 	}
-	fprintf (file_dialogue,"Il y'a au total %d processus:\n", nbProcess);
 
 }
+
+
+
 
 char * adresseClient(long socket)
 {
@@ -432,14 +500,14 @@ void ajouterConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct Conne
 
 }
 
-void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
+void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],FILE *file_dialogue)
 {
-	printf("Les utilisateurs connectes sont: \n");
+	fprintf(file_dialogue,"Les utilisateurs connectes sont: \n");
 	for (int i=0; i < MAX_UTILISATEURS; i++)
 	{
 		if (strcmp(connectedUsers[i], "") != 0)
 		{
-			printf("- %d°) %s\n",(i+1),connectedUsers[i]);
+			fprintf(file_dialogue,"- %d°) %s\n",(i+1),connectedUsers[i]);
 		}
 
 	}
@@ -449,6 +517,7 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID])
 void* gestionClient(void *dialogue)
 {
 
+	bool enable_instancProc=true; // sécurité (faut se deco puis reco pour instancier plusieurs processus)
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }
 	char * nomMachine = malloc(SIZE_NOM_MACHINE);
@@ -473,7 +542,6 @@ void* gestionClient(void *dialogue)
 		printf("L'utilisateur %s est connecte avec la machine: %s\n", Connexion.connectedUser, nomMachine);
 		fputs("Connexion reussie\n",file_dialogue);
 		ajouterConnList( connectedUsers,Connexion);
-		afficherConnList(connectedUsers);
 
 
 	}
@@ -489,31 +557,71 @@ void* gestionClient(void *dialogue)
 
 	while(fgets(buffer,MAX_LIGNE,file_dialogue)!=NULL)
 	{
-		printf("Message de l'utilisateur %s: %s",Connexion.connectedUser, buffer);
+		strtok(buffer, "\n");
+
+		printf("Message de l'utilisateur %s: %s\n",Connexion.connectedUser, buffer);
 		if(strncmp(buffer,"exit",4) == 0)
 		{
 			break;
 		}
-		if(strncmp(buffer,"aide",4) == 0)
+		if(strcmp(buffer,"aide") == 0)
 		{
 			fct_aide(file_dialogue);
 		}
-		if(strncmp(buffer,"ToDo",4) == 0)
+		if(strcmp(buffer,"ToDo") == 0)
 		{
-			fct_Todo(file_dialogue);
+			fct_Todo(file_dialogue,Connexion.connectedUser);
 		}
-		if(strncmp(buffer,"connected users",15) == 0)
+		if(strcmp(buffer,"connected users") == 0)
 		{
-			fct_connectedUsers(file_dialogue);
+			afficherConnList(connectedUsers,file_dialogue);
+		}
+		if(strncmp(buffer,"ls process <",12) == 0)
+		{
+			char *acc_ouvr=strchr(buffer,'<');
+			char *acc_ferm=strchr(buffer,'>');
+#ifdef DEBUG
+			printf("ouvr: %s\n", acc_ouvr);
+			printf("ferm: %s\n", acc_ferm);
+			printf("diff: %ld\n", acc_ferm-acc_ouvr);
+#endif 
+			if((acc_ouvr!=NULL)&&(acc_ferm!=NULL)&&(acc_ferm>acc_ouvr))
+			{
+				char* arg= findStrArg((const char *)buffer);
+				fct_printProcess(file_dialogue,debutListProcess,arg);
+			}
 		}
 		if(strncmp(buffer,"ls processes",12) == 0)
 		{
-			fct_listProcesses(file_dialogue,debutListProcess);
+			char* option=findStrOpt(buffer);           ;
+			fct_listProcesses(file_dialogue,debutListProcess,option);
 		}
-		if(strncmp(buffer,"create process",13) == 0)
+		if(strncmp(buffer,"create process ",15) == 0)
 		{
-			instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-			fputs("Instanciation de processus effectuee avec succes\n",file_dialogue);
+			if(enable_instancProc)
+			{
+				char *acc_ouvr=strchr(buffer,'<');
+				char *acc_ferm=strchr(buffer,'>');
+#ifdef DEBUG
+				printf("ouvr: %s\n", acc_ouvr);
+				printf("ferm: %s\n", acc_ferm);
+				printf("diff: %ld\n", acc_ferm-acc_ouvr);
+#endif 
+				if((acc_ouvr!=NULL)&&(acc_ferm!=NULL)&&(acc_ferm>acc_ouvr))
+				{
+					char* file=findStrArg((const char *)buffer);
+#ifdef DEBUG
+					printf("%s\n",file);
+#endif
+					instancierProcessus (&debutListProcess,file);
+					fputs("Instanciation de processus effectuee avec succes\n",file_dialogue);
+					enable_instancProc=false; // sécurité (faut se deco puis reco pour instancier plusieurs processus)
+				}
+			}
+			else
+			{
+				fputs("Veuillez vous reconnecter pour instancier à nouveau un processus\n",file_dialogue);
+			}
 		}
 
 	}
@@ -546,14 +654,14 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
 }
 
 
-void instancierProcessus (Process **debut, char *id, char *description, char *etat) {
+void instancierProcessus (Process **debut,char* file) {
 
 	int nbProcess=1;
-    #ifdef DEBUG
+#ifdef DEBUG
 	printf("debut : %p\n",debut);
 	printf("debutListProcess: %p\n",debutListProcess);
 	printf("processus: %p\n",processus);
-    #endif
+#endif
 	processus = malloc (sizeof (*processus));
 
 	nbProcess=  countProcesses (debutListProcess);
@@ -563,37 +671,27 @@ void instancierProcessus (Process **debut, char *id, char *description, char *et
 	handler.startElement = debut_element;
 	handler.endElement   = fin_element;
 	handler.characters   = caracteres;
-	if (xmlSAXUserParseFile (&handler, NULL, "../Models/process1.xml") < 0) { perror ("oups parser"); }
+	char fichier [SIZE]= "../Models/";
+	strcat(fichier,file);
+
+	if( access( fichier, F_OK ) != -1 ) // pour vérifier si le fichier existe
+	{
+
+		if (xmlSAXUserParseFile (&handler, NULL,  (const char *)fichier) < 0) { perror ("oups parser"); }
 
 
-	processus->validation=false;
-	sprintf (processus->id,"%d",nbProcess); 
-	strcpy (processus->description, (char *)process_description);
-	strcpy (processus->etat, etat);
-	processus->next = *debut;     //  On ajoute au debut (plus simple)
-	*debut = processus;
+		processus->validation=false;
+		sprintf (processus->id,"%d",nbProcess); 
+		strcpy (processus->description, (char *)process_description);
+		strcpy (processus->etat, "RUNNING");
+		processus->next = *debut;     //  On ajoute au debut (plus simple)
+		*debut = processus;
 
-	printf("Le nombre de processus est: %d\n", nbProcess);
-
-}
-
-
-
-
-void afficherInfos (Process *processCourant) {
-
-	while (processCourant != NULL) {
-
-		printf ("Process \t[Id:] %s\t[Desc:] %s\t[Etat:] %s contient les activites suivantes:\n", processCourant->id, processCourant->description, processCourant->etat);
-
-
-		Activity *activiteCourante = processCourant->debutListActivity;
-
-		while (activiteCourante != NULL) {
-			printf ("\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
-			activiteCourante = activiteCourante->next;
-		}
-		processCourant = processCourant->next;
+		printf("Le nombre de processus est: %d\n", nbProcess);
+	}
+	else 
+	{
+		printf("Le fichier %s n'existe pas \n", fichier);        
 	}
 }
 
