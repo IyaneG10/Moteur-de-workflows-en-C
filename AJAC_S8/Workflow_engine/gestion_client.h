@@ -54,6 +54,7 @@ struct ConnexionInfos
 {
 	bool validity; // true: connexion reussie
 	char connectedUser [LONG_ID]; // Nom et Prenom de l'utilisateur connecte
+	char login [LONG_ID];
 };
 
 
@@ -66,7 +67,7 @@ void fct_aide(FILE *file_dialogue);
 void fct_Todo(FILE *file_dialogue,char user[LONG_ID]);
 void fct_listProcesses(FILE *file_dialogue,Process *processCourant,char *option);
 void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg);
-//void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* arg,char user[LONG_ID]);
+void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* arg,char user[LONG_ID]);
 
 void supprConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion); 
 

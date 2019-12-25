@@ -152,7 +152,15 @@ void fin_element (void *user_data, const xmlChar *name)
 #endif
 		elem_courant=PROCESS;
 
-		ajouterActivite (processus, (char *)activity_id,(char *)activity_name,(char *)activity_description, (char *)activity_performer,"NULL","NULL","NOT STARTED");
+		if ((strncmp((const char*)activity_id,"A1",2)==0 ))
+		{
+			ajouterActivite (processus, (char *)activity_id,(char *)activity_name,(char *)activity_description, (char *)activity_performer,"NULL","NULL","STARTED");
+		}
+		else
+		{
+			ajouterActivite (processus, (char *)activity_id,(char *)activity_name,(char *)activity_description, (char *)activity_performer,"NULL","NULL","NOT STARTED");
+		}
+
 
 
 	}
@@ -252,6 +260,11 @@ void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 		{
 			break;
 		}
+		if(strncmp(buffer,"ls",2) == 0)
+		{
+			char* option=findStrOpt(buffer);   
+			fct_listActivities(file_dialogue,debutListProcess,option,user);
+		}
 
 	}
 	fputs("Vous êtes sorti du mode To-Do\n",file_dialogue);
@@ -318,6 +331,59 @@ void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg)
 
 }
 
+
+void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* option, char user[LONG_ID])
+{
+#ifdef DEBUG
+	printf("Process courant: %p\n", processCourant);
+#endif
+	int nbProcess=0;
+
+	while (processCourant != NULL) {
+		nbProcess++;
+
+
+		if (option == NULL)
+		{
+
+
+			Activity *activiteCourante = processCourant->debutListActivity;
+			while (activiteCourante != NULL) {
+				if(strncmp(activiteCourante->performer,user,sizeof(activiteCourante->performer)) == 0)
+				{
+					fprintf (file_dialogue,"Process \t[Id:] %s\n", processCourant->id);
+					fprintf (file_dialogue,"Activitee assignee\n\t[Id:] %s\n\t[Name:] %s\n", activiteCourante->id,activiteCourante->name);
+				}
+				activiteCourante = activiteCourante->next;
+			}
+
+		}
+		else
+		{
+			char opt[LONG_ID];
+			strncpy(opt,(const char *) option,2);
+			Activity *activiteCourante = processCourant->debutListActivity;
+			while (activiteCourante != NULL) {
+
+				if(strncmp(activiteCourante->performer,user,sizeof(activiteCourante->performer)) == 0)
+				{
+					if(strncmp(activiteCourante->id,opt,2) == 0) 
+					{
+						fprintf (file_dialogue,"Process \t[Id:] %s \n", processCourant->id);
+						fprintf (file_dialogue,"Activitee associee [Id:] %s details: \n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
+					}
+				}
+
+				activiteCourante = activiteCourante->next;
+			} 
+		}
+
+
+
+		processCourant = processCourant->next;
+	}
+
+}
 
 
 
@@ -415,7 +481,7 @@ int parserBDDUsers(FILE *fp_UsersFile, char users[MAX_UTILISATEURS][3][LONG_ID])
 
 struct ConnexionInfos authentificationClient(FILE *file_dialogue,  char users[MAX_UTILISATEURS][3][LONG_ID])
 {
-	struct ConnexionInfos Infos = {false,""};
+	struct ConnexionInfos Infos = {false,"",""};
 	char *pos_log, *pos_pwd; // pour enlever le CR du au fgets
 	char identifiantsBDD[LONG_ID*2];
 	char identifiantsSaisis[2*LONG_ID];
@@ -432,6 +498,7 @@ struct ConnexionInfos authentificationClient(FILE *file_dialogue,  char users[MA
 		*pos_pwd = '\0';
 	else {} // par protection
 
+	strcpy(Infos.login, login);
 	strcpy(identifiantsSaisis, login);
 	strcat(identifiantsSaisis,":");
 	strcat(identifiantsSaisis, password); // couple login:password
@@ -570,7 +637,7 @@ void* gestionClient(void *dialogue)
 		}
 		if(strcmp(buffer,"ToDo") == 0)
 		{
-			fct_Todo(file_dialogue,Connexion.connectedUser);
+			fct_Todo(file_dialogue,Connexion.login);
 		}
 		if(strcmp(buffer,"connected users") == 0)
 		{
