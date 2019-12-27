@@ -18,6 +18,7 @@ extern char connectedUsers[MAX_UTILISATEURS][LONG_ID]; // declare dans main
 
 
 typedef struct Activity {
+    struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
 	char id [SIZE];
 	char name[SIZE];
 	char description[SIZE];
@@ -26,7 +27,7 @@ typedef struct Activity {
 	char output[SIZE]; // NULL s'il n'y en a pas
 	char etat [SIZE]; // NOT STARTED, RUNNING, COMPLETED (voir transitions)
 	struct Activity *next;
-	struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
+
 } Activity; 
 
 
@@ -69,6 +70,8 @@ void fct_listProcesses(FILE *file_dialogue,Process *processCourant,char *option)
 void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg);
 void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* arg,char user[LONG_ID]);
 
+void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]);
+
 void supprConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion); 
 
 void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],FILE *file_dialogue);
@@ -90,6 +93,7 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
 void instancierProcessus (Process **debut,char* file);
 
 int countProcesses (Process *processCourant) ;
+int isEmpty (Process *process);
 
 
 

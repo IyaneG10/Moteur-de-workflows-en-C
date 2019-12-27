@@ -265,6 +265,10 @@ void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 			char* option=findStrOpt(buffer);   
 			fct_listActivities(file_dialogue,debutListProcess,option,user);
 		}
+		if (strncmp(buffer,"valider",7) == 0)
+		{
+			fct_valider(file_dialogue,debutListProcess, user);
+		}
 
 	}
 	fputs("Vous êtes sorti du mode To-Do\n",file_dialogue);
@@ -355,6 +359,7 @@ void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* option
 					fprintf (file_dialogue,"Activitee assignee\n\t[Id:] %s\n\t[Name:] %s\n", activiteCourante->id,activiteCourante->name);
 				}
 				activiteCourante = activiteCourante->next;
+
 			}
 
 		}
@@ -365,7 +370,7 @@ void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* option
 			Activity *activiteCourante = processCourant->debutListActivity;
 			while (activiteCourante != NULL) {
 
-				if(strncmp(activiteCourante->performer,user,sizeof(activiteCourante->performer)) == 0)
+				//if(strncmp(activiteCourante->performer,user,sizeof(activiteCourante->performer)) == 0)
 				{
 					if(strncmp(activiteCourante->id,opt,2) == 0) 
 					{
@@ -385,6 +390,104 @@ void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* option
 
 }
 
+
+void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID])
+{
+	char procToValid[LONG_ID];
+	fprintf (file_dialogue,"Veuillez saisir  l'ID du process concerne\n");
+	fgets(procToValid,LONG_ID,file_dialogue);
+	fprintf (file_dialogue,"choix: %s\n", procToValid);
+
+	int nbProcess=0;
+
+	while (processCourant != NULL) {
+		nbProcess++;
+		if(strncmp(processCourant->id,procToValid,1) == 0)
+		{
+			char actToValid[LONG_ID];
+			bool validation=true; // gérer es 2 différents cas plus tard
+			fprintf (file_dialogue,"Veuillez saisir l'ID de l'activite concernee\n");
+			fgets(actToValid,LONG_ID,file_dialogue);
+			fprintf (file_dialogue,"choix: %s\n", actToValid);
+
+			Activity *activiteCourante = processCourant->debutListActivity ;
+			//Activity *prev,*next;
+
+			activiteCourante->prev = NULL;
+
+			while (activiteCourante != NULL) {
+				if(strncmp(activiteCourante->id,actToValid,2) == 0)
+				{
+					//     if(strncmp(activiteCourante->performer,user,sizeof(activiteCourante->performer)) == 0)
+					{
+
+						if(activiteCourante->prev !=NULL)
+						{
+							fprintf (file_dialogue,"activite prec\n");
+
+							Activity *prev;
+							prev=activiteCourante->prev;
+							if(strncmp(prev->etat,"COMPLETED",9) == 0)
+							{
+								strcpy (activiteCourante->etat, "COMPLETED");
+							}
+							else
+							{
+								fprintf (file_dialogue,"L'activite %s ne peut pas etre validee car la transition n'est pas farnchie\n", activiteCourante->id);
+							}
+
+						}
+						else // Activite A1
+						{
+							fprintf (file_dialogue,"PAS activite prec\n");
+							strcpy (activiteCourante->etat, "COMPLETED");
+
+							Activity *next;
+							next=activiteCourante->next;
+							strcpy (next->etat, "RUNNING");
+						}
+
+					}
+					if(activiteCourante->next !=NULL) 
+					{
+
+						// GERER ACTIVITES 2 ET 3 AVEC VARIABLE BOOLEENE VALIDATON
+						fprintf (file_dialogue,"activite suiv\n");
+						Activity *next;
+						next=activiteCourante->next;
+						strcpy (next->etat, "RUNNING");
+					}
+					else // activite A7 (fin du process)
+					{
+						fprintf (file_dialogue,"PAS activite suiv\n");
+						strcpy (processCourant->etat, "COMPLETED");
+					}
+
+
+					fprintf (file_dialogue,"VALIDATION OK\n");
+
+
+				}
+				// else
+				//{
+				//  fprintf (file_dialogue,"L'activite %s n'est pas assignee a %s\n",activiteCourante->id,user);
+				//}
+			}
+			//activiteCourante = activiteCourante->next;
+
+
+			activiteCourante->prev = activiteCourante;
+			activiteCourante = activiteCourante->next;
+
+
+		}
+	}    
+
+	processCourant = processCourant->next;
+}
+
+
+}
 
 
 char * adresseClient(long socket)
@@ -705,18 +808,48 @@ void* gestionClient(void *dialogue)
 
 
 
-void ajouterActivite (Process *debut, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) {
+void ajouterActivite (Process *process, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) {
 
-	Activity *activite = malloc (sizeof (*activite));
-	strcpy (activite->id, id);
-	strcpy (activite->name, name);
-	strcpy (activite->description, description);
-	strcpy (activite->performer, performer);
-	strcpy (activite->input, input);
-	strcpy (activite->output, output);
-	strcpy (activite->etat, etat);
-	activite->next = debut->debutListActivity;  //  On ajoute au debut (plus simple)
-	debut->debutListActivity = activite;
+	Activity *activite = (Activity *)malloc (sizeof (Activity));
+
+
+
+	if(isEmpty(process))
+	{
+		activite->next = NULL;
+		process->debutListActivity= activite;
+		strcpy (activite->id, id);
+		strcpy (activite->name, name);
+		strcpy (activite->description, description);
+		strcpy (activite->performer, performer);
+		strcpy (activite->input, input);
+		strcpy (activite->output, output);
+		strcpy (activite->etat, etat);
+	}
+	else
+	{
+		Activity *ptr=process->debutListActivity;//recent
+		while (ptr->next != NULL)
+		{
+			ptr = ptr->next;
+		}
+		strcpy (activite->id, id);
+		strcpy (activite->name, name);
+		strcpy (activite->description, description);
+		strcpy (activite->performer, performer);
+		strcpy (activite->input, input);
+		strcpy (activite->output, output);
+		strcpy (activite->etat, etat);
+
+		activite->next = NULL;  
+		ptr->next = activite;
+	}
+
+
+
+
+
+
 
 }
 
@@ -774,3 +907,7 @@ int countProcesses (Process *processCourant) {
 	return nbProcess;
 }
 
+int isEmpty (Process *process)
+{
+	return (process->debutListActivity==NULL);
+}

@@ -8,6 +8,7 @@
 #define ETAT_CP COMPLETED
 
 typedef struct Activity {
+    struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
     char id [SIZE];
     char name[SIZE];
     char description[SIZE];
@@ -15,8 +16,9 @@ typedef struct Activity {
     char input[SIZE]; //  NULL s'il n'y en a pas
     char output[SIZE]; // NULL s'il n'y en a pas
     char etat [SIZE]; // NOT STARTED, RUNNING, COMPLETED (voir transitions)
+
     struct Activity *next;
-    struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
+
 } Activity; 
 
 
@@ -42,6 +44,8 @@ void ajouterActivite (Process *debut, char *id, char *name, char *description, c
     strcpy (activite->etat, etat);
     activite->next = debut->debutListActivity;  //  On ajoute au début (plus simple)
     debut->debutListActivity = activite;
+
+//activite->prev = activite;
 }
 
 
@@ -77,11 +81,47 @@ void afficherInfos (Process *processCourant) {
         
         
         Activity *activiteCourante = processCourant->debutListActivity;
+Activity *prev, *next;
         
             while (activiteCourante != NULL) {
+
+
+
+
+
+
+
+
                 printf ("\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", activiteCourante->id,activiteCourante->name,activiteCourante->description,activiteCourante->performer,activiteCourante->input,activiteCourante->output,activiteCourante->etat);
-                activiteCourante = activiteCourante->next;
+ 	next = activiteCourante->next; 
+        activiteCourante->next = prev; 
+        prev = activiteCourante; 
+        activiteCourante = next;
+					if(next != NULL) 
+					{
+strcpy (next->etat,"CHANGED" );
+						
+					} 
+
+
+					if(prev != NULL) 
+					{
+						printf ("Il y'a bien une activite precedente \n");
+                //printf ("\n\t[Id:] %s\n\t[Name:] %s\n\t[Descr:] %s\n\t[Perf:] %s\n\t[Entree:] %s\n\t[Sortie:] %s\n\t[Etat:] %s\n\n", prev->id,prev->name,prev->description,prev->performer,prev->input,prev->output,prev->etat);
+						
+					}
+					else 
+					{
+						printf ("Il n'y a pas d'activite precedente \n");
+						
+					}
+                //activiteCourante = activiteCourante->next;
+
+ 
+
+
             }
+
                 processCourant = processCourant->next;
     }
 }
@@ -92,7 +132,7 @@ int main (void) {
     Process *debutListProcess = NULL;
     
     instancierProcessus (&debutListProcess, "1", "Demande de stage Malick", "RUNNING");
-    instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
+    //instancierProcessus (&debutListProcess, "2", "Demande de stage Iyane", "RUNNING");
    
     afficherInfos (debutListProcess);
     
