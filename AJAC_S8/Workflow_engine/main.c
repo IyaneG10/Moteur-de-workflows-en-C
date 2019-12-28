@@ -21,6 +21,7 @@
 #include <sys/ipc.h> 
 #include <sys/msg.h> 
 
+
 #include "optionServer.h"
 #include "gestion_client.h"
 #include "libsck.h"
@@ -39,7 +40,7 @@ char connectedUsers[MAX_UTILISATEURS][LONG_ID];
 
 int main(int argc, char *argv[])
 {
-	struct OptionArg arg= check_arguments(argc,argv);
+    struct OptionArg arg= check_arguments(argc,argv);
 	printf("Le port utilisé est: %s\n", arg.portNum);
 	strcpy(usersFile, arg.File);
 	printf("Le userfile utilisé est: %s\n", usersFile);
