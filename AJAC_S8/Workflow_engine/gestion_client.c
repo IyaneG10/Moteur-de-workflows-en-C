@@ -405,7 +405,7 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 		if(strncmp(processCourant->id,procToValid,1) == 0)
 		{
 			char actToValid[LONG_ID];
-			//bool validation=true; // gérer es 2 différents cas plus tard
+			bool validation=false; 
 			fprintf (file_dialogue,"Veuillez saisir l'ID de l'activite concernee\n");
 			fgets(actToValid,LONG_ID,file_dialogue);
 			fprintf (file_dialogue,"choix: %s\n", actToValid);
@@ -417,28 +417,80 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 				{
 					if(strncmp(activiteCourante->performer,user,sizeof(activiteCourante->performer)) == 0)
 					{
-
-                            if(strncmp(activiteCourante->etat,"RUNNING",7) == 0)
+						if(strncmp(activiteCourante->id,"A2",2) == 0)
+						{
+							if(strncmp(activiteCourante->etat,"RUNNING",7) == 0)
 							{
-								strcpy (activiteCourante->etat, "COMPLETED");
-                                fprintf (file_dialogue,"Activite validee avec succes\n");
-						if(activiteCourante->next !=NULL) 
-						{
-
-							// GERER ACTIVITES 2 ET 3 AVEC VARIABLE BOOLEENE VALIDATON
-							Activity *next;
-							next=activiteCourante->next;
-							strcpy (next->etat, "RUNNING");
-						}
-						else // activite A7 (fin du process)
-						{
-							strcpy (processCourant->etat, "COMPLETED");
-						}
+								char valid[LONG_ID];
+								fprintf (file_dialogue,"Veuillez saisir  la valeur de la sortie validation: true ou false \n");
+								fgets(valid,LONG_ID,file_dialogue);
+								fprintf (file_dialogue,"choix: %s\n", valid);
+                                if(strncmp(valid,"true",4) == 0)
+                                {
+                                    validation =true;
+                                }
+                                else // si mauvaise saisie, valeur false par défaut
+                                {
+                                    validation=false;
+                                }
+    
+								Activity *next;
+								next=activiteCourante->next;
+								if(validation == true)
+								{
+									strcpy (next->etat, "NOT STARTED");
+								}
+								else
+								{
+									strcpy (next->etat, "RUNNING");
+								}
+								fprintf (file_dialogue,"Activite validee avec succes\n");
 							}
 							else
 							{
 								fprintf (file_dialogue,"L'activite %s ne peut pas etre validee car la transition n'est pas franchie\n", activiteCourante->id);
 							}
+						}
+						else if(strncmp(activiteCourante->id,"A3",2) == 0)
+						{
+							if(validation == false)
+							{
+								strcpy (activiteCourante->etat, "COMPLETED");
+								strcpy (processCourant->etat, "COMPLETED");
+							}
+						}
+						else if(strncmp(activiteCourante->id,"A4",2) == 0)
+						{
+							strcpy (activiteCourante->etat, "COMPLETED");
+							Activity *next;
+							next=activiteCourante->next;
+							if(validation == true)
+							{
+								strcpy (next->etat, "RUNNING");
+							}
+						}
+
+						else if(strncmp(activiteCourante->etat,"RUNNING",7) == 0)
+						{
+							strcpy (activiteCourante->etat, "COMPLETED");
+							fprintf (file_dialogue,"Activite validee avec succes\n");
+							if(activiteCourante->next !=NULL) 
+							{
+
+								// GERER ACTIVITES 2 ET 3 AVEC VARIABLE BOOLEENE VALIDATON
+								Activity *next;
+								next=activiteCourante->next;
+								strcpy (next->etat, "RUNNING");
+							}
+							else // activite A7 (fin du process)
+							{
+								strcpy (processCourant->etat, "COMPLETED");
+							}
+						}
+						else
+						{
+							fprintf (file_dialogue,"L'activite %s ne peut pas etre validee car la transition n'est pas franchie\n", activiteCourante->id);
+						}
 
 					}
 					else
@@ -451,7 +503,7 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 				activiteCourante->prev = activiteCourante;
 				activiteCourante = activiteCourante->next;
 			}
-	
+
 		}
 		processCourant = processCourant->next;
 	}    
