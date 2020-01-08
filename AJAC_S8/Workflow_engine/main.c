@@ -24,6 +24,7 @@
 
 #include "optionServer.h"
 #include "gestion_client.h"
+#include "workflow_struct.h"
 #include "libsck.h"
 #include "libthrd.h"
 #include "libipc.h"
@@ -31,7 +32,8 @@
 
 
 
-Process *debutListProcess;
+Process *debutListProcess=NULL;
+Process *processus=NULL;
 
 char usersFile[100]; // en variable globale car partagée par tous les processus (sans modification)
 char connectedUsers[MAX_UTILISATEURS][LONG_ID];
@@ -55,10 +57,8 @@ int main(int argc, char *argv[])
 
 	/* Lancement de la boucle d'ecoute */
 	boucleServeur(socket_ecoute,lanceClientLeger,gestionClient);
+    
 	printf("Au revoir !!!\n");
-    
- 
-    
 	return 0;
 }
 

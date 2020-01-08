@@ -17,7 +17,6 @@
 #include <sys/msg.h> 
 
 #include "libipc.h"
-//#include "gestion_client.h"
 
 
 
@@ -38,6 +37,7 @@ void* gestion_file_message(void* arg)
 
 	while (1) {
 		printf("En attente des requetes admin\n");
+		strcpy(msg.contenuMessage, "");
 		if (msgrcv(commandes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 
 
 		printf("La requete admin du processus n° %i est : %s \n", msg.numProcess,msg.contenuMessage); 

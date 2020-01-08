@@ -20,7 +20,6 @@ struct OptionArg check_arguments(int argc, char **argv)
 	int res;
 	struct OptionArg arguments = {"4000","users"}; // valeurs par défaut
 
-
 	while (1)
 	{
 		static struct option long_options[] =
