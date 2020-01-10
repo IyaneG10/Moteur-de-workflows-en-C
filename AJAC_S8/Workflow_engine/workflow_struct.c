@@ -173,92 +173,92 @@ void debut_element (void *user_data, const xmlChar *name, const xmlChar **attrs)
 
 
 void ajouterActivite (Process *process, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) {
-    
-    Activity *activite = (Activity *)malloc (sizeof (Activity));
-    
-    if(isEmpty(process))
-    {
-        activite->next = NULL;
-        process->debutListActivity= activite;
-        strcpy (activite->id, id);
-        strcpy (activite->name, name);
-        strcpy (activite->description, description);
-        strcpy (activite->performer, performer);
-        strcpy (activite->input, input);
-        strcpy (activite->output, output);
-        strcpy (activite->etat, etat);
-    }
-    	else
-        {
-            Activity *ptr=process->debutListActivity;//recent
-            		while (ptr->next != NULL)
-                    {
-                        ptr = ptr->next;
-                    }
-                    		strcpy (activite->id, id);
-                            strcpy (activite->name, name);
-                            strcpy (activite->description, description);
-                            strcpy (activite->performer, performer);
-                            strcpy (activite->input, input);
-                            strcpy (activite->output, output);
-                            strcpy (activite->etat, etat);
-                            
-                            activite->next = NULL;  
-                            ptr->next = activite;
-        }
-        
+
+	Activity *activite = (Activity *)malloc (sizeof (Activity));
+
+	if(isEmpty(process))
+	{
+		activite->next = NULL;
+		process->debutListActivity= activite;
+		strcpy (activite->id, id);
+		strcpy (activite->name, name);
+		strcpy (activite->description, description);
+		strcpy (activite->performer, performer);
+		strcpy (activite->input, input);
+		strcpy (activite->output, output);
+		strcpy (activite->etat, etat);
+	}
+	else
+	{
+		Activity *ptr=process->debutListActivity;//recent
+		while (ptr->next != NULL)
+		{
+			ptr = ptr->next;
+		}
+		strcpy (activite->id, id);
+		strcpy (activite->name, name);
+		strcpy (activite->description, description);
+		strcpy (activite->performer, performer);
+		strcpy (activite->input, input);
+		strcpy (activite->output, output);
+		strcpy (activite->etat, etat);
+
+		activite->next = NULL;  
+		ptr->next = activite;
+	}
+
 }
 
 
 int instancierProcessus (Process **debut,char* file) {
 
 	int ret=0;
-    
-    int nbProcess=1;
-    processus = malloc (sizeof (*processus));
-    
-    nbProcess=  countProcesses (debutListProcess);
-    nbProcess++;
-    
-    elem_courant=AUTRE;
-    handler.startElement = debut_element;
-    handler.endElement   = fin_element;
-    handler.characters   = caracteres;
-    char fichier [SIZE]= "../Models/";
-    strcat(fichier,file);
-    
-    if( access( fichier, F_OK ) != -1 ) // pour vérifier si le fichier existe
-    {
-        if (xmlSAXUserParseFile (&handler, NULL,  (const char *)fichier) < 0) { perror ("oups parser"); }
-        		processus->validation=false;
-                sprintf (processus->id,"%d",nbProcess); 
-                strcpy (processus->description, (char *)process_description);
-                strcpy (processus->etat, "RUNNING");
-                processus->next = *debut;     //  On ajoute au debut (plus simple)
-                		*debut = processus;
-                        printf("Le nombre de processus est: %d\n", nbProcess);
-    }
-    	else 
-        {
-            printf("Le fichier %s n'existe pas \n", fichier);  
-ret = 1;      
-        }
 
-return ret;
+	int nbProcess=1;
+	processus = malloc (sizeof (*processus));
+
+	nbProcess=  countProcesses (debutListProcess);
+	nbProcess++;
+
+	elem_courant=AUTRE;
+	handler.startElement = debut_element;
+	handler.endElement   = fin_element;
+	handler.characters   = caracteres;
+	char fichier [SIZE]= "../Models/";
+	strcat(fichier,file);
+
+	if( access( fichier, F_OK ) != -1 ) // pour vérifier si le fichier existe
+	{
+		if (xmlSAXUserParseFile (&handler, NULL,  (const char *)fichier) < 0) { perror ("oups parser"); }
+		processus->validation=false;
+		sprintf (processus->id,"%d",nbProcess); 
+		strcpy (processus->description, (char *)process_description);
+		strcpy (processus->etat, "RUNNING");
+		processus->next = *debut;     //  On ajoute au debut (plus simple)
+		*debut = processus;
+		printf("Le nombre de processus est: %d\n", nbProcess);
+	}
+	else 
+	{
+		printf("Le fichier %s n'existe pas \n", fichier);  
+		ret = 1;      
+	}
+
+	return ret;
 }
 
 
 int countProcesses (Process *processCourant) {
-    int nbProcess=0;
-    while (processCourant != NULL) {
-        
-        nbProcess++;
-        processCourant = processCourant->next;
-    }
-    	return nbProcess;
+	int nbProcess=0;
+	while (processCourant != NULL) {
+
+		nbProcess++;
+		processCourant = processCourant->next;
+	}
+	return nbProcess;
 }
 
 int isEmpty (Process *process)
 {
-    return (process->debutListActivity==NULL);
+	return (process->debutListActivity==NULL);
 }

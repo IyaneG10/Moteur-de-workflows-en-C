@@ -12,6 +12,11 @@ typedef struct {
 } messsage_IPC; 
 
 void* gestion_file_message(void* arg);
+void printConnectedUsers(messsage_IPC msg,int commandes, int reponses);
+void listUsers(messsage_IPC msg,int commandes, int reponses);
+void addUser(messsage_IPC msg,int commandes, int reponses);
+void modeListen(messsage_IPC msg,int commandes, int reponses);
+int verif_format(const char *modele,const char *chaine);
 
 
 

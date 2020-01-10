@@ -30,6 +30,7 @@
 
 extern Process *debutListProcess;
 extern Process *processus;
+extern int flag_connected ;
 
 
 
@@ -467,9 +468,10 @@ void* gestionClient(void *dialogue)
 
 	if(Connexion.validity)
 	{
-        nomMachine = getAdresseClient((long)dialogue); // recuperation de l'adresse de la machine connectee
+		nomMachine = getAdresseClient((long)dialogue); // recuperation de l'adresse de la machine connectee
 		printf("L'utilisateur %s est connecte avec la machine: %s\n", Connexion.connectedUser, nomMachine);
 		fputs("Connexion reussie\n",file_dialogue);
+		flag_connected=1 ;
 		ajouterConnList( connectedUsers,Connexion);
 
 
@@ -550,7 +552,7 @@ void* gestionClient(void *dialogue)
 
 					else
 					{
-                        fprintf (file_dialogue,"Impossible d'instancier le process avec le fichier: %s\n", file);   
+						fprintf (file_dialogue,"Impossible d'instancier le process avec le fichier: %s\n", file);   
 					}
 				}
 			}

@@ -25,6 +25,7 @@ struct ConnexionInfos
 
 
 
+
 void fct_aide(FILE *file_dialogue);
 void fct_Todo(FILE *file_dialogue,char user[LONG_ID]);
 void fct_listProcesses(FILE *file_dialogue,Process *processCourant,char *option);

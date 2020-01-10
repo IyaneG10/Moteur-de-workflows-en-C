@@ -32,20 +32,25 @@
 
 
 
+
+
+
 Process *debutListProcess=NULL;
 Process *processus=NULL;
 
 char usersFile[100]; // en variable globale car partagée par tous les processus (sans modification)
 char connectedUsers[MAX_UTILISATEURS][LONG_ID];
-
+int flag_connected ;
 
 
 int main(int argc, char *argv[])
 {
-    struct OptionArg arg= check_arguments(argc,argv);
+	struct OptionArg arg= check_arguments(argc,argv);
 	printf("Le port utilisé est: %s\n", arg.portNum);
 	strcpy(usersFile, arg.File);
 	printf("Le userfile utilisé est: %s\n", usersFile);
+
+	flag_connected=0;
 
 	debutListProcess = NULL;
 
@@ -57,7 +62,7 @@ int main(int argc, char *argv[])
 
 	/* Lancement de la boucle d'ecoute */
 	boucleServeur(socket_ecoute,lanceClientLeger,gestionClient);
-    
+
 	printf("Au revoir !!!\n");
 	return 0;
 }

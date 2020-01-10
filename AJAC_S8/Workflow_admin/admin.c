@@ -70,7 +70,6 @@ struct Arg getCmdAdmin(int argc, char **argv)
 			case 'u':
 				{
 					strcpy(arguments.arg_U, "u");
-					printf ("spécifiée en argument est: %s\n", arguments.arg_U);
 #ifdef DEBUG
 					printf ("GETOPTLONG:L'option spécifiée est: %s\n", arguments.arg_U);
 #endif
@@ -86,7 +85,6 @@ struct Arg getCmdAdmin(int argc, char **argv)
 				}
 			case 'a':
 				{
-					printf("Tout est OK jusqu'ici\n");
 					strcpy(arguments.arg_A, optarg);
 #ifdef DEBUG
 					printf ("GETOPTLONG:L'option spécifiée a pour agrhument : %s\n", optarg);
@@ -128,10 +126,12 @@ struct Arg getCmdAdmin(int argc, char **argv)
 int main(int argc, char **argv) { 
 
 
-	struct Arg arg = {"","","",""}; // valeurs par défaut
+    
+    struct Arg arg = {"","","",""}; // valeurs par défaut
 	arg = getCmdAdmin(argc, argv);
 	int commandes, reponses;
 	messsage_IPC msg;
+    memset(msg.contenuMessage,0,strlen(msg.contenuMessage));	
 	int res; 
 	int pid=getpid();
 	printf("Le PID est: %d\n",pid);
@@ -157,7 +157,7 @@ int main(int argc, char **argv) {
 	}
 	else if (strcmp(arg.arg_A, "NULL") != 0)
 	{
-		strcpy(msg.contenuMessage, arg.arg_A);
+		//strcpy(msg.contenuMessage, arg.arg_A);
 	}
 
 
@@ -168,11 +168,20 @@ int main(int argc, char **argv) {
 	if (res == -1) { perror("msgsnd"); return (EXIT_FAILURE); } 
 
 	// Récupérer et afficher la réponse du serveur
-	res = msgrcv(reponses, & msg, TAILLE_MSG,0 /*pid*/, 0); 
-	if (res == -1) { perror("msgrcv"); return (EXIT_FAILURE); } 
-	printf("Le serveur a envoyé : %s\n", msg.contenuMessage); 
+	while (1)
+	{
+		//memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
+		res = msgrcv(reponses, & msg, TAILLE_MSG,0 /*pid*/, 0); 
+		if (res == -1) { perror("msgrcv"); return (EXIT_FAILURE); } 
+		{
+			if (strcmp(msg.contenuMessage, "\0") != 0) 
+			{
+				printf("%s\n", msg.contenuMessage);
+			}
+			else{break;};
+		} 
 
-	//msgctl(reponses, IPC_RMID, NULL);
+	}
 
 
 	return 0; 

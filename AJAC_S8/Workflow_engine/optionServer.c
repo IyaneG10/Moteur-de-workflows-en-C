@@ -38,33 +38,33 @@ struct OptionArg check_arguments(int argc, char **argv)
 			case 0:
 				if (long_options[option_index].flag != 0)
 					break;
-				#ifdef DEBUG
+#ifdef DEBUG
 				printf ("GETOPTLONG:option %s", long_options[option_index].name);
-				#endif
+#endif
 				if (optarg)
 				{
-					#ifdef DEBUG
+#ifdef DEBUG
 					printf ("GETOPTLONG:with arg %s", optarg);
-					#endif
+#endif
 				}
-				#ifdef DEBUG
+#ifdef DEBUG
 				printf ("\n");
-				#endif
+#endif
 				break;
 			case 'p':
 				{
 					strcpy(arguments.portNum, optarg);
-					#ifdef DEBUG
+#ifdef DEBUG
 					printf ("GETOPTLONG:Le port spécifié en argument est: %s\n", optarg);
-					#endif
+#endif
 					break;
 				}
 			case 'u':
 				{
 					strcpy(arguments.File, optarg);
-					#ifdef DEBUG
+#ifdef DEBUG
 					printf ("GETOPTLONG:Le fichier utilisateur spécifié en argument est: %s\n", optarg);
-					#endif
+#endif
 					break;
 				}
 			case '?':

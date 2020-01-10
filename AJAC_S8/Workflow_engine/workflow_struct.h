@@ -5,38 +5,38 @@
 
 
 typedef struct Activity {
-    struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
-    	char id [SIZE];
-        char name[SIZE];
-        char description[SIZE];
-        char performer[SIZE];
-        char input[SIZE]; //  NULL s'il n'y en a pas
-        char output[SIZE]; // NULL s'il n'y en a pas
-        char etat [SIZE]; // NOT STARTED, RUNNING, COMPLETED (voir transitions)
-        struct Activity *next;
-                    
+	struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
+	char id [SIZE];
+	char name[SIZE];
+	char description[SIZE];
+	char performer[SIZE];
+	char input[SIZE]; //  NULL s'il n'y en a pas
+	char output[SIZE]; // NULL s'il n'y en a pas
+	char etat [SIZE]; // NOT STARTED, RUNNING, COMPLETED (voir transitions)
+	struct Activity *next;
+
 } Activity; 
 
 
 typedef struct Process {
-    char id [SIZE];
-    char description [SIZE];
-    char etat [SIZE]; // RUNNING, COMPLETED
-    	Activity *debutListActivity;
-        bool validation;
-        struct Process *next;
+	char id [SIZE];
+	char description [SIZE];
+	char etat [SIZE]; // RUNNING, COMPLETED
+	Activity *debutListActivity;
+	bool validation;
+	struct Process *next;
 } Process;
 
 
 enum {
-    AUTRE,
-    PROCESS,
-    DESC_PROCESS,
-    ACTIVITY,
-    DESC_ACTIVITY,
-    PERF_ACTIVITY,
-    IN_ACTIVITY,
-    OUT_ACTIVITY
+	AUTRE,
+	PROCESS,
+	DESC_PROCESS,
+	ACTIVITY,
+	DESC_ACTIVITY,
+	PERF_ACTIVITY,
+	IN_ACTIVITY,
+	OUT_ACTIVITY
 };
 
 
