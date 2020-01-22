@@ -7,7 +7,6 @@ export CC = gcc
 export LD = gcc
 export CLIB = ar cq
 export CFLAGS = -g -Wall
-#export CFLAGS = -g -Wall -DDEBUG
 
 #
 # Constantes liees au projet

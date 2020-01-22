@@ -32,9 +32,6 @@
 
 
 
-
-
-
 Process *debutListProcess=NULL;
 Process *processus=NULL;
 

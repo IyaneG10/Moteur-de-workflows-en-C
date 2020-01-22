@@ -88,7 +88,6 @@ void listUsers(messsage_IPC msg,int commandes, int reponses)
 
 				sprintf(msg.contenuMessage, "Utilisateur: [%s] Identifiant: [%s]", utilisateur,username);
 				if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
-				//memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 
 			}
 
@@ -97,7 +96,6 @@ void listUsers(messsage_IPC msg,int commandes, int reponses)
 
 	strcpy(msg.contenuMessage, "\0");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
-	//memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 
 	fclose (fp_UsersFile);
 
@@ -107,8 +105,22 @@ void listUsers(messsage_IPC msg,int commandes, int reponses)
 void addUser(messsage_IPC msg,int commandes, int reponses)
 {
     printf("Entree dans la fonction addUser \n");
-    strcpy(msg.contenuMessage, "Utilisateur ajoute avec succes");
-	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+    const char *modele = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+-[_[:alpha:]]+$";
+    if(0 == verif_format(modele,msg.contenuMessage))
+    {
+        printf("ADDED USER: %s\n", msg.contenuMessage);
+        // verifier si login inexistant
+        // remplacer tiret par espace
+        // ajouter à la fin du fichier
+        strcpy(msg.contenuMessage, "Utilisateur ajoute avec succes");
+        if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+    }
+    else
+    {
+        strcpy(msg.contenuMessage, "Impossible d'ajouter l'utilisateur, verifiez le format");
+        if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+    }
+
 	strcpy(msg.contenuMessage, "\0");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
@@ -117,24 +129,22 @@ void addUser(messsage_IPC msg,int commandes, int reponses)
 
 void modeListen(messsage_IPC msg,int commandes, int reponses)
 {
-    printf("Entree dans la fonction modeListen \n");
+    // Cette fonction ne marche pas correctement
     strcpy(msg.contenuMessage, "Bienvenue dans le mode d'ecoute");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
-/*
+
 	while (1)
 	{
 		if (flag_connected==1)
 		{
 			strcpy(msg.contenuMessage, "FLAG: Un nouvel utilisateur connecte");
 			if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
-			strcpy(msg.contenuMessage, "\0");
-			if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 			memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
-			//               flag_connected=0;
+			flag_connected=0;
 		}
 	}
-*/
+
 }
 
 void printConnectedUsers(messsage_IPC msg,int commandes, int reponses)
@@ -169,7 +179,6 @@ void* gestion_file_message(void* arg)
 	messsage_IPC msg;
 
 
-
 	// créer une file de message pour les commandes admin (les droit R/W pour tous)
 	commandes = msgget(CLE_COMMANDE, 0666 | IPC_CREAT); 
 	if (commandes == -1) { perror("msgget commande");} 
@@ -183,7 +192,6 @@ void* gestion_file_message(void* arg)
             
 	while (1) {
 
-		//memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 		if (msgrcv(commandes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 
 
 		printf("La requete admin du processus n° %i est : %s \n", msg.numProcess,msg.contenuMessage); 
@@ -202,10 +210,10 @@ void* gestion_file_message(void* arg)
 		{
 			modeListen(msg,commandes,reponses);
 		}
-		//if (strcmp(msg.contenuMessage, "NULL") != 0)
-		//{
-			//addUser(msg,commandes,reponses);
-		//}
+		if (strcmp(msg.contenuMessage, "\0") != 0)
+		{
+			addUser(msg,commandes,reponses);
+		}
 
 	}
 

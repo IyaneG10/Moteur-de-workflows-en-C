@@ -23,12 +23,6 @@
 #include "libthrd.h"
 
 
-
-// Constantes internes
-//#define NB_CONNEXIONS 10
-
-
-
 // Initialisation de la communication réseau 
 int initialisationServeur(char *port)
 {
@@ -85,27 +79,9 @@ int initialisationServeur(char *port)
 }
 
 
-
-
-
-
-
-
-/*
-   void lanceClientLeger(void *dialogue, void* (*action)(void *))
-   {
-//printf("On rentre dans gestionClient \n");
-//action(dialogue);
-//printf("On est sorti de gestionClient \n");
-}
-*/
 void dummy(void *dialogue, void* (*action)(void *))
 {
-	//printf("On est entré dans dummy\n");
-	//printf("%ld\n",(long)dialogue);
 	action(dialogue);
-	//printf("On ressort de dummy\n");
-
 }
 
 
@@ -114,7 +90,7 @@ void dummy(void *dialogue, void* (*action)(void *))
 
 // boucle d'attente des connexions 
 // a chaque connexion, lancment de la fonction "fonction" avec comme paramètre, socket et client 
-//int boucleServeur(int socket, void(*dummy)(void*, void *(*)(void*)), void* gestionClient).
+
 long boucleServeur(long socket, void(*fonction)(void *, void *(*)(void*)), void* (*action)(void*))
 {
 
@@ -126,11 +102,7 @@ long boucleServeur(long socket, void(*fonction)(void *, void *(*)(void*)), void*
 		if((dialogue=accept(socket,(struct sockaddr *)&adresse,&taille))<0) return -1;
 
 		// Passage de la socket de dialogue a la fonction de traitement 
-		//if(gestionClient(dialogue)<0){ shutdown(socket,SHUT_RDWR); return 0;}
-		//lanceClientLeger((void*)&dialogue,gestionClient);
 		fonction((void*)dialogue,action);
-		//dummy(dialogue,gestionClientLeger(dialogue));
-		//printf("On est bien sorti de dummy\n");
 	}
 	return socket;
 }

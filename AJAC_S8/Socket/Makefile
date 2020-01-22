@@ -2,11 +2,6 @@
 # Makefile pour generer la bibliotheque de fonctions reseau
 #
 
-
-
-
-############################################################################################################################################################
-
 SOURCES = $(wildcard *.c)
 OBJETS = $(SOURCES:.c=.o)
 BIBLIOTHEQUE = libsck.a

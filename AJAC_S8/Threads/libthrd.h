@@ -6,7 +6,6 @@ void *recup_param_Thread(void *arg);
 void lanceClientLeger(void *param, void* (*fonction) (void*)); 
 
 
-
 #endif
 
 

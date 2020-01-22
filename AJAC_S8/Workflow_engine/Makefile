@@ -21,6 +21,7 @@ clean:
 	@echo
 	@echo Debut du nettoyage Workflow_engine
 	rm -f *.o
+	rm -f main
 
 	@echo Debut du nettoyage Workflow_engine
 

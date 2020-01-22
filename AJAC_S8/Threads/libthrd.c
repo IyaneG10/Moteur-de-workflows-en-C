@@ -26,7 +26,6 @@ void *recup_param_Thread(void *arg)
 void lanceClientLeger(void *arg, void* (*fonction)(void*))
 {
 
-	//long statut;
 	pthread_t _monthread;
 
 	// allocation de memoire
@@ -37,15 +36,11 @@ void lanceClientLeger(void *arg, void* (*fonction)(void*))
 	parametres_thread->parametre = arg;
 
 	// Creation du thread
-	//statut = pthread_create(&_monthread, NULL, recup_param_Thread,parametres_thread);
 	pthread_create(&_monthread, NULL, recup_param_Thread,parametres_thread);
 
 
 	// détachement du thread
-	//statut = pthread_detach(_monthread);
 	pthread_detach(_monthread);
-
-	//return statut;
 
 
 }

@@ -3,11 +3,9 @@ CC=gcc
 
 all: admin
 
-
-
 clean:
 	rm -f *.o
-
+	rm -f admin
 
 
 admin: admin.o 

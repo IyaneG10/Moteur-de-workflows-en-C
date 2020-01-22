@@ -74,15 +74,15 @@ int parserUserFile(FILE *fp, char users[MAX_UTILISATEURS][3][LONG_ID])
 		{
 
 			char * token = strtok(user, ":");
-			if(token != NULL /*&& token != ""*/)
+			if(token != NULL )
 				strcpy(username, token);
 
 			token = strtok(NULL, ":");
-			if(token != NULL /*&& token != ""*/)
+			if(token != NULL )
 				strcpy(password, token);
 
 			token = strtok(NULL, "");
-			if(token != NULL /*&& token != ""*/)
+			if(token != NULL )
 				strcpy(utilisateur, token);
 
 			strcpy(users[usersFound][0], username);

@@ -31,8 +31,7 @@ struct Arg
 struct Arg getCmdAdmin(int argc, char **argv)
 {
 	int res;
-	//char arguments [TAILLE_MSG];
-	struct Arg arguments = {"","","",""}; // valeurs par défaut
+	struct Arg arguments = {"","","","\0"}; // valeurs par défaut
 
 	while (1)
 	{
@@ -127,7 +126,7 @@ int main(int argc, char **argv) {
 
 
     
-    struct Arg arg = {"","","",""}; // valeurs par défaut
+    struct Arg arg = {"","","","\0"}; // valeurs par défaut
 	arg = getCmdAdmin(argc, argv);
 	int commandes, reponses;
 	messsage_IPC msg;
@@ -155,9 +154,9 @@ int main(int argc, char **argv) {
 	{
 		strcpy(msg.contenuMessage, "listen");
 	}
-	else if (strcmp(arg.arg_A, "NULL") != 0)
+	else if (strcmp(arg.arg_A, "\0") != 0)
 	{
-		//strcpy(msg.contenuMessage, arg.arg_A);
+		strcpy(msg.contenuMessage, arg.arg_A);
 	}
 
 
@@ -170,20 +169,17 @@ int main(int argc, char **argv) {
 	// Récupérer et afficher la réponse du serveur
 	while (1)
 	{
-		//memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 		res = msgrcv(reponses, & msg, TAILLE_MSG,0 /*pid*/, 0); 
 		if (res == -1) { perror("msgrcv"); return (EXIT_FAILURE); } 
 		{
 			if (strcmp(msg.contenuMessage, "\0") != 0) 
 			{
 				printf("%s\n", msg.contenuMessage);
+                memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 			}
 			else{break;};
 		} 
-
 	}
-
-
 	return 0; 
 }
 

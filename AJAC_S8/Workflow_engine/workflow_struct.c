@@ -32,7 +32,7 @@ const xmlChar *  activity_description;
 const xmlChar *  activity_performer;
 const xmlChar *  activity_input; 
 const xmlChar *  activity_output; 
-const xmlChar *  activity_etat ; // Etat initial= NOT STARTED
+const xmlChar *  activity_etat ; // Etat initial= NOT STARTED sauf pour le premier qui est en RUNNING
 
 
 

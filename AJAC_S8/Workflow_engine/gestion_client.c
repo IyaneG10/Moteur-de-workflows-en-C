@@ -235,7 +235,7 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 
 						else if(strncmp(activiteCourante->id,"A3",2) == 0)
 						{
-							if(validation == false)
+							if(validation == false) // rajouter que l'activité 2 doit aussi etre validee
 							{
 								strcpy (activiteCourante->etat, "COMPLETED");
 								strcpy (processCourant->etat, "COMPLETED");
