@@ -245,11 +245,11 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 
 						else if(strncmp(activiteCourante->id,"A4",2) == 0)
 						{
-							strcpy (activiteCourante->etat, "COMPLETED");
-							Activity *next;
-							next=activiteCourante->next;
 							if(validation == true)
-							{
+							{				
+								strcpy (activiteCourante->etat, "COMPLETED");
+								Activity *next;
+								next=activiteCourante->next;
 								strcpy (next->etat, "RUNNING");
 							}
 						}
