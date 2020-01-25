@@ -16,6 +16,7 @@ stages:
 job:build:
     stage: build
     script:
+        - cd AJAC_S8
         - make clean all
     when: always
 
