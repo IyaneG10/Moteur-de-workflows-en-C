@@ -1,5 +1,15 @@
 /* Programme principal du moteur de workflow*/
-
+/**
+ * @file main.c
+ * @author SECK Malick 
+ * @brief 
+ * Programme principal
+ * @version 0.1
+ * @date 2020-01-25
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>moteur_de_workflow: PRESENTION DU PROJET</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">moteur_de_workflow
+   &#160;<span id="projectnumber">1.2.0</span>
+   </div>
+   <div id="projectbrief">Moteur de workflow pour processus de validation de stage</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Recherche');
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('d3/dcc/md__r_e_a_d_m_e.html','../../');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">PRESENTION DU PROJET </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>L’objectif du projet réside dans la conception et le développement d’un moteur de workflows simplifié pour l’obtention de la convention de stage d’un étudiant passe par différentes activités. Dans cet exemple, nous avons 7 activités différentes et 6 transitions (spécifiés dans un fichier xml correspondant à un processus de demande de stage). Chaque activité est réalisée par un performer qui correspond au login d’un utilisateur connecté. Le parsing des fichiers XML se fait par la méthode SAX avec la bibliothèque libXML2. L'éxecution du code se fait e trois parties:</p>
+<p><code>serveur</code>: programme principal qui gère à la fois les clients connectés et le processus administrateur</p>
+<p><code>client</code>: Lancement de thread de gestion des clients connecté au serveur en TCP</p>
+<p><code>administrateur</code>: Le processus système administrateur communique avec le processus principale via des file de messages IPC en analysant les arguments passés en paramètre.</p>
+<h1>Contenu du projet</h1>
+<p>Le projet est constitué de trois bibliothèques et des programmes serveur et administrateur. Chacune de ces entités est développée dans un répertoire propre. Le projet s’organise donc autourdes six répertoires suivants :</p>
+<p><code>Socket</code> - pour les sources permettant de générer la bibliothèque C libsck qui contiendra toutes les méthodes liées au réseau</p>
+<p><code>Threads</code> - pour la bibliothèque C libthrd qui contiendra toutes les méthodes permettant d’encapsuler l’utilisation des threads.</p>
+<p><code>IPC</code> - pour la bibliothèque C libipc</p>
+<p><code>Workflow engine</code> - pour le programme serveur et les modules de traitement des commandes client et administrateur</p>
+<p><code>Workflows admin</code> - pour le programme d’administration du serveur</p>
+<p><code>Models</code> - pour les différents modèles de processus existants</p>
+<p>Un fichier <code>Makefile</code> aglobal pour tout le code et des makefiles scpécifiques à chaque réêrtoire</p>
+<h1>1°) COMPILATION</h1>
+<p>Compiler tout le projet sur le répertoire principal du projet avec: </p><pre class="fragment">make clean all
+</pre><p>oubien Compiler chaque repertoire avec en mode debugavec: </p><pre class="fragment">make clean debug
+</pre><h1>2°) EXECUTION DU PROGRAMME COTE SERVEUR</h1>
+<p>Se placer sur le répertoire <code>Workflow_engine</code> et executer: </p><pre class="fragment">`./main -p &lt;numPort&gt; -u &lt;fichier&gt; ` 
+</pre><p>ou </p><pre class="fragment">./main --port &lt;numPort&gt; --users file &lt;fichier&gt;`
+</pre><p>Ces options permettent de scpécifier éventuellemnt un numéro de port différent de celui par défaut (port 4000) et/ou un autre fichier lors du démarrage du serveur</p>
+<h1>3°) UTILISATION DU PROGRAMME COTE CLIENT</h1>
+<p>Se connecter au serveur en TCP/IP via l'utilitaire netcac (nc) </p><pre class="fragment">`nc localhost &lt;numPort&gt;` 
+</pre><p>A ce moment vous devrez suivre les étapes indiquées par le serveur et lui donner votre login et mot de passe</p>
+<p>Une fois connecté, vous pouvez intéragir avec le serveur via les commandes suivantes:</p>
+<p><code>aide</code> : pour connaître les commandes disponibles</p>
+<p><code>ToDo</code> : pour passer en mode gestion de la To-Do List, i.e., gérer les activités assignées à l’utilisateur</p>
+<p><code>connected users</code> : pour connaître tous les utilisateurs connectés</p>
+<p><code>ls processes</code> : pour lister l’identifiant et l’état de tous les processus.</p>
+<p><code>ls processes -ETAT</code> : pour ne lister que les processus dans cet état</p>
+<p><code>ls process &lt;id-process&gt;</code> : pour récupérer toutes les informations associées à un processus particulier</p>
+<p><code>create process &lt;file&gt;</code> : pour créer une nouvelle instance de processus</p>
+<p><code>exit</code> : pour quitter l’application et se déconnecter</p>
+<h3>Dans le mode ToDo</h3>
+<p>Lorsque qu’un utilisateur est rentré dans le mode ToDo, il peut utiliser les commandes suivantes :</p>
+<p><code>ls</code> : pour lister toutes les activités assignées à l’utilisateur (récupération du nom et de l’identifiant).</p>
+<p><code>ls &lt;id-activity&gt;</code>: pour récupérer en plus l’état de l’activité, les entrées et les sorties</p>
+<p><code>valider</code> : pour valider une activité. Lors de la validation, le serveur demandera à l’utilisateur préciser le numéro du processus concerne puis l'activité à valider , et enfin de donner une nouvelle valeur pour chaque variable résultat (output).</p>
+<p><code>exit</code> : pour quitter le mode ToDo pour revenir au mode initial</p>
+<h1>4°) EXECUTION DU PROGRAMME COTE ADMINISTRATEUR</h1>
+<p>Les requêtes administrateur sont: L’administrateur pourra utiliser les requêtes suivantes :</p>
+<p><code>./admin -u</code> ou <code>./admin --users</code> : pour obtenir la liste de tous les utilisateurs</p>
+<p><code>./admin -c</code> ou <code>./admin --connected</code> : pour obtenir la liste de tous les utilisateurs connectés</p>
+<p><code>./admin -a login:pwd:Prenom-Nom</code> ou <code>./admin --add-user login:pwd:Prenom-Nom</code> : pour ajouter un nouvel utilisateur</p>
+<p><code>./admin -l</code> ou <code>./admin --listen</code> : permet d’écouter le fonctionnement du moteur, de workflow </p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

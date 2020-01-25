@@ -1,0 +1,583 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>moteur_de_workflow: Référence du fichier AJAC_S8/Workflow_engine/gestion_client.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">moteur_de_workflow
+   &#160;<span id="projectnumber">1.2.0</span>
+   </div>
+   <div id="projectbrief">Moteur de workflow pour processus de validation de stage</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Recherche');
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('d8/d8a/gestion__client_8c.html','../../');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier gestion_client.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;netinet/tcp.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="../../d4/dc7/libthrd_8h_source.html">libthrd.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/de8/gestion__client_8h_source.html">gestion_client.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d15/workflow__struct_8h_source.html">workflow_struct.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../df/d91/traitement__text_8h_source.html">traitement_text.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de gestion_client.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../d3/d96/gestion__client_8c__incl.png" border="0" usemap="#_a_j_a_c___s8_2_workflow__engine_2gestion__client_8c" alt=""/></div>
+<map name="_a_j_a_c___s8_2_workflow__engine_2gestion__client_8c" id="_a_j_a_c___s8_2_workflow__engine_2gestion__client_8c">
+<area shape="rect" id="node17" href="../../d4/dc7/libthrd_8h.html" title="libthrd.h" alt="" coords="1493,95,1561,121"/>
+<area shape="rect" id="node18" href="../../df/de8/gestion__client_8h.html" title="gestion_client.h" alt="" coords="1637,95,1750,121"/>
+<area shape="rect" id="node19" href="../../dc/d15/workflow__struct_8h.html" title="workflow_struct.h" alt="" coords="1557,169,1683,196"/>
+<area shape="rect" id="node20" href="../../df/d91/traitement__text_8h.html" title="traitement_text.h" alt="" coords="1717,169,1837,196"/>
+</map>
+</div>
+</div>
+<p><a href="../../d8/d8a/gestion__client_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a2f4f00ab4a064cab10c439bf29d5db6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a2f4f00ab4a064cab10c439bf29d5db6d">fct_aide</a> (FILE *file_dialogue)</td></tr>
+<tr class="separator:a2f4f00ab4a064cab10c439bf29d5db6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2af09a820e1e80c27003a3c2bebe521c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a2af09a820e1e80c27003a3c2bebe521c">fct_Todo</a> (FILE *file_dialogue, char user[<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="separator:a2af09a820e1e80c27003a3c2bebe521c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803826799a1fbf04ab7d1370414c8f49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a803826799a1fbf04ab7d1370414c8f49">fct_listProcesses</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char *option)</td></tr>
+<tr class="separator:a803826799a1fbf04ab7d1370414c8f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4800b9416a2f608a5fc699a3680d53b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a4800b9416a2f608a5fc699a3680d53b4">fct_printProcess</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char *arg)</td></tr>
+<tr class="separator:a4800b9416a2f608a5fc699a3680d53b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83416e2ce594d6acd6a553cc4584e001"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a83416e2ce594d6acd6a553cc4584e001">fct_listActivities</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char *option, char user[<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="separator:a83416e2ce594d6acd6a553cc4584e001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0cb62882d811ec34c4e7da9d2a7bf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#acc0cb62882d811ec34c4e7da9d2a7bf6">fct_valider</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char user[<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="separator:acc0cb62882d811ec34c4e7da9d2a7bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0f1b867da535ffa7be92d249b1e284a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#ac0f1b867da535ffa7be92d249b1e284a">getAdresseClient</a> (long socket)</td></tr>
+<tr class="separator:ac0f1b867da535ffa7be92d249b1e284a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87f3e45af118e587d4aabe3888691135"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a87f3e45af118e587d4aabe3888691135">authentificationClient</a> (FILE *file_dialogue, char users[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][3][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="separator:a87f3e45af118e587d4aabe3888691135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4732270e4598f0a2596111c5b2b2e28f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a4732270e4598f0a2596111c5b2b2e28f">supprConnList</a> (char <a class="el" href="../../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588">connectedUsers</a>[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>], struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a> Connexion)</td></tr>
+<tr class="separator:a4732270e4598f0a2596111c5b2b2e28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01c131e4dba3679a0bcf333b6f361eaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a01c131e4dba3679a0bcf333b6f361eaa">ajouterConnList</a> (char <a class="el" href="../../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588">connectedUsers</a>[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>], struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a> Connexion)</td></tr>
+<tr class="separator:a01c131e4dba3679a0bcf333b6f361eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa6dd9746966841f5cda61a23cdee5cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#aaa6dd9746966841f5cda61a23cdee5cf">afficherConnList</a> (char <a class="el" href="../../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588">connectedUsers</a>[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>], FILE *file_dialogue)</td></tr>
+<tr class="separator:aaa6dd9746966841f5cda61a23cdee5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7ace2bf743f0a98a18a112504429696"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#aa7ace2bf743f0a98a18a112504429696">gestionClient</a> (void *dialogue)</td></tr>
+<tr class="separator:aa7ace2bf743f0a98a18a112504429696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a01f0fb13c448f70bd4bd2b4f0010cf06">debutListProcess</a></td></tr>
+<tr class="separator:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3972f3617e84ee476cef67e0c1a9128d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#a3972f3617e84ee476cef67e0c1a9128d">processus</a></td></tr>
+<tr class="separator:a3972f3617e84ee476cef67e0c1a9128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa69dc085aad7e11230404f2d5e8bf314"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d8a/gestion__client_8c.html#aa69dc085aad7e11230404f2d5e8bf314">flag_connected</a></td></tr>
+<tr class="separator:aa69dc085aad7e11230404f2d5e8bf314"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="aaa6dd9746966841f5cda61a23cdee5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6dd9746966841f5cda61a23cdee5cf">&#9670;&nbsp;</a></span>afficherConnList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void afficherConnList </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>connectedUsers</em>[MAX_UTILISATEURS][LONG_ID], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00432">432</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a01c131e4dba3679a0bcf333b6f361eaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01c131e4dba3679a0bcf333b6f361eaa">&#9670;&nbsp;</a></span>ajouterConnList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ajouterConnList </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>connectedUsers</em>[MAX_UTILISATEURS][LONG_ID], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a>&#160;</td>
+          <td class="paramname"><em>Connexion</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00404">404</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a87f3e45af118e587d4aabe3888691135"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87f3e45af118e587d4aabe3888691135">&#9670;&nbsp;</a></span>authentificationClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a> authentificationClient </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>users</em>[MAX_UTILISATEURS][3][LONG_ID]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00344">344</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a2f4f00ab4a064cab10c439bf29d5db6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f4f00ab4a064cab10c439bf29d5db6d">&#9670;&nbsp;</a></span>fct_aide()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fct_aide </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00038">38</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a83416e2ce594d6acd6a553cc4584e001"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83416e2ce594d6acd6a553cc4584e001">&#9670;&nbsp;</a></span>fct_listActivities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fct_listActivities </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>processCourant</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>option</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>user</em>[LONG_ID]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00137">137</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a803826799a1fbf04ab7d1370414c8f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803826799a1fbf04ab7d1370414c8f49">&#9670;&nbsp;</a></span>fct_listProcesses()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fct_listProcesses </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>processCourant</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>option</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00078">78</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a4800b9416a2f608a5fc699a3680d53b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4800b9416a2f608a5fc699a3680d53b4">&#9670;&nbsp;</a></span>fct_printProcess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fct_printProcess </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>processCourant</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00107">107</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a2af09a820e1e80c27003a3c2bebe521c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2af09a820e1e80c27003a3c2bebe521c">&#9670;&nbsp;</a></span>fct_Todo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fct_Todo </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>user</em>[LONG_ID]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00051">51</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="acc0cb62882d811ec34c4e7da9d2a7bf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc0cb62882d811ec34c4e7da9d2a7bf6">&#9670;&nbsp;</a></span>fct_valider()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fct_valider </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>file_dialogue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>processCourant</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>user</em>[LONG_ID]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00181">181</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="aa7ace2bf743f0a98a18a112504429696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7ace2bf743f0a98a18a112504429696">&#9670;&nbsp;</a></span>gestionClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* gestionClient </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>dialogue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00448">448</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="ac0f1b867da535ffa7be92d249b1e284a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0f1b867da535ffa7be92d249b1e284a">&#9670;&nbsp;</a></span>getAdresseClient()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* getAdresseClient </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>socket</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00294">294</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<a id="a4732270e4598f0a2596111c5b2b2e28f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4732270e4598f0a2596111c5b2b2e28f">&#9670;&nbsp;</a></span>supprConnList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void supprConnList </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>connectedUsers</em>[MAX_UTILISATEURS][LONG_ID], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a>&#160;</td>
+          <td class="paramname"><em>Connexion</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00390">390</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des variables</h2>
+<a id="a01f0fb13c448f70bd4bd2b4f0010cf06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f0fb13c448f70bd4bd2b4f0010cf06">&#9670;&nbsp;</a></span>debutListProcess</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d8/daa/struct_process.html">Process</a>* debutListProcess</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>fichier <a class="el" href="../../d8/d8a/gestion__client_8c.html">gestion_client.c</a> Ce fichier contient des fonctions utilisees pour la gestion des clients qui se connectent au serveur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00045">45</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="aa69dc085aad7e11230404f2d5e8bf314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa69dc085aad7e11230404f2d5e8bf314">&#9670;&nbsp;</a></span>flag_connected</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int flag_connected</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00050">50</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a3972f3617e84ee476cef67e0c1a9128d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3972f3617e84ee476cef67e0c1a9128d">&#9670;&nbsp;</a></span>processus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d8/daa/struct_process.html">Process</a>* processus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00046">46</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_56374c43f30c4ce6be9e7b1c1ed35f42.html">AJAC_S8</a></li><li class="navelem"><a class="el" href="../../dir_765b0f7e12995727d15823605ffbb579.html">Workflow_engine</a></li><li class="navelem"><a class="el" href="../../d8/d8a/gestion__client_8c.html">gestion_client.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

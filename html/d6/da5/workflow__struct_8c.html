@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>moteur_de_workflow: Référence du fichier AJAC_S8/Workflow_engine/workflow_struct.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../resize.js"></script>
+<script type="text/javascript" src="../../navtreedata.js"></script>
+<script type="text/javascript" src="../../navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">moteur_de_workflow
+   &#160;<span id="projectnumber">1.2.0</span>
+   </div>
+   <div id="projectbrief">Moteur de workflow pour processus de validation de stage</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Recherche');
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('../../',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('d6/da5/workflow__struct_8c.html','../../');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle">
+<div class="title">Référence du fichier workflow_struct.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;stddef.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;netinet/tcp.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;libxml/parser.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="../../dc/d15/workflow__struct_8h_source.html">workflow_struct.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Graphe des dépendances par inclusion de workflow_struct.c:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../dc/dfd/workflow__struct_8c__incl.png" border="0" usemap="#_a_j_a_c___s8_2_workflow__engine_2workflow__struct_8c" alt=""/></div>
+<map name="_a_j_a_c___s8_2_workflow__engine_2workflow__struct_8c" id="_a_j_a_c___s8_2_workflow__engine_2workflow__struct_8c">
+<area shape="rect" id="node18" href="../../dc/d15/workflow__struct_8h.html" title="workflow_struct.h" alt="" coords="1623,95,1748,121"/>
+</map>
+</div>
+</div>
+<p><a href="../../d6/da5/workflow__struct_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:a338a425fbad776b305c78998908b15ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a338a425fbad776b305c78998908b15ce">caracteres</a> (void *user_data, const xmlChar *text, int length)</td></tr>
+<tr class="separator:a338a425fbad776b305c78998908b15ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a746df4ef5ad35777a6d79331694022f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a746df4ef5ad35777a6d79331694022f9">fin_element</a> (void *user_data, const xmlChar *name)</td></tr>
+<tr class="separator:a746df4ef5ad35777a6d79331694022f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f852f5d04dff100e97c1a3e96b513c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a9f852f5d04dff100e97c1a3e96b513c5">debut_element</a> (void *user_data, const xmlChar *name, const xmlChar **attrs)</td></tr>
+<tr class="separator:a9f852f5d04dff100e97c1a3e96b513c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615058008b0bd59c83b6ddbf3bf65c8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a615058008b0bd59c83b6ddbf3bf65c8b">ajouterActivite</a> (<a class="el" href="../../d8/daa/struct_process.html">Process</a> *process, char *id, char *name, char *description, char *performer, char *input, char *output, char *etat)</td></tr>
+<tr class="separator:a615058008b0bd59c83b6ddbf3bf65c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81176a4ad89edce4d4a72c0b9cbe128c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a81176a4ad89edce4d4a72c0b9cbe128c">instancierProcessus</a> (<a class="el" href="../../d8/daa/struct_process.html">Process</a> **debut, char *file)</td></tr>
+<tr class="separator:a81176a4ad89edce4d4a72c0b9cbe128c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06dc34ea1d4c1ffc6448052a2a4a4a1a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a06dc34ea1d4c1ffc6448052a2a4a4a1a">countProcesses</a> (<a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant)</td></tr>
+<tr class="separator:a06dc34ea1d4c1ffc6448052a2a4a4a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a475201daa461b52257dc3a0bd7f37707"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a475201daa461b52257dc3a0bd7f37707">isEmpty</a> (<a class="el" href="../../d8/daa/struct_process.html">Process</a> *process)</td></tr>
+<tr class="separator:a475201daa461b52257dc3a0bd7f37707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a01f0fb13c448f70bd4bd2b4f0010cf06">debutListProcess</a></td></tr>
+<tr class="separator:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3972f3617e84ee476cef67e0c1a9128d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a3972f3617e84ee476cef67e0c1a9128d">processus</a></td></tr>
+<tr class="separator:a3972f3617e84ee476cef67e0c1a9128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d6e85b4bbbb4e6ecc3b1fd05f1346cd"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a8d6e85b4bbbb4e6ecc3b1fd05f1346cd">process_description</a></td></tr>
+<tr class="separator:a8d6e85b4bbbb4e6ecc3b1fd05f1346cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0ff157debd00c257889b231bf7eb4a1"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#ad0ff157debd00c257889b231bf7eb4a1">description_stage</a></td></tr>
+<tr class="separator:ad0ff157debd00c257889b231bf7eb4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a421230405ce8a68e92b05f37a8eac23c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a421230405ce8a68e92b05f37a8eac23c">validation</a></td></tr>
+<tr class="separator:a421230405ce8a68e92b05f37a8eac23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebdaa998b926f75b497b33a12efafbef"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#aebdaa998b926f75b497b33a12efafbef">activity_id</a></td></tr>
+<tr class="separator:aebdaa998b926f75b497b33a12efafbef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb5f2e6c052e0055b049352d7adeba77"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#acb5f2e6c052e0055b049352d7adeba77">activity_name</a></td></tr>
+<tr class="separator:acb5f2e6c052e0055b049352d7adeba77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56fd76ac68dc7ee2cf96c17efd380b18"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a56fd76ac68dc7ee2cf96c17efd380b18">activity_description</a></td></tr>
+<tr class="separator:a56fd76ac68dc7ee2cf96c17efd380b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6a449e86964eef4a7d945e68a168c0"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#adc6a449e86964eef4a7d945e68a168c0">activity_performer</a></td></tr>
+<tr class="separator:adc6a449e86964eef4a7d945e68a168c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71e4ff5576be768f99e99fcac1dd1a42"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a71e4ff5576be768f99e99fcac1dd1a42">activity_input</a></td></tr>
+<tr class="separator:a71e4ff5576be768f99e99fcac1dd1a42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa284b43691ff41e2836de4214039772b"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#aa284b43691ff41e2836de4214039772b">activity_output</a></td></tr>
+<tr class="separator:aa284b43691ff41e2836de4214039772b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d705f81a9fa43a27762f2d1474b64f7"><td class="memItemLeft" align="right" valign="top">const xmlChar *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a5d705f81a9fa43a27762f2d1474b64f7">activity_etat</a></td></tr>
+<tr class="separator:a5d705f81a9fa43a27762f2d1474b64f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a615058008b0bd59c83b6ddbf3bf65c8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615058008b0bd59c83b6ddbf3bf65c8b">&#9670;&nbsp;</a></span>ajouterActivite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ajouterActivite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>process</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>description</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>performer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>etat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00175">175</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a338a425fbad776b305c78998908b15ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a338a425fbad776b305c78998908b15ce">&#9670;&nbsp;</a></span>caracteres()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void caracteres </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>user_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const xmlChar *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>length</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00042">42</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a06dc34ea1d4c1ffc6448052a2a4a4a1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06dc34ea1d4c1ffc6448052a2a4a4a1a">&#9670;&nbsp;</a></span>countProcesses()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int countProcesses </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>processCourant</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00251">251</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a9f852f5d04dff100e97c1a3e96b513c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f852f5d04dff100e97c1a3e96b513c5">&#9670;&nbsp;</a></span>debut_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void debut_element </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>user_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const xmlChar *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const xmlChar **&#160;</td>
+          <td class="paramname"><em>attrs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00135">135</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a746df4ef5ad35777a6d79331694022f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a746df4ef5ad35777a6d79331694022f9">&#9670;&nbsp;</a></span>fin_element()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void fin_element </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>user_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const xmlChar *&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00086">86</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a81176a4ad89edce4d4a72c0b9cbe128c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81176a4ad89edce4d4a72c0b9cbe128c">&#9670;&nbsp;</a></span>instancierProcessus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int instancierProcessus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> **&#160;</td>
+          <td class="paramname"><em>debut</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00213">213</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a475201daa461b52257dc3a0bd7f37707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a475201daa461b52257dc3a0bd7f37707">&#9670;&nbsp;</a></span>isEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int isEmpty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td>
+          <td class="paramname"><em>process</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00261">261</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentation des variables</h2>
+<a id="a56fd76ac68dc7ee2cf96c17efd380b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56fd76ac68dc7ee2cf96c17efd380b18">&#9670;&nbsp;</a></span>activity_description</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_description</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00031">31</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a5d705f81a9fa43a27762f2d1474b64f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d705f81a9fa43a27762f2d1474b64f7">&#9670;&nbsp;</a></span>activity_etat</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_etat</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00035">35</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="aebdaa998b926f75b497b33a12efafbef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebdaa998b926f75b497b33a12efafbef">&#9670;&nbsp;</a></span>activity_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00029">29</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a71e4ff5576be768f99e99fcac1dd1a42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e4ff5576be768f99e99fcac1dd1a42">&#9670;&nbsp;</a></span>activity_input</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_input</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00033">33</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="acb5f2e6c052e0055b049352d7adeba77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb5f2e6c052e0055b049352d7adeba77">&#9670;&nbsp;</a></span>activity_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_name</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00030">30</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="aa284b43691ff41e2836de4214039772b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa284b43691ff41e2836de4214039772b">&#9670;&nbsp;</a></span>activity_output</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_output</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00034">34</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="adc6a449e86964eef4a7d945e68a168c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc6a449e86964eef4a7d945e68a168c0">&#9670;&nbsp;</a></span>activity_performer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* activity_performer</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00032">32</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a01f0fb13c448f70bd4bd2b4f0010cf06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f0fb13c448f70bd4bd2b4f0010cf06">&#9670;&nbsp;</a></span>debutListProcess</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d8/daa/struct_process.html">Process</a>* debutListProcess</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>fichier <a class="el" href="../../d8/d8a/gestion__client_8c.html">gestion_client.c</a> Ce fichier contient des fonctions utilisees pour la gestion des clients qui se connectent au serveur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00045">45</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ad0ff157debd00c257889b231bf7eb4a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0ff157debd00c257889b231bf7eb4a1">&#9670;&nbsp;</a></span>description_stage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* description_stage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00027">27</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a8d6e85b4bbbb4e6ecc3b1fd05f1346cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d6e85b4bbbb4e6ecc3b1fd05f1346cd">&#9670;&nbsp;</a></span>process_description</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const xmlChar* process_description</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00026">26</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+<a id="a3972f3617e84ee476cef67e0c1a9128d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3972f3617e84ee476cef67e0c1a9128d">&#9670;&nbsp;</a></span>processus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d8/daa/struct_process.html">Process</a>* processus</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00046">46</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a421230405ce8a68e92b05f37a8eac23c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a421230405ce8a68e92b05f37a8eac23c">&#9670;&nbsp;</a></span>validation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool validation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00028">28</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="../../dir_56374c43f30c4ce6be9e7b1c1ed35f42.html">AJAC_S8</a></li><li class="navelem"><a class="el" href="../../dir_765b0f7e12995727d15823605ffbb579.html">Workflow_engine</a></li><li class="navelem"><a class="el" href="../../d6/da5/workflow__struct_8c.html">workflow_struct.c</a></li>
+    <li class="footer">Généré par
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>
