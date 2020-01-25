@@ -16,12 +16,9 @@ stages:
 job:build:
     stage: build
     script:
-        - mkdir build
-        - make main
+        - make clean all
     when: always
-    artifacts:
-        paths:
-            - build/
+
 
 
 
