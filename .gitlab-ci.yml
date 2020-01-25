@@ -4,24 +4,29 @@
 # see https://hub.docker.com/_/gcc/
 image: gcc
 
-build:
-  stage: build
-  # instead of calling g++ directly you can also use some build toolkit like make
-  # install the necessary build tools when needed
-  # before_script:
-  #   - apt update && apt -y install make autoconf
-  script:
-    - g++ helloworld.cpp -o mybinary
-  artifacts:
-    paths:
-      - mybinary
-      # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
-      # cache:
-      #   paths:
-      #     - "*.o"
+#image: debian
 
-# run tests using the binary built before
-test:
-  stage: test
-  script:
-    - ./runmytests.sh
+
+
+stages:
+    - build
+    - clean
+
+
+job:build:
+    stage: build
+    script:
+        - mkdir build
+        - make main
+    when: always
+    artifacts:
+        paths:
+            - build/
+
+
+
+job:clean:
+    stage: clean
+    script: echo "make clean"
+    when: always
+    allow_failure: true
