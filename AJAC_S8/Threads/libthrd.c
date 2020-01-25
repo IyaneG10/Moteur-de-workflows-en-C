@@ -6,6 +6,7 @@
 #include "libthrd.h"
 
 
+
 typedef struct  
 {
 	void* (*fonction)(void *);
@@ -44,5 +45,4 @@ void lanceClientLeger(void *arg, void* (*fonction)(void*))
 
 
 }
-
 

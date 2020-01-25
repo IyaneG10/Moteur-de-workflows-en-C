@@ -24,6 +24,7 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 
+#include "libthrd.h"
 #include "gestion_client.h"
 #include "workflow_struct.h"
 #include "traitement_text.h"

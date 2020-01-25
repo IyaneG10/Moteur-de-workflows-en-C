@@ -9,7 +9,9 @@
 typedef struct { 
 	int numProcess;
 	char contenuMessage[TAILLE_MSG]; 
-} messsage_IPC; 
+} messsage_IPC;
+
+void remplacerCar(char * chaine, char ancienneLettre, char nouvelleLettre);
 
 void* gestion_file_message(void* arg);
 void printConnectedUsers(messsage_IPC msg,int commandes, int reponses);

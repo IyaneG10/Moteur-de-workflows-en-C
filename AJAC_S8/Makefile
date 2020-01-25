@@ -18,7 +18,7 @@ DIRS= Threads IPC Socket Workflow_admin Workflow_engine
 # La cible generale
 #
 
-all: $(patsubst %, _dir_%, $(DIRS))
+all: $(patsubst %, _dir_%, $(DIRS)) 
 
 exec:
 	cd Workflow_engine  && ./main

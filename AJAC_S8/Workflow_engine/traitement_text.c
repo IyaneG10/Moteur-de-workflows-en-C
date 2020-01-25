@@ -112,8 +112,6 @@ int parserBDDUsers(FILE *fp_UsersFile, char users[MAX_UTILISATEURS][3][LONG_ID])
 
 		}
 
-
-
 	}
 	return usersFound;
 

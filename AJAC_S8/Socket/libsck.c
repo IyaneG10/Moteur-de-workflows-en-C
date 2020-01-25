@@ -89,7 +89,6 @@ void dummy(void *dialogue, void* (*action)(void *))
 
 
 // boucle d'attente des connexions 
-// a chaque connexion, lancment de la fonction "fonction" avec comme paramètre, socket et client 
 
 long boucleServeur(long socket, void(*fonction)(void *, void *(*)(void*)), void* (*action)(void*))
 {

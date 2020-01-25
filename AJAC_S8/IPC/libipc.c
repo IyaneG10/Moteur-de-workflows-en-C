@@ -36,12 +36,16 @@ int verif_format(const char *modele,const char *chaine)
 		if (validite == 0)
 		{
 			ret =0;
+            #ifdef DEBUG
 			printf ("%s est une chaine valide\n", chaine);
+            #endif
 		}
 
 		else if (validite == REG_NOMATCH)
 		{
+            #ifdef DEBUG
 			printf ("%s n\'est pas une chaine valide\n", chaine);
+            #endif
 		}
 	}
 
@@ -49,9 +53,27 @@ int verif_format(const char *modele,const char *chaine)
 	return ret;
 }
 
+void remplacerCar(char * chaine, char ancien, char nouveau)
+{
+	int i = 0;
+
+	while(chaine[i] != '\0')
+	{
+
+		if(chaine[i] == ancien)
+		{
+			chaine[i] = nouveau;
+		}
+
+		i=i+1;
+	}
+}
+
 void listUsers(messsage_IPC msg,int commandes, int reponses)
 {
+    #ifdef DEBUG
     printf("Entree dans la fonction listUsers \n");
+    #endif
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 	FILE * fp_UsersFile = fopen(usersFile, "r");
 	const char *modele = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+ [_[:alpha:]]+$";
@@ -104,22 +126,84 @@ void listUsers(messsage_IPC msg,int commandes, int reponses)
 
 void addUser(messsage_IPC msg,int commandes, int reponses)
 {
+    #ifdef DEBUG
     printf("Entree dans la fonction addUser \n");
-    const char *modele = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+-[_[:alpha:]]+$";
-    if(0 == verif_format(modele,msg.contenuMessage))
-    {
-        printf("ADDED USER: %s\n", msg.contenuMessage);
-        // verifier si login inexistant
-        // remplacer tiret par espace
-        // ajouter à la fin du fichier
-        strcpy(msg.contenuMessage, "Utilisateur ajoute avec succes");
-        if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
-    }
-    else
-    {
-        strcpy(msg.contenuMessage, "Impossible d'ajouter l'utilisateur, verifiez le format");
-        if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
-    }
+    #endif
+	bool enableAdd=true;
+	const char *modele_file = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+ [_[:alpha:]]+$";
+	const char *modele_addUser = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+-[_[:alpha:]]+$";
+	if(0 == verif_format(modele_addUser,msg.contenuMessage))
+	{
+
+		FILE * fp_UsersFile = fopen(usersFile, "a+");
+		char ligne[100];
+		char lecture='x';
+		int nbLectures=0;
+		int usersFound = 0;
+		char username[100];
+		char  userToAdd[100];
+		char  loginToAdd[100];
+		strcpy(userToAdd,msg.contenuMessage);
+		strcpy(loginToAdd,msg.contenuMessage);
+		strtok(loginToAdd, ":");
+        #ifdef DEBUG
+		printf("user to add: %s\n",userToAdd);
+		printf("login to add: %s\n",loginToAdd);
+        #endif
+
+		while(usersFound < 10 && lecture != EOF)
+		{
+			nbLectures=0;
+			lecture = fgetc(fp_UsersFile);
+			ligne[0] = '\0';
+			while(lecture != '\n' && lecture != EOF)
+			{
+				nbLectures++;
+				ligne[nbLectures-1] = lecture;
+				ligne[nbLectures] = '\0';
+				lecture = fgetc(fp_UsersFile);
+			}
+
+			if (ligne[0] != '\0')
+			{
+				if(verif_format(modele_file,ligne) == 0)
+				{
+					char * tmp = strtok(ligne, ":");
+					if(tmp != NULL){strcpy(username, tmp);}
+
+					if (strcmp(username, loginToAdd) == 0)
+					{
+						strcpy(msg.contenuMessage, "Login deja pris, veuillez en choisir un autre");
+						if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+						enableAdd=false;
+						break;
+					}
+
+
+
+				}
+
+			}
+		}
+		if (enableAdd)
+		{
+			remplacerCar((char *)userToAdd, '-',' ');
+
+			fprintf(fp_UsersFile,"%s\n",userToAdd);
+			strcpy(msg.contenuMessage, "Utilisateur ajoute avec succes");
+			if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+		}
+		fclose (fp_UsersFile);
+
+
+	}
+	else
+	{
+		strcpy(msg.contenuMessage, "Impossible d'ajouter l'utilisateur, verifiez que le format est comme suit");
+		if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+		strcpy(msg.contenuMessage, "login:password:prenom-nom");
+		if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
+	}
 
 	strcpy(msg.contenuMessage, "\0");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
@@ -127,10 +211,11 @@ void addUser(messsage_IPC msg,int commandes, int reponses)
 
 }
 
-void modeListen(messsage_IPC msg,int commandes, int reponses)
+void modeListen(messsage_IPC msg,int commandes, int reponses)     // Cette fonction ne marche pas correctement
 {
-    // Cette fonction ne marche pas correctement
-    strcpy(msg.contenuMessage, "Bienvenue dans le mode d'ecoute");
+    #ifdef DEBUG
+	strcpy(msg.contenuMessage, "Bienvenue dans le mode d'ecoute");
+    #endif
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 
@@ -149,8 +234,10 @@ void modeListen(messsage_IPC msg,int commandes, int reponses)
 
 void printConnectedUsers(messsage_IPC msg,int commandes, int reponses)
 {
+    #ifdef DEBUG
     printf("Entree dans la fonction printConnectedUsers \n");
-    memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
+    #endif
+	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 	int len= (sizeof(connectedUsers) / sizeof(connectedUsers[0]));
 	int nbconnected=0;
 	for (int i=0; i < len; i++)
@@ -182,14 +269,14 @@ void* gestion_file_message(void* arg)
 	// créer une file de message pour les commandes admin (les droit R/W pour tous)
 	commandes = msgget(CLE_COMMANDE, 0666 | IPC_CREAT); 
 	if (commandes == -1) { perror("msgget commande");} 
-        strcpy(msg.contenuMessage, "");
+	strcpy(msg.contenuMessage, "");
 	printf("Contenu du message : %s \n",msg.contenuMessage); 
 	// récupérer l'id de la file de réponse (crée par l'admin)
 	reponses = msgget(CLE_REPONSE, 0); 
 	if (reponses == -1) { perror("msgget reponse"); } 
 
-    printf("En attente des requetes admin\n");
-            
+	printf("En attente des requetes admin\n");
+
 	while (1) {
 
 		if (msgrcv(commandes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 
