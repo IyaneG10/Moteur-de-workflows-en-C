@@ -1,3 +1,14 @@
+/**
+ * @file libipc.c
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-25
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
+
 /** fichier libipc.c **/
 
 /* Fichier d'inclusion */

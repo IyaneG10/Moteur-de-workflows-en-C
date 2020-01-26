@@ -38,8 +38,8 @@ gestion_client.o : gestion_client.c workflow_struct.c traitement_text.c
 	$(CC) $(CFLAGS) -c -Wall gestion_client.c  
 	
 workflow_struct.o :  workflow_struct.c
-	$(CC) -c -Wall workflow_struct.c  -I/usr/include/libxml2/ -lxml2
+	$(CC) $(CFLAGS) -c -Wall workflow_struct.c  -I/usr/include/libxml2/ -lxml2
 	
 traitement_text.o :  traitement_text.c
-	$(CC) -c -Wall traitement_text.c 
+	$(CC) $(CFLAGS) -c -Wall traitement_text.c 
 	

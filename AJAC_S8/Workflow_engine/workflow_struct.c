@@ -17,6 +17,7 @@
 #include <libxml/parser.h>
 
 #include "workflow_struct.h"
+#include "libthrd.h"
 
 extern Process *debutListProcess;
 extern Process *processus;

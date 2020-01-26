@@ -9,6 +9,7 @@
 #include<regex.h>
 
 #include "traitement_text.h"
+#include "libthrd.h"
 
 
 char * findStrOpt(char str[100])

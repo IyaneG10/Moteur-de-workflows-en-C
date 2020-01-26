@@ -23,6 +23,7 @@
 #include <netinet/tcp.h>
 #include <arpa/inet.h>
 #include <fcntl.h>
+#include <pthread.h>
 
 #include "libthrd.h"
 #include "gestion_client.h"
@@ -37,7 +38,6 @@ extern int flag_connected ;
 
 void fct_aide(FILE *file_dialogue)
 {
-
 	fputs("Vos possibilites sont:\n",file_dialogue);
 	fputs("\tToDo : pour passer en mode gestion de la To-Do List\n",file_dialogue);
 	fputs("\tconnected users : pour de connaître tous les utilisateurs connectes\n",file_dialogue);
@@ -50,7 +50,8 @@ void fct_aide(FILE *file_dialogue)
 
 void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 {
-	char buffer[SIZE_BUFFER];
+    P(LOCK_TAB_CONN_USERS);
+    char buffer[SIZE_BUFFER];
 	fputs("Bienvenue dans le mode To-Do, saisir exit pour en sortir\n",file_dialogue);
 	while(fgets(buffer,MAX_LIGNE,file_dialogue)!=NULL)
 	{
@@ -70,7 +71,7 @@ void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 
 	}
 	fputs("Vous êtes sorti du mode To-Do\n",file_dialogue);
-
+    V(LOCK_TAB_CONN_USERS);
 }
 
 
@@ -447,7 +448,6 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],FILE *file_
 
 void* gestionClient(void *dialogue)
 {
-
 	bool enable_instancProc=true; // sécurité (faut se deco puis reco pour instancier plusieurs processus)
 	FILE *file_dialogue=fdopen((long)dialogue,"a+"); 
 	if(file_dialogue==NULL){ perror("gestionClient.fdopen"); exit(EXIT_FAILURE); }

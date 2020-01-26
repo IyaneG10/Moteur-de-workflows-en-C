@@ -25,12 +25,11 @@
 #include <arpa/inet.h>
 #include <fcntl.h>
 #include <string.h>
-#include <resolv.h> 
+#include <resolv.h>
 #include <pthread.h>
 #include <stdbool.h>
-#include <sys/ipc.h> 
-#include <sys/msg.h> 
-
+#include <sys/ipc.h>
+#include <sys/msg.h>
 
 #include "optionServer.h"
 #include "gestion_client.h"
@@ -39,44 +38,58 @@
 #include "libthrd.h"
 #include "libipc.h"
 
-
-
-
-Process *debutListProcess=NULL;
-Process *processus=NULL;
+Process *debutListProcess = NULL;
+Process *processus = NULL;
 
 char usersFile[100]; // en variable globale car partagée par tous les processus (sans modification)
 char connectedUsers[MAX_UTILISATEURS][LONG_ID];
-int flag_connected ;
-
-
+int flag_connected;
+/**
+ * @fn Programme principal
+ * @brief Programme principal
+ * 
+ * @param argc 
+ * @param argv -p <numPort> -u <fichier>
+ * @return int return 0 si tout se passe bien
+ */
 int main(int argc, char *argv[])
 {
-	struct OptionArg arg= check_arguments(argc,argv);
+	struct OptionArg arg = check_arguments(argc, argv);
 	printf("Le port utilisé est: %s\n", arg.portNum);
 	strcpy(usersFile, arg.File);
 	printf("Le userfile utilisé est: %s\n", usersFile);
 
-	flag_connected=0;
-
+	flag_connected = 0;
+	
 	debutListProcess = NULL;
 
-	//Thread de gestion de la file de message pour les requetes admin
-	lanceClientLeger(NULL, gestion_file_message); 
+	
+	/**
+	 * @fn lanceClientLeger(NULL, gestion_file_message)
+	 * @brief Thread de gestion de la file de message pour les requetes admin
+	 * 
+	 */
+	lanceClientLeger(NULL, gestion_file_message);
 
-	/* Initialisation du serveur */	    
-	long socket_ecoute=initialisationServeur(arg.portNum);
+	
+	/**
+	 * @fn long socket_ecoute = initialisationServeur(arg.portNum)
+	 * 
+	 * @brief Fonction d'initialisation du serveur TCP
+	 * 
+	 */
+	long socket_ecoute = initialisationServeur(arg.portNum);
 
-	/* Lancement de la boucle d'ecoute */
-	boucleServeur(socket_ecoute,lanceClientLeger,gestionClient);
+
+
+	/**
+	 * @brief Fonction boucle serveur qui lance un thread de gestionpour chaque client
+	 * 
+	 */
+
+	
+	boucleServeur(socket_ecoute, lanceClientLeger, gestionClient);
 
 	printf("Au revoir !!!\n");
 	return 0;
 }
-
-
-
-
-
-
-

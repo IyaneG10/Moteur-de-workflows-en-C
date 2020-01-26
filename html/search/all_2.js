@@ -3,7 +3,6 @@ var searchData=
   ['caracteres',['caracteres',['../d6/da5/workflow__struct_8c.html#a338a425fbad776b305c78998908b15ce',1,'workflow_struct.c']]],
   ['check_5farguments',['check_arguments',['../d5/d0b/option_server_8c.html#a1f40f85c2509db824f2805c44c93929a',1,'check_arguments(int argc, char **argv):&#160;optionServer.c'],['../dd/dc4/option_server_8h.html#a1f40f85c2509db824f2805c44c93929a',1,'check_arguments(int argc, char **argv):&#160;optionServer.c']]],
   ['check_5fformat',['check_format',['../d7/d41/traitement__text_8c.html#af6fd688c12169a60bffafd638b78d84f',1,'check_format(const char *modele, const char *chaine):&#160;traitement_text.c'],['../df/d91/traitement__text_8h.html#af6fd688c12169a60bffafd638b78d84f',1,'check_format(const char *modele, const char *chaine):&#160;traitement_text.c']]],
-  ['checkifvaliduser',['checkIfValidUser',['../de/db7/test__user_file_8c.html#abe799910c698b00fb32b93867bbbf7ca',1,'test_userFile.c']]],
   ['cle_5fcommande',['CLE_COMMANDE',['../d5/d9d/libipc_8h.html#ae4a2dbd6d0e683f655dec5c66aca6c83',1,'CLE_COMMANDE():&#160;libipc.h'],['../d5/dc2/admin_8c.html#ae4a2dbd6d0e683f655dec5c66aca6c83',1,'CLE_COMMANDE():&#160;admin.c']]],
   ['cle_5freponse',['CLE_REPONSE',['../d5/d9d/libipc_8h.html#a04548babe29d446017ae6266e54b4103',1,'CLE_REPONSE():&#160;libipc.h'],['../d5/dc2/admin_8c.html#a04548babe29d446017ae6266e54b4103',1,'CLE_REPONSE():&#160;admin.c']]],
   ['connecteduser',['connectedUser',['../db/d97/struct_connexion_infos.html#a5c029e95738c5b9c34ebdc183ee84a1a',1,'ConnexionInfos']]],

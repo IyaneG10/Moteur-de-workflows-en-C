@@ -5,7 +5,9 @@
 #include <pthread.h>
 #include "libthrd.h"
 
-
+pthread_mutex_t verrou1; 
+pthread_mutex_t verrou2; 
+pthread_mutex_t verrou3; 
 
 typedef struct  
 {
@@ -46,3 +48,33 @@ void lanceClientLeger(void *arg, void* (*fonction)(void*))
 
 }
 
+
+void P(int index) {
+    switch(index)
+    {
+        case 0: 
+            pthread_mutex_lock(&(verrou1)); 
+              break;
+        case 1: 
+            pthread_mutex_lock(&(verrou2));
+            break;
+        case 2: 
+            pthread_mutex_lock(&(verrou3));
+            break;
+    }
+}
+
+void V(int index) {
+    switch(index)
+    {
+        case 0: 
+            pthread_mutex_unlock(&(verrou1)); 
+            break;
+        case 1: 
+            pthread_mutex_unlock(&(verrou2));
+            break;
+        case 2: 
+            pthread_mutex_unlock(&(verrou3));
+            break;
+    }
+}

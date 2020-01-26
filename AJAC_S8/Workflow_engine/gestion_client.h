@@ -13,6 +13,13 @@
 extern char usersFile[100]; // declare dans main
 extern char connectedUsers[MAX_UTILISATEURS][LONG_ID]; // declare dans main
 
+// pour les différents verrous (car les fonctions P et V prennent des entiers en arguments
+// Il y'a 3 verrous pour le code (définis dans libthrd)
+enum {
+    LOCK_TAB_CONN_USERS,
+    LOCK_USERS_FILE,
+    LOCK_LIST_PROCESSES
+};
 
 struct ConnexionInfos
 {
