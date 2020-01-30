@@ -1,16 +1,9 @@
 var searchData=
 [
-  ['fct_5faide',['fct_aide',['../d8/d8a/gestion__client_8c.html#a2f4f00ab4a064cab10c439bf29d5db6d',1,'gestion_client.c']]],
-  ['fct_5flistactivities',['fct_listActivities',['../d8/d8a/gestion__client_8c.html#a83416e2ce594d6acd6a553cc4584e001',1,'gestion_client.c']]],
-  ['fct_5flistprocesses',['fct_listProcesses',['../d8/d8a/gestion__client_8c.html#a803826799a1fbf04ab7d1370414c8f49',1,'gestion_client.c']]],
-  ['fct_5fprintprocess',['fct_printProcess',['../d8/d8a/gestion__client_8c.html#a4800b9416a2f608a5fc699a3680d53b4',1,'gestion_client.c']]],
-  ['fct_5ftodo',['fct_Todo',['../d8/d8a/gestion__client_8c.html#a2af09a820e1e80c27003a3c2bebe521c',1,'gestion_client.c']]],
-  ['fct_5fvalider',['fct_valider',['../d8/d8a/gestion__client_8c.html#acc0cb62882d811ec34c4e7da9d2a7bf6',1,'gestion_client.c']]],
-  ['file',['File',['../db/d70/struct_option_arg.html#aa1d3b9b9375fec033b547ea68752122b',1,'OptionArg']]],
-  ['fin_5felement',['fin_element',['../d6/da5/workflow__struct_8c.html#a746df4ef5ad35777a6d79331694022f9',1,'workflow_struct.c']]],
-  ['findstrarg',['findStrArg',['../d7/d41/traitement__text_8c.html#a21d70bbda86d13f27b2bd939a4cd9600',1,'findStrArg(const char *text):&#160;traitement_text.c'],['../df/d91/traitement__text_8h.html#a21d70bbda86d13f27b2bd939a4cd9600',1,'findStrArg(const char *text):&#160;traitement_text.c']]],
-  ['findstropt',['findStrOpt',['../d7/d41/traitement__text_8c.html#ac92580083d408391dcec70debe905084',1,'findStrOpt(char str[100]):&#160;traitement_text.c'],['../df/d91/traitement__text_8h.html#ac92580083d408391dcec70debe905084',1,'findStrOpt(char str[100]):&#160;traitement_text.c']]],
-  ['flag_5fconnected',['flag_connected',['../d4/da7/libipc_8c.html#aa69dc085aad7e11230404f2d5e8bf314',1,'flag_connected():&#160;main.c'],['../d8/d8a/gestion__client_8c.html#aa69dc085aad7e11230404f2d5e8bf314',1,'flag_connected():&#160;main.c'],['../d0/d29/main_8c.html#aa69dc085aad7e11230404f2d5e8bf314',1,'flag_connected():&#160;main.c']]],
-  ['flag_5fconnexion',['flag_connexion',['../d4/da7/libipc_8c.html#a0b4898060927098485a6f2557aa13ab2',1,'libipc.c']]],
-  ['fonction',['fonction',['../da/d26/struct_parametres.html#a06fa1e7fbf128efacc5e883a09c4823e',1,'Parametres']]]
+  ['gestion_5fclient_2ec',['gestion_client.c',['../d8/d8a/gestion__client_8c.html',1,'']]],
+  ['gestion_5fclient_2eh',['gestion_client.h',['../df/de8/gestion__client_8h.html',1,'']]],
+  ['gestion_5ffile_5fmessage',['gestion_file_message',['../d4/da7/libipc_8c.html#a0d17759558e169819d65d55e8bde57cc',1,'gestion_file_message(void *arg):&#160;libipc.c'],['../d5/d9d/libipc_8h.html#a0d17759558e169819d65d55e8bde57cc',1,'gestion_file_message(void *arg):&#160;libipc.c']]],
+  ['gestionclient',['gestionClient',['../d8/d8a/gestion__client_8c.html#aa7ace2bf743f0a98a18a112504429696',1,'gestionClient(void *dialogue):&#160;gestion_client.c'],['../df/de8/gestion__client_8h.html#a775dc0072dcf1723100480d3441ac722',1,'gestionClient(void *s):&#160;gestion_client.c']]],
+  ['getadresseclient',['getAdresseClient',['../d8/d8a/gestion__client_8c.html#ac0f1b867da535ffa7be92d249b1e284a',1,'getAdresseClient(long socket):&#160;gestion_client.c'],['../df/de8/gestion__client_8h.html#ac0f1b867da535ffa7be92d249b1e284a',1,'getAdresseClient(long socket):&#160;gestion_client.c']]],
+  ['getcmdadmin',['getCmdAdmin',['../d5/dc2/admin_8c.html#a11ad5623fb38251b8f0d26afc11d974a',1,'admin.c']]]
 ];

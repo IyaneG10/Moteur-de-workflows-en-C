@@ -95,7 +95,7 @@ Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier
 <div class="center"><img src="../../de/d1e/libsck_8h__dep__incl.png" border="0" usemap="#_a_j_a_c___s8_2_socket_2libsck_8hdep" alt=""/></div>
 <map name="_a_j_a_c___s8_2_socket_2libsck_8hdep" id="_a_j_a_c___s8_2_socket_2libsck_8hdep">
 <area shape="rect" id="node2" href="../../db/dad/libsck_8c.html" title="AJAC_S8/Socket/libsck.c" alt="" coords="5,87,180,114"/>
-<area shape="rect" id="node3" href="../../d0/d29/main_8c.html" title="Programme principal. " alt="" coords="205,80,389,121"/>
+<area shape="rect" id="node3" href="../../d0/d29/main_8c.html" title="Programme du serveur. " alt="" coords="205,80,389,121"/>
 </map>
 </div>
 </div>
@@ -103,8 +103,6 @@ Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a99c87834a31bb59efd9b12ca3e0b3f4f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df7/libsck_8h.html#a99c87834a31bb59efd9b12ca3e0b3f4f">__LIBSCK_H__</a></td></tr>
-<tr class="separator:a99c87834a31bb59efd9b12ca3e0b3f4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affabe4414803365e2c0651ddac1d9c32"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df7/libsck_8h.html#affabe4414803365e2c0651ddac1d9c32">NB_CONNEXIONS</a>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:affabe4414803365e2c0651ddac1d9c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -114,7 +112,7 @@ Fonctions</h2></td></tr>
 <tr class="separator:a7e64341468d02165d22c6b7aad90e45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a879c67a5ce813f30c3252835a53da41e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df7/libsck_8h.html#a879c67a5ce813f30c3252835a53da41e">dummy</a> (void *dialogue, void *(*action)(void *))</td></tr>
 <tr class="separator:a879c67a5ce813f30c3252835a53da41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4623b92ca18b03a0fa370dd1af59ae13"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df7/libsck_8h.html#a4623b92ca18b03a0fa370dd1af59ae13">boucleServeur</a> (long socket, void(*fonction)(void *, void *(*)(void *)), void *(*<a class="el" href="../../d8/d8a/gestion__client_8c.html#aa7ace2bf743f0a98a18a112504429696">gestionClient</a>)(void *))</td></tr>
+<tr class="memitem:a4623b92ca18b03a0fa370dd1af59ae13"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/df7/libsck_8h.html#a4623b92ca18b03a0fa370dd1af59ae13">boucleServeur</a> (long socket, void(*fonction)(void *, void *(*)(void *)), void *(*<a class="el" href="../../df/de8/gestion__client_8h.html#a775dc0072dcf1723100480d3441ac722">gestionClient</a>)(void *))</td></tr>
 <tr class="separator:a4623b92ca18b03a0fa370dd1af59ae13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -130,22 +128,6 @@ Variables</h2></td></tr>
 
 <p class="definition">Définition dans le fichier <a class="el" href="../../d5/df7/libsck_8h_source.html">libsck.h</a>.</p>
 </div><h2 class="groupheader">Documentation des macros</h2>
-<a id="a99c87834a31bb59efd9b12ca3e0b3f4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99c87834a31bb59efd9b12ca3e0b3f4f">&#9670;&nbsp;</a></span>__LIBSCK_H__</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define __LIBSCK_H__</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Définition à la ligne <a class="el" href="../../d5/df7/libsck_8h_source.html#l00011">11</a> du fichier <a class="el" href="../../d5/df7/libsck_8h_source.html">libsck.h</a>.</p>
-
-</div>
-</div>
 <a id="affabe4414803365e2c0651ddac1d9c32"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#affabe4414803365e2c0651ddac1d9c32">&#9670;&nbsp;</a></span>NB_CONNEXIONS</h2>
 
@@ -159,7 +141,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>Constantes </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d5/df7/libsck_8h_source.html#l00017">17</a> du fichier <a class="el" href="../../d5/df7/libsck_8h_source.html">libsck.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d5/df7/libsck_8h_source.html#l00018">18</a> du fichier <a class="el" href="../../d5/df7/libsck_8h_source.html">libsck.h</a>.</p>
 
 </div>
 </div>
@@ -263,7 +245,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d5/df7/libsck_8h_source.html#l00014">14</a> du fichier <a class="el" href="../../d5/df7/libsck_8h_source.html">libsck.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d5/df7/libsck_8h_source.html#l00015">15</a> du fichier <a class="el" href="../../d5/df7/libsck_8h_source.html">libsck.h</a>.</p>
 
 </div>
 </div>

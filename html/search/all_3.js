@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['caracteres',['caracteres',['../d6/da5/workflow__struct_8c.html#a338a425fbad776b305c78998908b15ce',1,'workflow_struct.c']]],
-  ['check_5farguments',['check_arguments',['../d5/d0b/option_server_8c.html#a1f40f85c2509db824f2805c44c93929a',1,'check_arguments(int argc, char **argv):&#160;optionServer.c'],['../dd/dc4/option_server_8h.html#a1f40f85c2509db824f2805c44c93929a',1,'check_arguments(int argc, char **argv):&#160;optionServer.c']]],
-  ['check_5fformat',['check_format',['../d7/d41/traitement__text_8c.html#af6fd688c12169a60bffafd638b78d84f',1,'check_format(const char *modele, const char *chaine):&#160;traitement_text.c'],['../df/d91/traitement__text_8h.html#af6fd688c12169a60bffafd638b78d84f',1,'check_format(const char *modele, const char *chaine):&#160;traitement_text.c']]],
-  ['cle_5fcommande',['CLE_COMMANDE',['../d5/d9d/libipc_8h.html#ae4a2dbd6d0e683f655dec5c66aca6c83',1,'CLE_COMMANDE():&#160;libipc.h'],['../d5/dc2/admin_8c.html#ae4a2dbd6d0e683f655dec5c66aca6c83',1,'CLE_COMMANDE():&#160;admin.c']]],
-  ['cle_5freponse',['CLE_REPONSE',['../d5/d9d/libipc_8h.html#a04548babe29d446017ae6266e54b4103',1,'CLE_REPONSE():&#160;libipc.h'],['../d5/dc2/admin_8c.html#a04548babe29d446017ae6266e54b4103',1,'CLE_REPONSE():&#160;admin.c']]],
-  ['connectedusers',['connectedUsers',['../d4/da7/libipc_8c.html#a449801ffe9077ed2daa4f8ffe0b76ad2',1,'connectedUsers():&#160;main.c'],['../df/de8/gestion__client_8h.html#a15ad9a534b1df4605157e849f750e588',1,'connectedUsers():&#160;main.c'],['../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588',1,'connectedUsers():&#160;main.c']]],
-  ['contenumessage',['contenuMessage',['../d8/d91/structmesssage___i_p_c.html#a5ee24c5cdac8853b04850d26c7dcfab3',1,'messsage_IPC']]],
-  ['countprocesses',['countProcesses',['../d6/da5/workflow__struct_8c.html#a06dc34ea1d4c1ffc6448052a2a4a4a1a',1,'countProcesses(Process *processCourant):&#160;workflow_struct.c'],['../dc/d15/workflow__struct_8h.html#a06dc34ea1d4c1ffc6448052a2a4a4a1a',1,'countProcesses(Process *processCourant):&#160;workflow_struct.c']]]
+  ['debut_5felement',['debut_element',['../d6/da5/workflow__struct_8c.html#a9f852f5d04dff100e97c1a3e96b513c5',1,'workflow_struct.c']]],
+  ['debutlistactivity',['debutListActivity',['../d8/daa/struct_process.html#ae3ce5024e3ba2004db95e25f0f4278c8',1,'Process']]],
+  ['debutlistprocess',['debutListProcess',['../d8/d8a/gestion__client_8c.html#a01f0fb13c448f70bd4bd2b4f0010cf06',1,'debutListProcess():&#160;main.c'],['../d0/d29/main_8c.html#a01f0fb13c448f70bd4bd2b4f0010cf06',1,'debutListProcess():&#160;main.c'],['../d6/da5/workflow__struct_8c.html#a01f0fb13c448f70bd4bd2b4f0010cf06',1,'debutListProcess():&#160;main.c']]],
+  ['desc_5factivity',['DESC_ACTIVITY',['../dc/d15/workflow__struct_8h.html#adf764cbdea00d65edcd07bb9953ad2b7af1f6247db5a94902e29b6100e81071c8',1,'workflow_struct.h']]],
+  ['desc_5fprocess',['DESC_PROCESS',['../dc/d15/workflow__struct_8h.html#adf764cbdea00d65edcd07bb9953ad2b7a488179d5aed33d4f0ee9d9ac21f6404e',1,'workflow_struct.h']]],
+  ['description',['description',['../de/d84/struct_activity.html#a5a373ec5665117d491c1baa523c967de',1,'Activity::description()'],['../d8/daa/struct_process.html#a5a373ec5665117d491c1baa523c967de',1,'Process::description()']]],
+  ['description_5fstage',['description_stage',['../d6/da5/workflow__struct_8c.html#ad0ff157debd00c257889b231bf7eb4a1',1,'workflow_struct.c']]],
+  ['dummy',['dummy',['../db/dad/libsck_8c.html#a879c67a5ce813f30c3252835a53da41e',1,'dummy(void *dialogue, void *(*action)(void *)):&#160;libsck.c'],['../d5/df7/libsck_8h.html#a879c67a5ce813f30c3252835a53da41e',1,'dummy(void *dialogue, void *(*action)(void *)):&#160;libsck.c']]]
 ];

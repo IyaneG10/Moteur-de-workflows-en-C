@@ -2,6 +2,7 @@
  * @file admin.c
  * @author SECK Malick
  * @brief 
+ * Programme administrateur: traitement des arguments passés pour envoyer au programme pincipal la requete via IPC
  * @version 0.1
  * @date 2020-01-30
  * 
@@ -21,6 +22,7 @@
 #define CLE_COMMANDE        0x00000001
 #define CLE_REPONSE        0x00000002 
 #define TAILLE_MSG              1024
+
 typedef struct { 
 	int numProcess;
 	char contenuMessage[TAILLE_MSG]; 
@@ -37,7 +39,13 @@ struct Arg
 
 
 
-
+/**
+ * @brief Recuperer les arguments passés en paramètre à au programme admin grâce à getopt long
+ * 
+ * @param argc 
+ * @param argv 
+ * @return struct Arg 
+ */
 struct Arg getCmdAdmin(int argc, char **argv)
 {
 	int res;

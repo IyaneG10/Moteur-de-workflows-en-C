@@ -1,15 +1,7 @@
 var searchData=
 [
-  ['lanceclientleger',['lanceClientLeger',['../dc/df7/libthrd_8c.html#aab050cdeb1e60795861515dc788e3ace',1,'lanceClientLeger(void *arg, void *(*fonction)(void *)):&#160;libthrd.c'],['../d4/dc7/libthrd_8h.html#aad5b22294b75f70caa7e354cd1918757',1,'lanceClientLeger(void *param, void *(*fonction)(void *)):&#160;libthrd.c']]],
-  ['libipc_2ec',['libipc.c',['../d4/da7/libipc_8c.html',1,'']]],
-  ['libipc_2eh',['libipc.h',['../d5/d9d/libipc_8h.html',1,'']]],
-  ['libsck_2ec',['libsck.c',['../db/dad/libsck_8c.html',1,'']]],
-  ['libsck_2eh',['libsck.h',['../d5/df7/libsck_8h.html',1,'']]],
-  ['libthrd_2ec',['libthrd.c',['../dc/df7/libthrd_8c.html',1,'']]],
-  ['libthrd_2eh',['libthrd.h',['../d4/dc7/libthrd_8h.html',1,'']]],
-  ['listusers',['listUsers',['../d4/da7/libipc_8c.html#abcfa08806a2b130aee567b079ec23d55',1,'listUsers(messsage_IPC msg, int commandes, int reponses):&#160;libipc.c'],['../d5/d9d/libipc_8h.html#abcfa08806a2b130aee567b079ec23d55',1,'listUsers(messsage_IPC msg, int commandes, int reponses):&#160;libipc.c']]],
-  ['lock_5flist_5fprocesses',['LOCK_LIST_PROCESSES',['../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba82ee9154583737b1e769c966f6ef6caa',1,'libthrd.h']]],
-  ['lock_5ftab_5fconn_5fusers',['LOCK_TAB_CONN_USERS',['../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7fd2d825f6e6419dc1d7e0d7344235ae',1,'libthrd.h']]],
-  ['lock_5fusers_5ffile',['LOCK_USERS_FILE',['../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba93759ee839ed474e97ce08bf7fc9f498',1,'libthrd.h']]],
-  ['long_5fid',['LONG_ID',['../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b',1,'traitement_text.h']]]
+  ['name',['name',['../de/d84/struct_activity.html#a362a9f6628fd91034ed0060a4df1a54f',1,'Activity']]],
+  ['nb_5fconnexions',['NB_CONNEXIONS',['../d5/df7/libsck_8h.html#affabe4414803365e2c0651ddac1d9c32',1,'libsck.h']]],
+  ['next',['next',['../de/d84/struct_activity.html#a49ba13c9ccd5ba5b59d1f97699f8e7a6',1,'Activity::next()'],['../d8/daa/struct_process.html#a1fe8d7f7cde32085143a49a892425a7c',1,'Process::next()']]],
+  ['numprocess',['numProcess',['../d8/d91/structmesssage___i_p_c.html#ab7fbb55d77cb32e4c6d0f296d0c03de9',1,'messsage_IPC']]]
 ];

@@ -3,7 +3,7 @@
  * @file main.c
  * @author SECK Malick 
  * @brief 
- * Programme principal
+ * Programme du serveur
  * @version 0.1
  * @date 2020-01-25
  * 
@@ -44,13 +44,15 @@ Process *processus = NULL;
 char usersFile[100]; // en variable globale car partagée par tous les processus (sans modification)
 char connectedUsers[MAX_UTILISATEURS][LONG_ID];
 int flag_connected;
+
 /**
- * @fn Programme principal
- * @brief Programme principal
+ * @brief 
+ * Programme principal
+ * 
  * 
  * @param argc 
- * @param argv -p <numPort> -u <fichier>
- * @return int return 0 si tout se passe bien
+ * @param argv : -p <numPort> -u <fichier>
+ * @return int : return 0 si tout se passe bien
  */
 int main(int argc, char *argv[])
 {

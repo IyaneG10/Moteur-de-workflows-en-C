@@ -15,16 +15,6 @@
 
 /**** Fichiers d'inclusion ****/
 
-/**
- * @file gestion_client.c
- * @author SECK Malick 
- * @brief 
- * @version 0.1
- * @date 2020-01-30
- * 
- * @copyright Copyright (c) 2020
- * 
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

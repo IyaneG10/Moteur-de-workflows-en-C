@@ -1,6 +1,6 @@
 <map id="AJAC_S8/Workflow_engine/workflow_struct.h" name="AJAC_S8/Workflow_engine/workflow_struct.h">
 <area shape="rect" id="node2" href="$df/de8/gestion__client_8h.html" title="AJAC_S8/Workflow_engine\l/gestion_client.h" alt="" coords="123,95,307,136"/>
 <area shape="rect" id="node3" href="$d8/d8a/gestion__client_8c.html" title="AJAC_S8/Workflow_engine\l/gestion_client.c" alt="" coords="5,184,189,225"/>
-<area shape="rect" id="node4" href="$d0/d29/main_8c.html" title="Programme principal. " alt="" coords="239,184,423,225"/>
+<area shape="rect" id="node4" href="$d0/d29/main_8c.html" title="Programme du serveur. " alt="" coords="239,184,423,225"/>
 <area shape="rect" id="node5" href="$d6/da5/workflow__struct_8c.html" title="AJAC_S8/Workflow_engine\l/workflow_struct.c" alt="" coords="381,95,565,136"/>
 </map>
