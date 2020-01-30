@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2020
  * 
  */
+#ifndef __LIBSCK_H__
 #define __LIBSCK_H__
 
 /**** Variables globales *****/

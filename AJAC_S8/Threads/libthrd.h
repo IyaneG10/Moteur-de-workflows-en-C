@@ -8,6 +8,8 @@
  * @copyright Copyright (c) 2020
  * 
  */
+
+#ifndef H_LIBTHRD
 #define H_LIBTHRD
 
 

@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2020
  * 
  */
+#ifndef __TRAITEMENTTEXT_H__
 #define __TRAITEMENTTEXT_H__
 
 #define MAX_UTILISATEURS 10

@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2020
  * 
  */
+#ifndef __OPTIONSERVER_H__
 #define __OPTIONSERVER_H__
 
 extern char usersFile[100];
