@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['usersfile',['usersFile',['../d4/da7/libipc_8c.html#a24b2c9954517b97dd0f3b5ad64c19a8c',1,'usersFile():&#160;main.c'],['../df/de8/gestion__client_8h.html#a24b2c9954517b97dd0f3b5ad64c19a8c',1,'usersFile():&#160;main.c'],['../d0/d29/main_8c.html#a24b2c9954517b97dd0f3b5ad64c19a8c',1,'usersFile():&#160;main.c'],['../dd/dc4/option_server_8h.html#a24b2c9954517b97dd0f3b5ad64c19a8c',1,'usersFile():&#160;main.c']]]
+  ['size',['SIZE',['../dc/d15/workflow__struct_8h.html#a70ed59adcb4159ac551058053e649640',1,'workflow_struct.h']]],
+  ['size_5fbuffer',['SIZE_BUFFER',['../df/de8/gestion__client_8h.html#a4dea39042071768c1e115b0ebbfc52f2',1,'gestion_client.h']]],
+  ['size_5fnom_5fmachine',['SIZE_NOM_MACHINE',['../df/de8/gestion__client_8h.html#aa5e288306db1dcfc6c70a061e05511d0',1,'gestion_client.h']]],
+  ['supprconnlist',['supprConnList',['../d8/d8a/gestion__client_8c.html#a4732270e4598f0a2596111c5b2b2e28f',1,'gestion_client.c']]]
 ];

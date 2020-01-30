@@ -1,4 +1,13 @@
-
+/**
+ * @file libipc.h
+ * @author SECK Malick 
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef __LIBIPC_H__
 #define __LIBIPC_H__
 
@@ -6,10 +15,12 @@
 #define CLE_REPONSE        0x00000002 
 #define TAILLE_MSG              1024
 
+
 typedef struct { 
 	int numProcess;
 	char contenuMessage[TAILLE_MSG]; 
 } messsage_IPC;
+
 
 void remplacerCar(char * chaine, char ancienneLettre, char nouvelleLettre);
 

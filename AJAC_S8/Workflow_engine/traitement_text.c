@@ -1,4 +1,13 @@
-#include <stdio.h>
+/**
+ * @file traitement_text.c
+ * @author SECK Malick
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #include <stdlib.h>
 #include <unistd.h>
 #include <stddef.h>
@@ -69,6 +78,7 @@ int check_format(const char *modele,const char *chaine)
 
 int parserBDDUsers(FILE *fp_UsersFile, char users[MAX_UTILISATEURS][3][LONG_ID])
 {
+    P(LOCK_USERS_FILE);
 	const char *modele = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+ [_[:alpha:]]+$";
 	char ligne[LONG_ID];
 	char lecture='x';
@@ -114,6 +124,8 @@ int parserBDDUsers(FILE *fp_UsersFile, char users[MAX_UTILISATEURS][3][LONG_ID])
 		}
 
 	}
+	
+		V(LOCK_USERS_FILE);
 	return usersFound;
 
 }

@@ -1,3 +1,13 @@
+/**
+ * @file workflow_struct.h
+ * @author SECK Malick 
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #ifndef __WORKFLOWSTRUCT_H__
 #define __WORKFLOWSTRUCT_H__
 

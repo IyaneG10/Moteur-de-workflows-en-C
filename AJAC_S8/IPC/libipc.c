@@ -1,8 +1,9 @@
 /**
  * @file libipc.c
+ * @author SECK Malick 
  * @brief 
  * @version 0.1
- * @date 2020-01-25
+ * @date 2020-01-30
  * 
  * @copyright Copyright (c) 2020
  * 
@@ -29,6 +30,7 @@
 #include <regex.h>
 
 #include "libipc.h"
+#include "libthrd.h"
 
 
 extern char connectedUsers[10][100];
@@ -82,6 +84,7 @@ void remplacerCar(char * chaine, char ancien, char nouveau)
 
 void listUsers(messsage_IPC msg,int commandes, int reponses)
 {
+    P(LOCK_USERS_FILE);
     #ifdef DEBUG
     printf("Entree dans la fonction listUsers \n");
     #endif
@@ -131,12 +134,13 @@ void listUsers(messsage_IPC msg,int commandes, int reponses)
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 
 	fclose (fp_UsersFile);
-
+    V(LOCK_USERS_FILE);
 
 }
 
 void addUser(messsage_IPC msg,int commandes, int reponses)
 {
+    P(LOCK_USERS_FILE);
     #ifdef DEBUG
     printf("Entree dans la fonction addUser \n");
     #endif
@@ -216,10 +220,11 @@ void addUser(messsage_IPC msg,int commandes, int reponses)
 		if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	}
 
+
 	strcpy(msg.contenuMessage, "\0");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
-
+    V(LOCK_USERS_FILE);
 }
 
 void modeListen(messsage_IPC msg,int commandes, int reponses)     // Cette fonction ne marche pas correctement
@@ -245,6 +250,7 @@ void modeListen(messsage_IPC msg,int commandes, int reponses)     // Cette fonct
 
 void printConnectedUsers(messsage_IPC msg,int commandes, int reponses)
 {
+    P(LOCK_TAB_CONN_USERS);
     #ifdef DEBUG
     printf("Entree dans la fonction printConnectedUsers \n");
     #endif
@@ -267,7 +273,7 @@ void printConnectedUsers(messsage_IPC msg,int commandes, int reponses)
 	}
 	strcpy(msg.contenuMessage, "\0");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
-
+	V(LOCK_TAB_CONN_USERS);
 }
 
 

@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['id',['id',['../de/d84/struct_activity.html#a63539fb4d61afda16180aa9733dd5668',1,'Activity::id()'],['../d8/daa/struct_process.html#a63539fb4d61afda16180aa9733dd5668',1,'Process::id()']]],
-  ['in_5factivity',['IN_ACTIVITY',['../dc/d15/workflow__struct_8h.html#a06fc87d81c62e9abb8790b6e5713c55baa3e5a2dbf3586b9c9e55d6846ade5a79',1,'workflow_struct.h']]],
-  ['initialisationserveur',['initialisationServeur',['../db/dad/libsck_8c.html#a7e64341468d02165d22c6b7aad90e45a',1,'initialisationServeur(char *port):&#160;libsck.c'],['../d5/df7/libsck_8h.html#a7e64341468d02165d22c6b7aad90e45a',1,'initialisationServeur(char *port):&#160;libsck.c']]],
-  ['input',['input',['../de/d84/struct_activity.html#a34e6095d036ac8b0b703df8ad2ca987f',1,'Activity']]],
-  ['instancierprocessus',['instancierProcessus',['../d6/da5/workflow__struct_8c.html#a81176a4ad89edce4d4a72c0b9cbe128c',1,'instancierProcessus(Process **debut, char *file):&#160;workflow_struct.c'],['../dc/d15/workflow__struct_8h.html#a81176a4ad89edce4d4a72c0b9cbe128c',1,'instancierProcessus(Process **debut, char *file):&#160;workflow_struct.c']]],
-  ['isempty',['isEmpty',['../d6/da5/workflow__struct_8c.html#a475201daa461b52257dc3a0bd7f37707',1,'isEmpty(Process *process):&#160;workflow_struct.c'],['../dc/d15/workflow__struct_8h.html#a475201daa461b52257dc3a0bd7f37707',1,'isEmpty(Process *process):&#160;workflow_struct.c']]]
+  ['gestion_5fclient_2ec',['gestion_client.c',['../d8/d8a/gestion__client_8c.html',1,'']]],
+  ['gestion_5fclient_2eh',['gestion_client.h',['../df/de8/gestion__client_8h.html',1,'']]],
+  ['gestion_5ffile_5fmessage',['gestion_file_message',['../d4/da7/libipc_8c.html#a0d17759558e169819d65d55e8bde57cc',1,'gestion_file_message(void *arg):&#160;libipc.c'],['../d5/d9d/libipc_8h.html#a0d17759558e169819d65d55e8bde57cc',1,'gestion_file_message(void *arg):&#160;libipc.c']]],
+  ['gestionclient',['gestionClient',['../d8/d8a/gestion__client_8c.html#aa7ace2bf743f0a98a18a112504429696',1,'gestion_client.c']]],
+  ['getadresseclient',['getAdresseClient',['../d8/d8a/gestion__client_8c.html#ac0f1b867da535ffa7be92d249b1e284a',1,'gestion_client.c']]],
+  ['getcmdadmin',['getCmdAdmin',['../d5/dc2/admin_8c.html#a11ad5623fb38251b8f0d26afc11d974a',1,'admin.c']]]
 ];

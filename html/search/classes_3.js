@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['optionarg',['OptionArg',['../db/d70/struct_option_arg.html',1,'']]]
+  ['parametres',['Parametres',['../da/d26/struct_parametres.html',1,'']]],
+  ['process',['Process',['../d8/daa/struct_process.html',1,'']]]
 ];

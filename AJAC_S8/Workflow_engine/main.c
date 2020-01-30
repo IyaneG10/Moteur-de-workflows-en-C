@@ -1,4 +1,4 @@
-/* Programme principal du moteur de workflow*/
+
 /**
  * @file main.c
  * @author SECK Malick 

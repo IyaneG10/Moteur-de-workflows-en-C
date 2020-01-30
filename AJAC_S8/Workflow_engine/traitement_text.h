@@ -1,8 +1,18 @@
-#ifndef __TRAITEMENTTEXT_H__
+/**
+ * @file traitement_text.h
+ * @author SECK Malick 
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #define __TRAITEMENTTEXT_H__
 
 #define MAX_UTILISATEURS 10
 #define LONG_ID 100
+
 
 
 

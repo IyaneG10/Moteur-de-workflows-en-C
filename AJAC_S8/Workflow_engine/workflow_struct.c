@@ -1,3 +1,14 @@
+/**
+ * @file workflow_struct.c
+ * @author SECK Malick 
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -174,7 +185,6 @@ void debut_element (void *user_data, const xmlChar *name, const xmlChar **attrs)
 
 
 void ajouterActivite (Process *process, char *id, char *name, char *description, char *performer,char *input, char *output, char *etat) {
-
 	Activity *activite = (Activity *)malloc (sizeof (Activity));
 
 	if(isEmpty(process))
@@ -212,7 +222,6 @@ void ajouterActivite (Process *process, char *id, char *name, char *description,
 
 
 int instancierProcessus (Process **debut,char* file) {
-
 	int ret=0;
 
 	int nbProcess=1;
@@ -244,7 +253,6 @@ int instancierProcessus (Process **debut,char* file) {
 		printf("Le fichier %s n'existe pas \n", fichier);  
 		ret = 1;      
 	}
-
 	return ret;
 }
 
@@ -262,4 +270,5 @@ int countProcesses (Process *processCourant) {
 int isEmpty (Process *process)
 {
 	return (process->debutListActivity==NULL);
+    
 }

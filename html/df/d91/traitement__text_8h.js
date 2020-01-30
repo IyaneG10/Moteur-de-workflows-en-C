@@ -1,5 +1,6 @@
 var traitement__text_8h =
 [
+    [ "__TRAITEMENTTEXT_H__", "df/d91/traitement__text_8h.html#ad769b11c93d7629850ef1b8c2d0cc28c", null ],
     [ "LONG_ID", "df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b", null ],
     [ "MAX_UTILISATEURS", "df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6", null ],
     [ "check_format", "df/d91/traitement__text_8h.html#af6fd688c12169a60bffafd638b78d84f", null ],

@@ -1,4 +1,13 @@
-#ifndef __OPTIONSERVER_H__
+/**
+ * @file optionServer.h
+ * @author SECK Malick 
+ * @brief 
+ * @version 0.1
+ * @date 2020-01-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #define __OPTIONSERVER_H__
 
 extern char usersFile[100];
