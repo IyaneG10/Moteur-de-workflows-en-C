@@ -121,10 +121,13 @@ Graphe des dépendances par inclusion de workflow_struct.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:a338a425fbad776b305c78998908b15ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a338a425fbad776b305c78998908b15ce">caracteres</a> (void *user_data, const xmlChar *text, int length)</td></tr>
+<tr class="memdesc:a338a425fbad776b305c78998908b15ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Choses à faire selon l'état dans lequel la machine à état se trouve.  <a href="#a338a425fbad776b305c78998908b15ce">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a338a425fbad776b305c78998908b15ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a746df4ef5ad35777a6d79331694022f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a746df4ef5ad35777a6d79331694022f9">fin_element</a> (void *user_data, const xmlChar *name)</td></tr>
+<tr class="memdesc:a746df4ef5ad35777a6d79331694022f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction éxécutée à la rencontre d'une balise fermante.  <a href="#a746df4ef5ad35777a6d79331694022f9">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a746df4ef5ad35777a6d79331694022f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f852f5d04dff100e97c1a3e96b513c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a9f852f5d04dff100e97c1a3e96b513c5">debut_element</a> (void *user_data, const xmlChar *name, const xmlChar **attrs)</td></tr>
+<tr class="memdesc:a9f852f5d04dff100e97c1a3e96b513c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction éxécutée à la rencontre d'une balise ouvrante.  <a href="#a9f852f5d04dff100e97c1a3e96b513c5">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a9f852f5d04dff100e97c1a3e96b513c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a615058008b0bd59c83b6ddbf3bf65c8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a615058008b0bd59c83b6ddbf3bf65c8b">ajouterActivite</a> (<a class="el" href="../../d8/daa/struct_process.html">Process</a> *process, char *id, char *name, char *description, char *performer, char *input, char *output, char *etat)</td></tr>
 <tr class="separator:a615058008b0bd59c83b6ddbf3bf65c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +141,7 @@ Fonctions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a01f0fb13c448f70bd4bd2b4f0010cf06">debutListProcess</a></td></tr>
+<tr class="memdesc:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="mdescLeft">&#160;</td><td class="mdescRight">pour la liste des processus (partagé par plusieurs fichiers)  <a href="#a01f0fb13c448f70bd4bd2b4f0010cf06">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a01f0fb13c448f70bd4bd2b4f0010cf06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3972f3617e84ee476cef67e0c1a9128d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d8/daa/struct_process.html">Process</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/da5/workflow__struct_8c.html#a3972f3617e84ee476cef67e0c1a9128d">processus</a></td></tr>
 <tr class="separator:a3972f3617e84ee476cef67e0c1a9128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,7 +236,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00187">187</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00206">206</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -268,7 +272,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00054">54</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p>Choses à faire selon l'état dans lequel la machine à état se trouve. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_data</td><td></td></tr>
+    <tr><td class="paramname">text</td><td></td></tr>
+    <tr><td class="paramname">length</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00060">60</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -288,7 +302,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00260">260</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00279">279</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -324,7 +338,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00147">147</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p>Fonction éxécutée à la rencontre d'une balise ouvrante. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_data</td><td></td></tr>
+    <tr><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramname">attrs</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00166">166</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -354,7 +378,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00098">98</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p>Fonction éxécutée à la rencontre d'une balise fermante. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user_data</td><td></td></tr>
+    <tr><td class="paramname">name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00110">110</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -384,7 +417,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00224">224</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00243">243</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -404,7 +437,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00270">270</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d6/da5/workflow__struct_8c_source.html#l00289">289</a> du fichier <a class="el" href="../../d6/da5/workflow__struct_8c_source.html">workflow_struct.c</a>.</p>
 
 </div>
 </div>
@@ -532,9 +565,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>pour la liste des processus (partagé par plusieurs fichiers) </p>
 <p>Ce fichier contient des fonctions utilisees pour la gestion des clients qui se connectent au serveur </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00041">41</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00045">45</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -582,7 +617,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00042">42</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00046">46</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>

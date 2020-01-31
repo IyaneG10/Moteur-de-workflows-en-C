@@ -28,7 +28,10 @@ typedef struct {
 	char contenuMessage[TAILLE_MSG]; 
 } messsage_IPC; 
 
-
+/**
+ * @brief Structure pour stocker les arguments du programme admin
+ * 
+ */
 struct Arg
 {
 	char arg_U [TAILLE_MSG];
@@ -143,20 +146,26 @@ struct Arg getCmdAdmin(int argc, char **argv)
 int main(int argc, char **argv) { 
 
 
-    
-    struct Arg arg = {"","","","\0"}; // valeurs par défaut
+
+	struct Arg arg = {"","","","\0"}; // valeurs par défaut
 	arg = getCmdAdmin(argc, argv);
 	int commandes, reponses;
 	messsage_IPC msg;
-    memset(msg.contenuMessage,0,strlen(msg.contenuMessage));	
+	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));	
 	int res; 
 	int pid=getpid();
 	printf("Le PID est: %d\n",pid);
 
-	// récupérer l'id de la file de commande (créee par le serveur) 
+	/**
+	 * @brief  récupérer l'id de la file de commande (créee par le serveur)
+	 * 
+	 */
 	commandes = msgget(CLE_COMMANDE, 0); 
 	if (commandes == -1) { perror("msgget requete"); return (EXIT_FAILURE); } 
-	// créer une file de reponse (les droit R/W pour tous)
+	/**
+	 * @brief créer une file de reponse (les droit R/W pour tous)
+	 * 
+	 */
 	reponses = msgget(CLE_REPONSE, 0666 | IPC_CREAT); 
 	if (reponses == -1) { perror("msgget reponse"); return (EXIT_FAILURE); }
 
@@ -179,12 +188,19 @@ int main(int argc, char **argv) {
 
 
 
-	// envoyer la commande admin avec le numéroo du processus 
+	/**
+	 * @brief envoyer la commande admin avec le numéroo du processus
+	 * 
+	 */
 	msg.numProcess = pid;
 	res = msgsnd(commandes, & msg, strlen(msg.contenuMessage) + 1, 0); 
 	if (res == -1) { perror("msgsnd"); return (EXIT_FAILURE); } 
 
-	// Récupérer et afficher la réponse du serveur
+
+	/**
+	 * @brief Récupérer et afficher la réponse du serveur
+	 * 
+	 */
 	while (1)
 	{
 		res = msgrcv(reponses, & msg, TAILLE_MSG,0 /*pid*/, 0); 
@@ -193,7 +209,7 @@ int main(int argc, char **argv) {
 			if (strcmp(msg.contenuMessage, "\0") != 0) 
 			{
 				printf("%s\n", msg.contenuMessage);
-                memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
+				memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 			}
 			else{break;};
 		} 

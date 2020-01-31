@@ -12,7 +12,10 @@
 #define __OPTIONSERVER_H__
 
 extern char usersFile[100];
-
+/**
+ * @brief Paramètre à passer en argument au programme principal pour définir le numéro du port et/ou le fichier de stockage des utilisateurs
+ * 
+ */
 struct OptionArg
 {
 	char portNum [100];

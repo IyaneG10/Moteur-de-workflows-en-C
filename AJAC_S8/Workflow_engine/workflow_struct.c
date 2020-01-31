@@ -50,7 +50,13 @@ const xmlChar *  activity_etat ; // Etat initial= NOT STARTED sauf pour le premi
 
 
 
-
+/**
+ * @brief Choses à faire selon l'état dans lequel la machine à état se trouve
+ * 
+ * @param user_data 
+ * @param text 
+ * @param length 
+ */
 void caracteres (void *user_data, const xmlChar *text, int length)
 {
 	if( elem_courant == DESC_PROCESS)
@@ -95,6 +101,12 @@ void caracteres (void *user_data, const xmlChar *text, int length)
 
 }
 
+/**
+ * @brief Fonction éxécutée à la rencontre d'une balise fermante
+ * 
+ * @param user_data 
+ * @param name 
+ */
 void fin_element (void *user_data, const xmlChar *name)
 {
 
@@ -144,6 +156,13 @@ void fin_element (void *user_data, const xmlChar *name)
 	}
 }
 
+/**
+ * @brief Fonction éxécutée à la rencontre d'une balise ouvrante
+ * 
+ * @param user_data 
+ * @param name 
+ * @param attrs 
+ */
 void debut_element (void *user_data, const xmlChar *name, const xmlChar **attrs)
 {
 	if(strcmp((const char*)name,"tns:activity")==0 )
@@ -270,5 +289,5 @@ int countProcesses (Process *processCourant) {
 int isEmpty (Process *process)
 {
 	return (process->debutListActivity==NULL);
-    
+
 }

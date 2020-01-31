@@ -21,7 +21,12 @@
 #include "traitement_text.h"
 #include "libthrd.h"
 
-
+/**
+ * @brief Pour détecter l'option (aprés le tiret)
+ * 
+ * @param str 
+ * @return char* 
+ */
 char * findStrOpt(char str[100])
 {
 	char * strToken=strtok (str, "-" );
@@ -29,6 +34,12 @@ char * findStrOpt(char str[100])
 	return strToken;
 }
 
+/**
+ * @brief Pour détecter un argument compris entre "<" et ">"
+ * 
+ * @param text 
+ * @return char* 
+ */
 char * findStrArg(const char *text)
 {   
 	const char *p1 = "<";
@@ -49,6 +60,13 @@ char * findStrArg(const char *text)
 	return res;
 }
 
+/**
+ * @brief Vérification du format avec des expression régulièreq
+ * 
+ * @param modele regex 
+ * @param chaine 
+ * @return int 
+ */
 int check_format(const char *modele,const char *chaine)
 {	
 	int ret =1;
@@ -60,26 +78,32 @@ int check_format(const char *modele,const char *chaine)
 		if (validite == 0)
 		{
 			ret =0;
-            #ifdef DEBUG
+#ifdef DEBUG
 			printf ("%s est une chaine valide\n", chaine);
-            #endif
+#endif
 		}
 
 		else if (validite == REG_NOMATCH)
 		{
-            #ifdef DEBUG
-            printf ("%s n\'est pas une chaine valide\n", chaine);
-            #endif
+#ifdef DEBUG
+			printf ("%s n\'est pas une chaine valide\n", chaine);
+#endif
 		}
 	}
 
 	regfree (&regex);
 	return ret;
 }
-
+/**
+ * @brief Parser le fichier d'utilisateurs et mettre les éléments dans une matrice
+ * 
+ * @param fp_UsersFile 
+ * @param users 
+ * @return int 
+ */
 int parserBDDUsers(FILE *fp_UsersFile, char users[MAX_UTILISATEURS][3][LONG_ID])
 {
-    P(LOCK_USERS_FILE);
+	P(LOCK_USERS_FILE);
 	const char *modele = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+ [_[:alpha:]]+$";
 	char ligne[LONG_ID];
 	char lecture='x';
@@ -125,8 +149,8 @@ int parserBDDUsers(FILE *fp_UsersFile, char users[MAX_UTILISATEURS][3][LONG_ID])
 		}
 
 	}
-	
-		V(LOCK_USERS_FILE);
+
+	V(LOCK_USERS_FILE);
 	return usersFound;
 
 }

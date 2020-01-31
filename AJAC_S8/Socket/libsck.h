@@ -1,6 +1,5 @@
 /**
  * @file libsck.h
- * @author SECK Malick 
  * @brief 
  * @version 0.1
  * @date 2020-01-30

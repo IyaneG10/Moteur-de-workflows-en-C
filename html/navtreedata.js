@@ -2,6 +2,7 @@ var NAVTREE =
 [
   [ "moteur_de_workflow", "index.html", [
     [ "PRESENTION DU PROJET", "d3/dcc/md__r_e_a_d_m_e.html", null ],
+    [ "Liste des bogues", "de/da5/bug.html", null ],
     [ "Structures de données", "annotated.html", [
       [ "Structures de données", "annotated.html", "annotated_dup" ],
       [ "Index des structures de données", "classes.html", null ],

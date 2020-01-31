@@ -119,15 +119,16 @@ Graphe des dépendances par inclusion de libsck.c:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:a7e64341468d02165d22c6b7aad90e45a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dad/libsck_8c.html#a7e64341468d02165d22c6b7aad90e45a">initialisationServeur</a> (char *port)</td></tr>
+<tr class="memdesc:a7e64341468d02165d22c6b7aad90e45a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation de la communication réseau.  <a href="#a7e64341468d02165d22c6b7aad90e45a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a7e64341468d02165d22c6b7aad90e45a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a879c67a5ce813f30c3252835a53da41e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dad/libsck_8c.html#a879c67a5ce813f30c3252835a53da41e">dummy</a> (void *dialogue, void *(*action)(void *))</td></tr>
 <tr class="separator:a879c67a5ce813f30c3252835a53da41e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4081354309ead3df0856129a8867558"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/dad/libsck_8c.html#af4081354309ead3df0856129a8867558">boucleServeur</a> (long socket, void(*fonction)(void *, void *(*)(void *)), void *(*action)(void *))</td></tr>
+<tr class="memdesc:af4081354309ead3df0856129a8867558"><td class="mdescLeft">&#160;</td><td class="mdescRight">boucle d'attente des connexions  <a href="#af4081354309ead3df0856129a8867558">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af4081354309ead3df0856129a8867558"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><dl class="section author"><dt>Auteur</dt><dd>SECK Malick </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
+<div class="textblock"><dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2020-01-30</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2020 </dd></dl>
 
@@ -165,7 +166,18 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../db/dad/libsck_8c_source.html#l00101">101</a> du fichier <a class="el" href="../../db/dad/libsck_8c_source.html">libsck.c</a>.</p>
+<p>boucle d'attente des connexions </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">socket</td><td></td></tr>
+    <tr><td class="paramname">fonction</td><td></td></tr>
+    <tr><td class="paramname">action</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>long </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../db/dad/libsck_8c_source.html#l00135">135</a> du fichier <a class="el" href="../../db/dad/libsck_8c_source.html">libsck.c</a>.</p>
 
 </div>
 </div>
@@ -195,7 +207,7 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../db/dad/libsck_8c_source.html#l00090">90</a> du fichier <a class="el" href="../../db/dad/libsck_8c_source.html">libsck.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../db/dad/libsck_8c_source.html#l00118">118</a> du fichier <a class="el" href="../../db/dad/libsck_8c_source.html">libsck.c</a>.</p>
 
 </div>
 </div>
@@ -215,7 +227,23 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../db/dad/libsck_8c_source.html#l00035">35</a> du fichier <a class="el" href="../../db/dad/libsck_8c_source.html">libsck.c</a>.</p>
+<p>Initialisation de la communication réseau. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>port passé en argument de la fonction main dans Workflow_engine </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int socket </dd></dl>
+<p>Création d'une socket</p>
+<p>Options utiles</p>
+<p>socket=s; niveau"reseau (sol_socket)"=; option= adresse reutilisable</p>
+<p>Options utiles socket=s; niveau"couche de transport (mode TCP)"=; option= pas de retard (delay) pour envoyer les messages</p>
+<p>Spécification de l'adresse de la socket</p>
+<p>Liberation de la structure d'informations</p>
+<p>écoute sur la file d'attentes de taille=[connecions]</p>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../db/dad/libsck_8c_source.html#l00038">38</a> du fichier <a class="el" href="../../db/dad/libsck_8c_source.html">libsck.c</a>.</p>
 
 </div>
 </div>

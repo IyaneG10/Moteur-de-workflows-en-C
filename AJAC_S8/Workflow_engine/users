@@ -2,3 +2,4 @@ tmv:toto:Thomas Vantroys
 rex:alpha:Xavier Redon
 cette ligne a ete ajoutee expres pour verifier que les fonctions d'ajout et de listing prenne bien en compte le format login:password:prenom nom
 mlk:ima:Malick SECK
+login:passwor:prenom nom

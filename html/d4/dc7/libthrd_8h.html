@@ -110,18 +110,23 @@ Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier
 <tr class="memitem:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="../../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7fd2d825f6e6419dc1d7e0d7344235ae">LOCK_TAB_CONN_USERS</a>, 
 <a class="el" href="../../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba93759ee839ed474e97ce08bf7fc9f498">LOCK_USERS_FILE</a>, 
 <a class="el" href="../../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba82ee9154583737b1e769c966f6ef6caa">LOCK_LIST_PROCESSES</a>
- }</td></tr>
+ }<tr class="memdesc:a06fc87d81c62e9abb8790b6e5713c55b"><td class="mdescLeft">&#160;</td><td class="mdescRight">3 verrous pour les zones sensibles  <a href="../../d4/dc7/libthrd_8h.html#a06fc87d81c62e9abb8790b6e5713c55b">Plus de détails...</a><br /></td></tr>
+</td></tr>
 <tr class="separator:a06fc87d81c62e9abb8790b6e5713c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:a8f585914b2a5f5e2c9234259933ab822"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dc7/libthrd_8h.html#a8f585914b2a5f5e2c9234259933ab822">recup_param_Thread</a> (void *arg)</td></tr>
+<tr class="memdesc:a8f585914b2a5f5e2c9234259933ab822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Récupération des paramètres.  <a href="#a8f585914b2a5f5e2c9234259933ab822">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a8f585914b2a5f5e2c9234259933ab822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5b22294b75f70caa7e354cd1918757"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dc7/libthrd_8h.html#aad5b22294b75f70caa7e354cd1918757">lanceClientLeger</a> (void *param, void *(*fonction)(void *))</td></tr>
+<tr class="memdesc:aad5b22294b75f70caa7e354cd1918757"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lancer un thread.  <a href="#aad5b22294b75f70caa7e354cd1918757">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aad5b22294b75f70caa7e354cd1918757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad79a16b3f95f48d7da9f9b01ded9fe13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dc7/libthrd_8h.html#ad79a16b3f95f48d7da9f9b01ded9fe13">P</a> (int index)</td></tr>
+<tr class="memdesc:ad79a16b3f95f48d7da9f9b01ded9fe13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primitive pour prendre le mutex.  <a href="#ad79a16b3f95f48d7da9f9b01ded9fe13">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad79a16b3f95f48d7da9f9b01ded9fe13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32ce1abfb08ba5cc978c6ced192eff91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/dc7/libthrd_8h.html#a32ce1abfb08ba5cc978c6ced192eff91">V</a> (int index)</td></tr>
+<tr class="memdesc:a32ce1abfb08ba5cc978c6ced192eff91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primitive pour Vendre le mutex.  <a href="#a32ce1abfb08ba5cc978c6ced192eff91">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a32ce1abfb08ba5cc978c6ced192eff91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
@@ -143,13 +148,20 @@ Fonctions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>3 verrous pour les zones sensibles </p>
+<ul>
+<li>pour la table des utilisateurs connectés</li>
+<li>pour le fichier de stockage des utilisateurs</li>
+<li>pour les listes chainés (processus et activités) </li>
+</ul>
 <table class="fieldtable">
 <tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55ba7fd2d825f6e6419dc1d7e0d7344235ae"></a>LOCK_TAB_CONN_USERS&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55ba93759ee839ed474e97ce08bf7fc9f498"></a>LOCK_USERS_FILE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a06fc87d81c62e9abb8790b6e5713c55ba82ee9154583737b1e769c966f6ef6caa"></a>LOCK_LIST_PROCESSES&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d4/dc7/libthrd_8h_source.html#l00026">26</a> du fichier <a class="el" href="../../d4/dc7/libthrd_8h_source.html">libthrd.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d4/dc7/libthrd_8h_source.html#l00032">32</a> du fichier <a class="el" href="../../d4/dc7/libthrd_8h_source.html">libthrd.h</a>.</p>
 
 </div>
 </div>
@@ -164,7 +176,7 @@ Fonctions</h2></td></tr>
           <td class="memname">void lanceClientLeger </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>param</em>, </td>
+          <td class="paramname"><em>arg</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -180,7 +192,16 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00038">38</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
+<p>Lancer un thread. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>argument de la fonction à executer </td></tr>
+    <tr><td class="paramname">fonction</td><td>fonction à executer par le thread </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00052">52</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
 
 </div>
 </div>
@@ -200,7 +221,15 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00061">61</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
+<p>Primitive pour prendre le mutex. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>selon l'enum </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00079">79</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
 
 </div>
 </div>
@@ -220,7 +249,16 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00028">28</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
+<p>Récupération des paramètres. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void* </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00037">37</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
 
 </div>
 </div>
@@ -240,7 +278,15 @@ Fonctions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00076">76</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
+<p>Primitive pour Vendre le mutex. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>selon enum </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../dc/df7/libthrd_8c_source.html#l00099">99</a> du fichier <a class="el" href="../../dc/df7/libthrd_8c_source.html">libthrd.c</a>.</p>
 
 </div>
 </div>

@@ -38,6 +38,10 @@
 #include "libthrd.h"
 #include "libipc.h"
 
+/**
+ * @brief pour la liste des processus (partagé par plusieurs fichiers)
+ * 
+ */
 Process *debutListProcess = NULL;
 Process *processus = NULL;
 
@@ -62,18 +66,18 @@ int main(int argc, char *argv[])
 	printf("Le userfile utilisé est: %s\n", usersFile);
 
 	flag_connected = 0;
-	
+
 	debutListProcess = NULL;
 
-	
+
 	/**
-	 * @fn lanceClientLeger(NULL, gestion_file_message)
+	 * @fn lanceClientLeger(NULL, gestion_file_message) 
 	 * @brief Thread de gestion de la file de message pour les requetes admin
 	 * 
 	 */
 	lanceClientLeger(NULL, gestion_file_message);
 
-	
+
 	/**
 	 * @fn long socket_ecoute = initialisationServeur(arg.portNum)
 	 * 
@@ -89,7 +93,7 @@ int main(int argc, char *argv[])
 	 * 
 	 */
 
-	
+
 	boucleServeur(socket_ecoute, lanceClientLeger, gestionClient);
 
 	printf("Au revoir !!!\n");

@@ -38,6 +38,13 @@ extern char usersFile[100];
 extern struct flag flag_connexion ;
 extern int flag_connected ;
 
+/**
+ * @brief Pour vérifier si un chaine de caractère match avec un format via une expression régilière
+ * 
+ * @param modele modele à base d'expression réguliere
+ * @param chaine chaine à observer
+ * @return int 
+ */
 int verif_format(const char *modele,const char *chaine)
 {	
 	int ret =1;
@@ -49,16 +56,16 @@ int verif_format(const char *modele,const char *chaine)
 		if (validite == 0)
 		{
 			ret =0;
-            #ifdef DEBUG
+#ifdef DEBUG
 			printf ("%s est une chaine valide\n", chaine);
-            #endif
+#endif
 		}
 
 		else if (validite == REG_NOMATCH)
 		{
-            #ifdef DEBUG
+#ifdef DEBUG
 			printf ("%s n\'est pas une chaine valide\n", chaine);
-            #endif
+#endif
 		}
 	}
 
@@ -66,6 +73,13 @@ int verif_format(const char *modele,const char *chaine)
 	return ret;
 }
 
+/**
+ * @brief Pour remplacer le tiret par un espace (on est obligé d'utiliser un tiret au lieu d'un espace lorsqu'on passe un seul paramètre)
+ * 
+ * @param chaine 
+ * @param ancien 
+ * @param nouveau 
+ */
 void remplacerCar(char * chaine, char ancien, char nouveau)
 {
 	int i = 0;
@@ -81,13 +95,19 @@ void remplacerCar(char * chaine, char ancien, char nouveau)
 		i=i+1;
 	}
 }
-
+/**
+ * @brief Pour lister les utilisateur grâce au fichier de stocker, avec vérification du format bien défini
+ * 
+ * @param msg 
+ * @param commandes 
+ * @param reponses 
+ */
 void listUsers(messsage_IPC msg,int commandes, int reponses)
 {
-    P(LOCK_USERS_FILE);
-    #ifdef DEBUG
-    printf("Entree dans la fonction listUsers \n");
-    #endif
+	P(LOCK_USERS_FILE);
+#ifdef DEBUG
+	printf("Entree dans la fonction listUsers \n");
+#endif
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 	FILE * fp_UsersFile = fopen(usersFile, "r");
 	const char *modele = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+ [_[:alpha:]]+$";
@@ -134,16 +154,24 @@ void listUsers(messsage_IPC msg,int commandes, int reponses)
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 
 	fclose (fp_UsersFile);
-    V(LOCK_USERS_FILE);
+	V(LOCK_USERS_FILE);
 
 }
 
+/**
+ * @brief Permet d'ajouter un utilisateur aprés avoir vérifié que le login voulu n'est pas déja pris et que le format est correct
+ * 
+ * @param msg 
+ * @param commandes 
+ * @param reponses 
+ */
+
 void addUser(messsage_IPC msg,int commandes, int reponses)
 {
-    P(LOCK_USERS_FILE);
-    #ifdef DEBUG
-    printf("Entree dans la fonction addUser \n");
-    #endif
+	P(LOCK_USERS_FILE);
+#ifdef DEBUG
+	printf("Entree dans la fonction addUser \n");
+#endif
 	bool enableAdd=true;
 	const char *modele_file = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+ [_[:alpha:]]+$";
 	const char *modele_addUser = "^[-_[:alnum:]]+:[-_[:alnum:]]+:[_[:alpha:]]+-[_[:alpha:]]+$";
@@ -161,10 +189,10 @@ void addUser(messsage_IPC msg,int commandes, int reponses)
 		strcpy(userToAdd,msg.contenuMessage);
 		strcpy(loginToAdd,msg.contenuMessage);
 		strtok(loginToAdd, ":");
-        #ifdef DEBUG
+#ifdef DEBUG
 		printf("user to add: %s\n",userToAdd);
 		printf("login to add: %s\n",loginToAdd);
-        #endif
+#endif
 
 		while(usersFound < 10 && lecture != EOF)
 		{
@@ -224,14 +252,20 @@ void addUser(messsage_IPC msg,int commandes, int reponses)
 	strcpy(msg.contenuMessage, "\0");
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
-    V(LOCK_USERS_FILE);
+	V(LOCK_USERS_FILE);
 }
-
+/**
+ * @brief Mode d'écoute du moteur (incomplet et avec des bugs)
+ * @bug Ne    pas utiliser cette fonction pour l'instant
+ * @param msg 
+ * @param commandes 
+ * @param reponses 
+ */
 void modeListen(messsage_IPC msg,int commandes, int reponses)     // Cette fonction ne marche pas correctement
 {
-    #ifdef DEBUG
+#ifdef DEBUG
 	strcpy(msg.contenuMessage, "Bienvenue dans le mode d'ecoute");
-    #endif
+#endif
 	if (msgsnd(reponses, & msg, strlen(msg.contenuMessage) + 1, 0) == -1) { perror("msgsnd"); }
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 
@@ -247,13 +281,19 @@ void modeListen(messsage_IPC msg,int commandes, int reponses)     // Cette fonct
 	}
 
 }
-
+/**
+ * @brief Afficher la liste des utilisateurs connectés âgrce à une table mise en variable globale
+ * 
+ * @param msg 
+ * @param commandes 
+ * @param reponses 
+ */
 void printConnectedUsers(messsage_IPC msg,int commandes, int reponses)
 {
-    P(LOCK_TAB_CONN_USERS);
-    #ifdef DEBUG
-    printf("Entree dans la fonction printConnectedUsers \n");
-    #endif
+	P(LOCK_TAB_CONN_USERS);
+#ifdef DEBUG
+	printf("Entree dans la fonction printConnectedUsers \n");
+#endif
 	memset(msg.contenuMessage,0,strlen(msg.contenuMessage));
 	int len= (sizeof(connectedUsers) / sizeof(connectedUsers[0]));
 	int nbconnected=0;
@@ -276,24 +316,39 @@ void printConnectedUsers(messsage_IPC msg,int commandes, int reponses)
 	V(LOCK_TAB_CONN_USERS);
 }
 
-
+/**
+ * @brief Processus léger de gestion des massages reçus de la part du promgramme admin et gestion des requetes
+ * 
+ * @param arg 
+ * @return void* 
+ */
 void* gestion_file_message(void* arg)
 {
 	int commandes, reponses;
 	messsage_IPC msg;
 
+	/**
+	 * @brief créer une file de message pour les commandes admin (les droit R/W pour tous)
+	 * 
+	 */
 
-	// créer une file de message pour les commandes admin (les droit R/W pour tous)
 	commandes = msgget(CLE_COMMANDE, 0666 | IPC_CREAT); 
 	if (commandes == -1) { perror("msgget commande");} 
 	strcpy(msg.contenuMessage, "");
 	printf("Contenu du message : %s \n",msg.contenuMessage); 
-	// récupérer l'id de la file de réponse (crée par l'admin)
+	/**
+	 * @brief récupérer l'id de la file de réponse (crée par l'admin)
+	 * 
+	 */
+
 	reponses = msgget(CLE_REPONSE, 0); 
 	if (reponses == -1) { perror("msgget reponse"); } 
 
 	printf("En attente des requetes admin\n");
-
+	/**
+	 * @brief Boucle d'écoute des requetes admin et de réponse
+	 * 
+	 */
 	while (1) {
 
 		if (msgrcv(commandes, & msg, TAILLE_MSG, 0, 0) == -1) { perror("msgrcv"); } 

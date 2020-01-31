@@ -1,6 +1,5 @@
 /**
  * @file libsck.c
- * @author SECK Malick
  * @brief 
  * @version 0.1
  * @date 2020-01-30
@@ -30,8 +29,12 @@
 #include "libsck.h"
 #include "libthrd.h"
 
-
-// Initialisation de la communication réseau 
+/**
+ * @brief Initialisation de la communication réseau
+ * 
+ * @param port port passé en argument de la fonction main dans Workflow_engine
+ * @return int socket
+ */
 int initialisationServeur(char *port)
 {
 	struct addrinfo precisions,*resultat,*origine; // liste chainée pour trouver des adresses
@@ -52,34 +55,59 @@ int initialisationServeur(char *port)
 		if(p->ai_family==AF_INET6){ resultat=p; break; } // chercher des adresses jusqu'à IP v6 
 
 	}  
-	// Creation d'une socket 
+	/**
+	 * @brief Création d'une socket
+	 * 
+	 */
 	s=socket(resultat->ai_family,resultat->ai_socktype,resultat->ai_protocol);
 	if(s<0){ perror("initialisationServeur.socket"); exit(EXIT_FAILURE); }
 	printf("Socket TCP crée avec succes\n"); 
 
-	// Options utiles 
+	/**
+	 * @brief Options utiles
+	 * 
+	 */
 	int vrai=1;
-	// socket=s; niveau"reseau (sol_socket)"=; option= adresse reutilisable
+	/**
+	 * @brief socket=s; niveau"reseau (sol_socket)"=; option= adresse reutilisable
+	 * 
+	 */
 	if(setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&vrai,sizeof(vrai))<0){
 		perror("initialisationServeur.setsockopt (REUSEADDR)");
 		exit(EXIT_FAILURE);
 	}
-	// socket=s; niveau"couche de transport (mode TCP)"=; option= pas de retard (delay) pour envoyer les messages
+	/**
+	 * @brief Options utiles
+	 * socket=s; niveau"couche de transport (mode TCP)"=; option= pas de retard (delay) pour envoyer les messages
+	 * 
+	 */
+
 	if(setsockopt(s,IPPROTO_TCP,TCP_NODELAY,&vrai,sizeof(vrai))<0){
 		perror("initialisationServeur.setsockopt (NODELAY)");
 		exit(EXIT_FAILURE);
 	}
 
-	// Specification de l'adresse de la socket 
+
+	/**
+	 * @brief Spécification de l'adresse de la socket
+	 * 
+	 */
 	statut=bind(s,resultat->ai_addr,resultat->ai_addrlen);
 	if(statut<0) return -1;
 	printf("Socket TCP \"bindé\" avec succes\n"); 
 
-	// Liberation de la structure d'informations 
-	freeaddrinfo(origine); // libérer la liste chainée
+	/**
+	 * @brief Liberation de la structure d'informations
+	 * 
+	 */
+	//  
+	freeaddrinfo(origine); 
 
-	// Taille de la queue d'attente
-	statut=listen(s,NB_CONNEXIONS); // écoute sur la file d'attentes de taille=[connecions]
+	/**
+	 * @brief écoute sur la file d'attentes de taille=[connecions]
+	 * 
+	 */
+	statut=listen(s,NB_CONNEXIONS);
 	printf("En attente de connexion avec les clients TCP\n");
 	if(statut<0) return -1;
 
@@ -96,8 +124,14 @@ void dummy(void *dialogue, void* (*action)(void *))
 
 
 
-// boucle d'attente des connexions 
-
+/**
+ * @brief boucle d'attente des connexions
+ * 
+ * @param socket 
+ * @param fonction 
+ * @param action 
+ * @return long 
+ */
 long boucleServeur(long socket, void(*fonction)(void *, void *(*)(void*)), void* (*action)(void*))
 {
 

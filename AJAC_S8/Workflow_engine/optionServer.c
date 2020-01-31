@@ -23,7 +23,13 @@
 
 
 
-
+/**
+ * @brief Paramètre à passer en argument au programme principal pour définir le numéro du port et/ou le fichier de stockage des utilisateurs
+ * 
+ * @param argc 
+ * @param argv 
+ * @return struct OptionArg 
+ */
 struct OptionArg check_arguments(int argc, char **argv)
 {
 	int res;

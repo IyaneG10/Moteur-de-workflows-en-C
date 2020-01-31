@@ -130,28 +130,40 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
 <tr class="memitem:a2f4f00ab4a064cab10c439bf29d5db6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a2f4f00ab4a064cab10c439bf29d5db6d">fct_aide</a> (FILE *file_dialogue)</td></tr>
+<tr class="memdesc:a2f4f00ab4a064cab10c439bf29d5db6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lister les possiblités du client connecté  <a href="#a2f4f00ab4a064cab10c439bf29d5db6d">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a2f4f00ab4a064cab10c439bf29d5db6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2af09a820e1e80c27003a3c2bebe521c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a2af09a820e1e80c27003a3c2bebe521c">fct_Todo</a> (FILE *file_dialogue, char user[<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="memdesc:a2af09a820e1e80c27003a3c2bebe521c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mode ToDo.  <a href="#a2af09a820e1e80c27003a3c2bebe521c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a2af09a820e1e80c27003a3c2bebe521c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a803826799a1fbf04ab7d1370414c8f49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a803826799a1fbf04ab7d1370414c8f49">fct_listProcesses</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char *option)</td></tr>
+<tr class="memdesc:a803826799a1fbf04ab7d1370414c8f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lister les processus , peut prendre en argument un état particulier pour n'afficher que les processus dans cet état.  <a href="#a803826799a1fbf04ab7d1370414c8f49">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a803826799a1fbf04ab7d1370414c8f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4800b9416a2f608a5fc699a3680d53b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a4800b9416a2f608a5fc699a3680d53b4">fct_printProcess</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char *arg)</td></tr>
+<tr class="memdesc:a4800b9416a2f608a5fc699a3680d53b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pour afficher la liste des processus.  <a href="#a4800b9416a2f608a5fc699a3680d53b4">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a4800b9416a2f608a5fc699a3680d53b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fb82b6506ce7a76ac9f900c517d3206"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a5fb82b6506ce7a76ac9f900c517d3206">fct_listActivities</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char *arg, char user[<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="memdesc:a5fb82b6506ce7a76ac9f900c517d3206"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pour lister les activités assignées à l'utilisateur (peut prendre en argument une activité particulière et afficher toutes les infos la concernant)  <a href="#a5fb82b6506ce7a76ac9f900c517d3206">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5fb82b6506ce7a76ac9f900c517d3206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc0cb62882d811ec34c4e7da9d2a7bf6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#acc0cb62882d811ec34c4e7da9d2a7bf6">fct_valider</a> (FILE *file_dialogue, <a class="el" href="../../d8/daa/struct_process.html">Process</a> *processCourant, char user[<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="memdesc:acc0cb62882d811ec34c4e7da9d2a7bf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction de validation d'une activité Tout d'abord l'utilisateur devra renseigner le processus concerné Puis il précise l'activité en question Une activité ne peut être validée que si elle est assignée à l'utilisateur en question et que la précédente est validé LOrsqu'une activité est validée, elle passe directement à l'état COMPLETED et l'activité suivante passe à l'état RUNNING De ce fait, pour vérifier si la transition est franchie, on regarde si l'activité en à l'état RUNNING Pour l'activité A2: l'utilisateur devra renseigner la valeur de sortie de validation.  <a href="#acc0cb62882d811ec34c4e7da9d2a7bf6">Plus de détails...</a><br /></td></tr>
 <tr class="separator:acc0cb62882d811ec34c4e7da9d2a7bf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4732270e4598f0a2596111c5b2b2e28f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a4732270e4598f0a2596111c5b2b2e28f">supprConnList</a> (char <a class="el" href="../../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588">connectedUsers</a>[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>], struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a> Connexion)</td></tr>
+<tr class="memdesc:a4732270e4598f0a2596111c5b2b2e28f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enlever l'utilisateur de la liste des utilisateurs connectés.  <a href="#a4732270e4598f0a2596111c5b2b2e28f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a4732270e4598f0a2596111c5b2b2e28f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa6dd9746966841f5cda61a23cdee5cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#aaa6dd9746966841f5cda61a23cdee5cf">afficherConnList</a> (char <a class="el" href="../../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588">connectedUsers</a>[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>], FILE *file_dialogue)</td></tr>
+<tr class="memdesc:aaa6dd9746966841f5cda61a23cdee5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Afficher la liste des utilisateurs connectés.  <a href="#aaa6dd9746966841f5cda61a23cdee5cf">Plus de détails...</a><br /></td></tr>
 <tr class="separator:aaa6dd9746966841f5cda61a23cdee5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01c131e4dba3679a0bcf333b6f361eaa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a01c131e4dba3679a0bcf333b6f361eaa">ajouterConnList</a> (char <a class="el" href="../../d0/d29/main_8c.html#a15ad9a534b1df4605157e849f750e588">connectedUsers</a>[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>], struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a> Connexion)</td></tr>
+<tr class="memdesc:a01c131e4dba3679a0bcf333b6f361eaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajouter l'utilisateur à la liste des utilisateurs connectés.  <a href="#a01c131e4dba3679a0bcf333b6f361eaa">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a01c131e4dba3679a0bcf333b6f361eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f1b867da535ffa7be92d249b1e284a"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#ac0f1b867da535ffa7be92d249b1e284a">getAdresseClient</a> (long socket)</td></tr>
+<tr class="memdesc:ac0f1b867da535ffa7be92d249b1e284a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pour récupérer l'adresse du client qui vient de se connecter.  <a href="#ac0f1b867da535ffa7be92d249b1e284a">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ac0f1b867da535ffa7be92d249b1e284a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a775dc0072dcf1723100480d3441ac722"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a775dc0072dcf1723100480d3441ac722">gestionClient</a> (void *s)</td></tr>
+<tr class="memdesc:a775dc0072dcf1723100480d3441ac722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processus léger de gestion des clients connectés.  <a href="#a775dc0072dcf1723100480d3441ac722">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a775dc0072dcf1723100480d3441ac722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a265646453b036a8855850c7c293ebe1e"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/de8/gestion__client_8h.html#a265646453b036a8855850c7c293ebe1e">authentificationClient</a> (FILE *file_dialogue, char usersBDD[<a class="el" href="../../df/d91/traitement__text_8h.html#a6681dbfdc8e778ce904861d0afe5f5a6">MAX_UTILISATEURS</a>][3][<a class="el" href="../../df/d91/traitement__text_8h.html#a20a67b392cc1cad29c740506f7bd148b">LONG_ID</a>])</td></tr>
+<tr class="memdesc:a265646453b036a8855850c7c293ebe1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verification du login et password donné par le client.  <a href="#a265646453b036a8855850c7c293ebe1e">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a265646453b036a8855850c7c293ebe1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -244,7 +256,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00447">447</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Afficher la liste des utilisateurs connectés. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectedUsers</td><td></td></tr>
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00517">517</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -274,7 +295,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00418">418</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Ajouter l'utilisateur à la liste des utilisateurs connectés. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectedUsers</td><td></td></tr>
+    <tr><td class="paramname">Connexion</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00482">482</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -294,7 +324,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>usersBDD</em>[MAX_UTILISATEURS][3][LONG_ID]&#160;</td>
+          <td class="paramname"><em>users</em>[MAX_UTILISATEURS][3][LONG_ID]&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -304,7 +334,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00356">356</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Verification du login et password donné par le client. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+    <tr><td class="paramname">users</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>struct <a class="el" href="../../db/d97/struct_connexion_infos.html">ConnexionInfos</a> </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00410">410</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -324,7 +364,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00047">47</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Lister les possiblités du client connecté </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00051">51</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -350,7 +398,7 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>arg</em>, </td>
+          <td class="paramname"><em>option</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -366,7 +414,18 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00147">147</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Pour lister les activités assignées à l'utilisateur (peut prendre en argument une activité particulière et afficher toutes les infos la concernant) </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+    <tr><td class="paramname">processCourant</td><td></td></tr>
+    <tr><td class="paramname">option</td><td></td></tr>
+    <tr><td class="paramname">user</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00176">176</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -402,7 +461,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00085">85</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Lister les processus , peut prendre en argument un état particulier pour n'afficher que les processus dans cet état. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+    <tr><td class="paramname">processCourant</td><td></td></tr>
+    <tr><td class="paramname">option</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00101">101</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -438,7 +507,17 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00116">116</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Pour afficher la liste des processus. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+    <tr><td class="paramname">processCourant</td><td></td></tr>
+    <tr><td class="paramname">arg</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00138">138</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -468,7 +547,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00059">59</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Mode ToDo. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+    <tr><td class="paramname">user</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00068">68</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -504,7 +592,21 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00192">192</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Fonction de validation d'une activité Tout d'abord l'utilisateur devra renseigner le processus concerné Puis il précise l'activité en question Une activité ne peut être validée que si elle est assignée à l'utilisateur en question et que la précédente est validé LOrsqu'une activité est validée, elle passe directement à l'état COMPLETED et l'activité suivante passe à l'état RUNNING De ce fait, pour vérifier si la transition est franchie, on regarde si l'activité en à l'état RUNNING Pour l'activité A2: l'utilisateur devra renseigner la valeur de sortie de validation. </p>
+<ul>
+<li>si true: on passe à l'activité A4 et le processus continue jusqu'à l'activité A7 pour être COMPLETED</li>
+<li>si false: le processus est COMPLETED car la demande est refusée</li>
+</ul>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_dialogue</td><td></td></tr>
+    <tr><td class="paramname">processCourant</td><td></td></tr>
+    <tr><td class="paramname">user</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00235">235</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -518,13 +620,22 @@ Variables</h2></td></tr>
           <td class="memname">void* gestionClient </td>
           <td>(</td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>dialogue</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00465">465</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Processus léger de gestion des clients connectés. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dialogue</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void* </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00540">540</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -544,7 +655,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00306">306</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Pour récupérer l'adresse du client qui vient de se connecter. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">socket</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>char* </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00354">354</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -574,7 +694,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00402">402</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
+<p>Enlever l'utilisateur de la liste des utilisateurs connectés. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">connectedUsers</td><td></td></tr>
+    <tr><td class="paramname">Connexion</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="../../d8/d8a/gestion__client_8c_source.html#l00461">461</a> du fichier <a class="el" href="../../d8/d8a/gestion__client_8c_source.html">gestion_client.c</a>.</p>
 
 </div>
 </div>
@@ -592,7 +721,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>fichier <a class="el" href="../../d4/da7/libipc_8c.html">libipc.c</a> </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00045">45</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00049">49</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>
@@ -608,7 +737,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00044">44</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="../../d0/d29/main_8c_source.html#l00048">48</a> du fichier <a class="el" href="../../d0/d29/main_8c_source.html">main.c</a>.</p>
 
 </div>
 </div>

@@ -27,9 +27,9 @@ extern char connectedUsers[MAX_UTILISATEURS][LONG_ID]; // declare dans main
 
 struct ConnexionInfos
 {
-    bool validity; // true: connexion reussie
-    	char connectedUser [LONG_ID]; // Nom et Prenom de l'utilisateur connecte
-    		char login [LONG_ID];
+	bool validity; // true: connexion reussie
+	char connectedUser [LONG_ID]; // Nom et Prenom de l'utilisateur connecte
+	char login [LONG_ID];
 };
 
 

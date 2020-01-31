@@ -13,7 +13,10 @@
 
 #define SIZE 100
 
-
+/**
+ * @brief Structure de la liste chainee pour les activité
+ * 
+ */
 typedef struct Activity {
 	struct Activity *prev; // pour pouvoir verifier si l'activite precedente est validee (condition de validation) + etat=RUNNING
 	char id [SIZE];
@@ -27,7 +30,10 @@ typedef struct Activity {
 
 } Activity; 
 
-
+/**
+ * @brief Structure de la liste chainee de processus (incluant une liste d'activités associées)
+ * 
+ */
 typedef struct Process {
 	char id [SIZE];
 	char description [SIZE];
@@ -37,7 +43,10 @@ typedef struct Process {
 	struct Process *next;
 } Process;
 
-
+/**
+ * @brief Enumération pour connaitre l'état dans lequel on se trouve pour le parsing XML en mode SAX
+ * 
+ */
 enum {
 	AUTRE,
 	PROCESS,

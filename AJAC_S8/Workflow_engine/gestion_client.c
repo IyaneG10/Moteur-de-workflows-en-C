@@ -43,7 +43,11 @@ extern Process *processus;
 extern int flag_connected ;
 
 
-
+/**
+ * @brief Lister les possiblités du client connecté
+ * 
+ * @param file_dialogue 
+ */
 void fct_aide(FILE *file_dialogue)
 {
 	fputs("Vos possibilites sont:\n",file_dialogue);
@@ -55,10 +59,15 @@ void fct_aide(FILE *file_dialogue)
 	fputs("\texit : pour quitter l’application et se deconnecter\n",file_dialogue);
 }
 
-
+/**
+ * @brief Mode ToDo
+ * 
+ * @param file_dialogue 
+ * @param user 
+ */
 void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 {
-    char buffer[SIZE_BUFFER];
+	char buffer[SIZE_BUFFER];
 	fputs("Bienvenue dans le mode To-Do, saisir exit pour en sortir\n",file_dialogue);
 	while(fgets(buffer,MAX_LIGNE,file_dialogue)!=NULL)
 	{
@@ -81,10 +90,17 @@ void fct_Todo(FILE *file_dialogue, char user[LONG_ID])
 }
 
 
+/**
+ * @brief Lister les processus , peut prendre en argument un état particulier pour n'afficher que les processus dans cet état
+ * 
+ * @param file_dialogue 
+ * @param processCourant 
+ * @param option 
+ */
 
 void fct_listProcesses(FILE *file_dialogue,Process *processCourant, char *option) // argument optionnel
 {
-    P(LOCK_LIST_PROCESSES);
+	P(LOCK_LIST_PROCESSES);
 #ifdef DEBUG
 	printf("Process courant: %p\n", processCourant);
 #endif
@@ -112,10 +128,16 @@ void fct_listProcesses(FILE *file_dialogue,Process *processCourant, char *option
 	V(LOCK_LIST_PROCESSES);
 }
 
-
+/**
+ * @brief Pour afficher la liste des processus
+ * 
+ * @param file_dialogue 
+ * @param processCourant 
+ * @param arg 
+ */
 void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg) // argument obligatoire
 {
-    P(LOCK_LIST_PROCESSES);
+	P(LOCK_LIST_PROCESSES);
 #ifdef DEBUG
 	printf("Process courant: %p\n", processCourant);
 #endif
@@ -143,10 +165,17 @@ void fct_printProcess(FILE *file_dialogue,Process *processCourant,char* arg) // 
 	V(LOCK_LIST_PROCESSES);
 }
 
-
+/**
+ * @brief Pour lister les activités assignées à l'utilisateur (peut prendre en argument une activité particulière et afficher toutes les infos la concernant)
+ * 
+ * @param file_dialogue 
+ * @param processCourant 
+ * @param option 
+ * @param user 
+ */
 void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* option, char user[LONG_ID])
 {
-    P(LOCK_LIST_PROCESSES);
+	P(LOCK_LIST_PROCESSES);
 #ifdef DEBUG
 	printf("Process courant: %p\n", processCourant);
 #endif
@@ -188,7 +217,21 @@ void fct_listActivities(FILE *file_dialogue,Process *processCourant,char* option
 	V(LOCK_LIST_PROCESSES);
 }
 
-
+/**
+ * @brief Fonction de validation d'une activité
+ * Tout d'abord l'utilisateur devra renseigner le processus concerné
+ * Puis il précise l'activité en question
+ * Une activité ne peut être validée que si elle est assignée à l'utilisateur en question et que la précédente est validé
+ * LOrsqu'une activité est validée, elle passe directement à l'état COMPLETED et l'activité suivante passe à l'état RUNNING
+ * De ce fait, pour vérifier si la transition est franchie, on regarde si l'activité en à l'état RUNNING
+ * Pour l'activité A2: l'utilisateur devra renseigner la valeur de sortie de validation
+ * 	- si true: on passe à l'activité A4 et le processus continue jusqu'à l'activité A7 pour être COMPLETED
+ * 	- si false: le processus est COMPLETED car la demande est refusée
+ * 
+ * @param file_dialogue 
+ * @param processCourant 
+ * @param user 
+ */
 void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID])
 {
 	char procToValid[LONG_ID];
@@ -197,7 +240,7 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 	fprintf (file_dialogue,"choix: %s\n", procToValid);
 
 	int nbProcess=0;
-    P(LOCK_LIST_PROCESSES);
+	P(LOCK_LIST_PROCESSES);
 	while (processCourant != NULL) {
 		nbProcess++;
 		if(strncmp(processCourant->id,procToValid,1) == 0)
@@ -296,12 +339,17 @@ void fct_valider(FILE *file_dialogue,Process *processCourant, char user[LONG_ID]
 		}
 		processCourant = processCourant->next;
 	}  
-		V(LOCK_LIST_PROCESSES);  
+	V(LOCK_LIST_PROCESSES);  
 }
 
 
 
-
+/**
+ * @brief Pour récupérer l'adresse du client qui vient de se connecter
+ * 
+ * @param socket 
+ * @return char* 
+ */
 
 char * getAdresseClient(long socket)
 {
@@ -352,7 +400,13 @@ char * getAdresseClient(long socket)
 
 
 
-
+/**
+ * @brief Verification du login et password donné par le client
+ * 
+ * @param file_dialogue 
+ * @param users 
+ * @return struct ConnexionInfos 
+ */
 struct ConnexionInfos authentificationClient(FILE *file_dialogue,  char users[MAX_UTILISATEURS][3][LONG_ID])
 {
 	struct ConnexionInfos Infos = {false,"",""};
@@ -398,10 +452,15 @@ struct ConnexionInfos authentificationClient(FILE *file_dialogue,  char users[MA
 	return Infos;
 }
 
-
+/**
+ * @brief Enlever l'utilisateur de la liste des utilisateurs connectés
+ * 
+ * @param connectedUsers 
+ * @param Connexion 
+ */
 void supprConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion)
 {
-    P(LOCK_TAB_CONN_USERS);
+	P(LOCK_TAB_CONN_USERS);
 	int index_connected_user=0;
 	for (index_connected_user=0; index_connected_user < MAX_UTILISATEURS; index_connected_user++)
 	{
@@ -414,10 +473,15 @@ void supprConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct Connexi
 	}
 	V(LOCK_TAB_CONN_USERS);
 }
-
+/**
+ * @brief Ajouter l'utilisateur à la liste des utilisateurs connectés
+ * 
+ * @param connectedUsers 
+ * @param Connexion 
+ */
 void ajouterConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct ConnexionInfos Connexion)
 {
-    P(LOCK_TAB_CONN_USERS);
+	P(LOCK_TAB_CONN_USERS);
 	int index_connected_user=0;
 	bool ajouter=true;
 	for (index_connected_user=0; index_connected_user < MAX_UTILISATEURS; index_connected_user++)
@@ -444,10 +508,16 @@ void ajouterConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],struct Conne
 	V(LOCK_TAB_CONN_USERS);
 }
 
+/**
+ * @brief Afficher la liste des utilisateurs connectés
+ * 
+ * @param connectedUsers 
+ * @param file_dialogue 
+ */
 void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],FILE *file_dialogue)
 {
-    P(LOCK_TAB_CONN_USERS);
-    fprintf(file_dialogue,"Les utilisateurs connectes sont: \n");
+	P(LOCK_TAB_CONN_USERS);
+	fprintf(file_dialogue,"Les utilisateurs connectes sont: \n");
 	for (int i=0; i < MAX_UTILISATEURS; i++)
 	{
 		if (strcmp(connectedUsers[i], "") != 0)
@@ -461,7 +531,12 @@ void afficherConnList(char connectedUsers[MAX_UTILISATEURS][LONG_ID],FILE *file_
 
 
 
-
+/**
+ * @brief Processus léger de gestion des clients connectés
+ * 
+ * @param dialogue 
+ * @return void* 
+ */
 void* gestionClient(void *dialogue)
 {
 	bool enable_instancProc=true; // sécurité (faut se deco puis reco pour instancier plusieurs processus)
@@ -561,10 +636,10 @@ void* gestionClient(void *dialogue)
 #ifdef DEBUG
 					printf("%s\n",file);
 #endif
-                    P(LOCK_LIST_PROCESSES);
-                    int ret_inst_process = (instancierProcessus (&debutListProcess,file));
-                    V(LOCK_LIST_PROCESSES);
-                    if ( 00== ret_inst_process)
+					P(LOCK_LIST_PROCESSES);
+					int ret_inst_process = (instancierProcessus (&debutListProcess,file));
+					V(LOCK_LIST_PROCESSES);
+					if ( 00== ret_inst_process)
 					{
 						fputs("Instanciation de processus effectuee avec succes\n",file_dialogue);
 						enable_instancProc=false; // sécurité (Il faut se déconnecter pour instancier à nouveau un processus)

@@ -21,12 +21,18 @@ void P(int index);
 void V(int index);
 
 
-// pour les différents verrous (car les fonctions P et V prennent des entiers en arguments)
-// Il y'a 3 verrous pour le code 
+/**
+ * @brief 3 verrous pour les zones sensibles
+ * - pour la table des utilisateurs connectés
+ * - pour le fichier de stockage des utilisateurs
+ * - pour les listes chainés (processus et activités)
+ * 
+ */
+
 enum {
-    LOCK_TAB_CONN_USERS,
-    LOCK_USERS_FILE,
-    LOCK_LIST_PROCESSES
+	LOCK_TAB_CONN_USERS,
+	LOCK_USERS_FILE,
+	LOCK_LIST_PROCESSES
 };
 
 
