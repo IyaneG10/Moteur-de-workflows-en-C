@@ -27,6 +27,8 @@ Le projet est constitué de trois bibliothèques et des programmes serveur et ad
 
 Un fichier `Makefile` aglobal pour tout le code et des makefiles scpécifiques à chaque réêrtoire 
 
+Une documentation en html via Doxygen à télécharger sur le wiki
+
 
 # 1°) COMPILATION
 
