@@ -1,9 +1,0 @@
-<map id="AJAC_S8/Threads/libthrd.h" name="AJAC_S8/Threads/libthrd.h">
-<area shape="rect" id="node2" href="$d4/da7/libipc_8c.html" title="AJAC_S8/IPC/libipc.c" alt="" coords="5,87,157,114"/>
-<area shape="rect" id="node3" href="$db/dad/libsck_8c.html" title="AJAC_S8/Socket/libsck.c" alt="" coords="182,87,357,114"/>
-<area shape="rect" id="node4" href="$dc/df7/libthrd_8c.html" title="AJAC_S8/Threads/libthrd.c" alt="" coords="381,87,563,114"/>
-<area shape="rect" id="node5" href="$d8/d8a/gestion__client_8c.html" title="AJAC_S8/Workflow_engine\l/gestion_client.c" alt="" coords="587,80,771,121"/>
-<area shape="rect" id="node6" href="$d0/d29/main_8c.html" title="Programme du serveur. " alt="" coords="795,80,979,121"/>
-<area shape="rect" id="node7" href="$d7/d41/traitement__text_8c.html" title="AJAC_S8/Workflow_engine\l/traitement_text.c" alt="" coords="1003,80,1187,121"/>
-<area shape="rect" id="node8" href="$d6/da5/workflow__struct_8c.html" title="AJAC_S8/Workflow_engine\l/workflow_struct.c" alt="" coords="1211,80,1395,121"/>
-</map>
